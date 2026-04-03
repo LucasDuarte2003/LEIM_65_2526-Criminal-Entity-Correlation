@@ -3,7 +3,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from transformers import AutoTokenizer, XLMRobertaForTokenClassification
-from data.dataset import ID2LABEL
+from data.dataset_teste import ID2LABEL
 
 
 MODEL_PATH = "./saved_model"

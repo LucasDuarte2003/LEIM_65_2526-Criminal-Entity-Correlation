@@ -1,4 +1,3 @@
-# data/verify_dataset.py
 import json
 
 with open("dataset_anotado.json", "r", encoding="utf-8") as f:

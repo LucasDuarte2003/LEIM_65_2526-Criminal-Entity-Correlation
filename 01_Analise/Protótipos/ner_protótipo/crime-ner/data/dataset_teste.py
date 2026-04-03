@@ -1,5 +1,3 @@
-# data/dataset.py
-
 LABEL_LIST = [
     "O",
     "B-PESSOA", "I-PESSOA",

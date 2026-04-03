@@ -7,7 +7,7 @@ from seqeval.metrics import classification_report
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from data.dataset import RAW_TRAIN_DATA, RAW_VAL_DATA, LABEL_LIST, LABEL2ID, ID2LABEL
+from data.dataset_teste import RAW_TRAIN_DATA, RAW_VAL_DATA, LABEL_LIST, LABEL2ID, ID2LABEL
 from model.ner_model import NERDataset, load_model
 
 CONFIG = {

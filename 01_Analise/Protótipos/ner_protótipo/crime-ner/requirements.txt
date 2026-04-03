@@ -1,0 +1,9 @@
+torch
+transformers
+seqeval
+accelerate
+deepl
+label-studio
+numpy
+scikit-learn
+sentencepiece
