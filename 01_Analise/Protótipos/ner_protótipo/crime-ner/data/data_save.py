@@ -50,7 +50,7 @@ def merge_with_existing(new_data, existing_filepath):
 
 if __name__ == "__main__":
     ficheiros = [
-        "label_studio/datasets_anotados/noticias_anotadas_16-20.json",
+        "label_studio/datasets_anotados/noticias_anotadas_26-30.json",
     ]
 
     for ficheiro in ficheiros:

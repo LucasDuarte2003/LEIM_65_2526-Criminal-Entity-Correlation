@@ -50,11 +50,11 @@ def load_model(num_labels, label2id, id2label, model_path=None):
     MODEL_NAME = "xlm-roberta-base"  # ← multilingual, suporta português
 
     if model_path:
-        print(f"📂 A carregar modelo guardado de: {model_path}")
+        print(f"A carregar modelo guardado de: {model_path}")
         tokenizer = AutoTokenizer.from_pretrained(model_path)
         model = XLMRobertaForTokenClassification.from_pretrained(model_path)
     else:
-        print(f"⬇️  A descarregar {MODEL_NAME} da HuggingFace (~1GB, só na primeira vez)...")
+        print(f"A descarregar {MODEL_NAME} da HuggingFace (~1GB, só na primeira vez)...")
         tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         model = XLMRobertaForTokenClassification.from_pretrained(
             MODEL_NAME,

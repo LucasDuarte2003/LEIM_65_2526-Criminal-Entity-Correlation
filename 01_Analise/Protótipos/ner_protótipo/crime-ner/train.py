@@ -1,64 +1,76 @@
+
+import os
 import torch
-import os, sys
-from torch.optim import AdamW  # ← mudou aqui
+from torch.optim import AdamW
 from torch.utils.data import DataLoader
-from transformers import get_linear_schedule_with_warmup
+from transformers import AutoTokenizer, XLMRobertaForTokenClassification, get_linear_schedule_with_warmup
 from seqeval.metrics import classification_report
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from data.labels import LABEL_LIST, LABEL2ID, ID2LABEL
+from data.json_dataset import load_bio_from_json, NERDataset
 
-from data.dataset_teste import RAW_TRAIN_DATA, RAW_VAL_DATA, LABEL_LIST, LABEL2ID, ID2LABEL
-from model.ner_model import NERDataset, load_model
-
-CONFIG = {
-    "model_save_path": "./saved_model",
-    "num_epochs": 40,        # ← era 10, dataset pequeno precisa de mais
-    "batch_size": 2,
-    "learning_rate": 3e-5,   # ← era 2e-5, ligeiramente maior
-    "max_length": 128,
-}
+# CONFIGURAÇÃO
+DATASET_PATH     = "data/dataset_anotado.json"
+MODEL_SAVE_PATH  = "saved_model"
+MODEL_NAME       = "xlm-roberta-base"
+NUM_EPOCHS       = 40
+BATCH_SIZE       = 2
+LEARNING_RATE    = 3e-5
+MAX_LENGTH       = 256
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"🖥️  A usar: {device}")
+print(f"Dispositivo: {device}")
 
-model, tokenizer = load_model(
+# DADOS
+all_data = load_bio_from_json(DATASET_PATH)
+
+split      = int(len(all_data) * 0.8)
+train_data = all_data[:split]
+val_data   = all_data[split:]
+
+print(f"Treino: {len(train_data)} | Validação: {len(val_data)}")
+
+# MODELO
+print(f"A carregar {MODEL_NAME}...")
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model     = XLMRobertaForTokenClassification.from_pretrained(
+    MODEL_NAME,
     num_labels=len(LABEL_LIST),
+    id2label=ID2LABEL,
     label2id=LABEL2ID,
-    id2label=ID2LABEL
+    ignore_mismatched_sizes=True
 )
 model = model.to(device)
 
-train_dataset = NERDataset(RAW_TRAIN_DATA, tokenizer, LABEL2ID, CONFIG["max_length"])
-val_dataset = NERDataset(RAW_VAL_DATA, tokenizer, LABEL2ID, CONFIG["max_length"])
+# DATASETS E DATALOADERS
+train_dataset = NERDataset(train_data, tokenizer, MAX_LENGTH)
+val_dataset   = NERDataset(val_data,   tokenizer, MAX_LENGTH)
+train_loader  = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+val_loader    = DataLoader(val_dataset,   batch_size=BATCH_SIZE)
 
-train_loader = DataLoader(train_dataset, batch_size=CONFIG["batch_size"], shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=CONFIG["batch_size"])
-
-print(f"📊 Exemplos de treino: {len(train_dataset)} | Validação: {len(val_dataset)}")
-
-optimizer = AdamW(model.parameters(), lr=CONFIG["learning_rate"])
-total_steps = len(train_loader) * CONFIG["num_epochs"]
-scheduler = get_linear_schedule_with_warmup(
+# OPTIMIZER E SCHEDULER
+optimizer    = AdamW(model.parameters(), lr=LEARNING_RATE)
+total_steps  = len(train_loader) * NUM_EPOCHS
+scheduler    = get_linear_schedule_with_warmup(
     optimizer,
     num_warmup_steps=total_steps // 10,
     num_training_steps=total_steps
 )
 
-
-def evaluate(model, data_loader):
+# AVALIAÇÃO
+def evaluate(model, loader):
     model.eval()
     all_preds, all_labels = [], []
 
     with torch.no_grad():
-        for batch in data_loader:
-            input_ids = batch["input_ids"].to(device)
-            attention_mask = batch["attention_mask"].to(device)
-            labels = batch["labels"].to(device)
-
-            outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+        for batch in loader:
+            outputs = model(
+                input_ids=batch["input_ids"].to(device),
+                attention_mask=batch["attention_mask"].to(device)
+            )
             predictions = torch.argmax(outputs.logits, dim=-1)
 
-            for pred_seq, label_seq in zip(predictions, labels):
+            for pred_seq, label_seq in zip(predictions, batch["labels"]):
                 pred_list, label_list = [], []
                 for p, l in zip(pred_seq, label_seq):
                     if l.item() != -100:
@@ -69,22 +81,18 @@ def evaluate(model, data_loader):
 
     return classification_report(all_labels, all_preds, zero_division=0)
 
+# TREINO
+print("A iniciar treino...\n")
 
-print("\n🚀 A iniciar treino...\n")
-
-for epoch in range(CONFIG["num_epochs"]):
+for epoch in range(NUM_EPOCHS):
     model.train()
     total_loss = 0
 
     for batch in train_loader:
-        input_ids = batch["input_ids"].to(device)
-        attention_mask = batch["attention_mask"].to(device)
-        labels = batch["labels"].to(device)
-
         outputs = model(
-            input_ids=input_ids,
-            attention_mask=attention_mask,
-            labels=labels
+            input_ids=batch["input_ids"].to(device),
+            attention_mask=batch["attention_mask"].to(device),
+            labels=batch["labels"].to(device)
         )
         loss = outputs.loss
         total_loss += loss.item()
@@ -96,14 +104,13 @@ for epoch in range(CONFIG["num_epochs"]):
         scheduler.step()
 
     avg_loss = total_loss / len(train_loader)
-    print(f"Época {epoch + 1}/{CONFIG['num_epochs']} | Loss: {avg_loss:.4f}")
+    print(f"Época {epoch+1}/{NUM_EPOCHS} | Loss: {avg_loss:.4f}")
 
-    if (epoch + 1) % 2 == 0:
-        print("\n📈 Métricas de validação:")
+    if (epoch + 1) % 5 == 0:
         print(evaluate(model, val_loader))
 
-print(f"\n💾 A guardar modelo em {CONFIG['model_save_path']}...")
-os.makedirs(CONFIG["model_save_path"], exist_ok=True)
-model.save_pretrained(CONFIG["model_save_path"])
-tokenizer.save_pretrained(CONFIG["model_save_path"])
-print("✅ Modelo guardado!")
+# GUARDAR
+os.makedirs(MODEL_SAVE_PATH, exist_ok=True)
+model.save_pretrained(MODEL_SAVE_PATH)
+tokenizer.save_pretrained(MODEL_SAVE_PATH)
+print(f"\nModelo guardado em {MODEL_SAVE_PATH}")

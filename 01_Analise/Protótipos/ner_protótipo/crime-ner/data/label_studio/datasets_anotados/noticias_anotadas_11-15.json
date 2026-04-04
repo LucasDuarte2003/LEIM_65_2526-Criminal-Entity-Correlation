@@ -1,1 +1,2382 @@
-[{"id":21,"annotations":[{"id":16,"completed_by":1,"result":[{"value":{"start":8,"end":27,"text":"14 de março de 2024","labels":["DATA"]},"id":"H6a2NW7TuD","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":0,"end":6,"text":"Lisboa","labels":["LOCAL"]},"id":"kzl---V9wi","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":31,"end":59,"text":"Ricardo Filipe Andrade Sousa","labels":["PESSOA"]},"id":"JqxxOe3rIc","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":84,"end":92,"text":"Odivelas","labels":["LOCAL"]},"id":"nhq2gwy-A9","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":110,"end":128,"text":"Polícia Judiciária","labels":["ORGANIZACAO"]},"id":"mSXbN8iAjJ","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":136,"end":155,"text":"12 de março de 2024","labels":["DATA"]},"id":"XwSWiPxvVz","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":159,"end":178,"text":"Rotunda da Mouraria","labels":["LOCAL"]},"id":"Z4LUk49PkM","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":183,"end":189,"text":"Lisboa","labels":["LOCAL"]},"id":"To-jmj70bV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":234,"end":260,"text":"tráfico de estupefacientes","labels":["CRIME"]},"id":"MEnCfBnbv8","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":324,"end":345,"text":"Volkswagen Golf preto","labels":["VIATURA"]},"id":"6oY4OMJEaG","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":363,"end":371,"text":"47-GH-29","labels":["MATRICULA"]},"id":"1-QMzAF_MR","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":411,"end":468,"text":"Unidade Nacional de Combate ao Tráfico de Estupefacientes","labels":["ORGANIZACAO"]},"id":"1L8Y6gK4eR","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":559,"end":570,"text":"4 850 euros","labels":["MONTANTE"]},"id":"bRZpWQqoIg","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":623,"end":634,"text":"963 417 285","labels":["TELEMOVEL"]},"id":"IcbrlvLws2","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":796,"end":809,"text":"Ricardo Sousa","labels":["PESSOA"]},"id":"t95LqPdKuu","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":861,"end":901,"text":"Tribunal de Instrução Criminal de Lisboa","labels":["ORGANIZACAO"]},"id":"2zW90mdYlD","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":978,"end":1003,"text":"tráfico de droga agravado","labels":["CRIME"]},"id":"2TCctW2V7t","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1006,"end":1026,"text":"associação criminosa","labels":["CRIME"]},"id":"RUQlOeeTr9","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1085,"end":1093,"text":"Odivelas","labels":["LOCAL"]},"id":"TizoDpHM2_","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1099,"end":1106,"text":"Amadora","labels":["LOCAL"]},"id":"mTAYMPkv6X","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1170,"end":1183,"text":"120 000 euros","labels":["MONTANTE"]},"id":"4fg9yzNYD_","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1231,"end":1283,"text":" Departamento de Investigação e Ação Penal de Lisboa","labels":["ORGANIZACAO"]},"id":"WLfCCH103f","from_name":"label","to_name":"text","type":"labels","origin":"manual"}],"was_cancelled":false,"ground_truth":false,"created_at":"2026-04-02T14:32:39.448708Z","updated_at":"2026-04-02T14:32:39.448708Z","draft_created_at":"2026-04-02T13:39:16.723683Z","lead_time":175.62400000000002,"prediction":{},"result_count":22,"unique_id":"b56566ce-5ccb-4baa-a79a-f41155a27e5e","import_id":null,"last_action":null,"bulk_created":false,"task":21,"project":3,"updated_by":1,"parent_prediction":null,"parent_annotation":null,"last_created_by":null}],"file_upload":"c5ee5604-lucas_5noticias2.json","drafts":[],"predictions":[],"data":{"text":"Lisboa, 14 de março de 2024. — Ricardo Filipe Andrade Sousa, de 34 anos, natural de Odivelas, foi detido pela Polícia Judiciária no dia 12 de março de 2024 na Rotunda da Mouraria, em Lisboa, na sequência de uma operação de combate ao tráfico de estupefacientes que decorreu durante três semanas. O suspeito deslocava-se num Volkswagen Golf preto, com a matrícula 47-GH-29, quando foi intercetado por agentes da Unidade Nacional de Combate ao Tráfico de Estupefacientes. No interior do veículo foram encontrados 2,3 kg de cocaína e 1,4 kg de heroína, bem como 4 850 euros em numerário. No telemóvel apreendido, com o número 963 417 285, as autoridades encontraram registos de comunicações com fornecedores e compradores, incluindo mensagens com coordenadas de entregas em vários pontos da cidade. Ricardo Sousa foi presente a primeiro interrogatório judicial no Tribunal de Instrução Criminal de Lisboa, tendo o juiz determinado a prisão preventiva. O arguido está indiciado por tráfico de droga agravado e associação criminosa. A investigação revelou que o suspeito operava na zona de Odivelas e da Amadora há pelo menos dois anos, com um volume de negócios estimado em 120 000 euros mensais. A operação contou com a colaboração do Departamento de Investigação e Ação Penal de Lisboa.","original_id":"SIN-001"},"meta":{},"created_at":"2026-04-02T12:06:54.674527Z","updated_at":"2026-04-02T14:32:39.501044Z","allow_skip":true,"inner_id":1,"total_annotations":1,"cancelled_annotations":0,"total_predictions":0,"comment_count":0,"unresolved_comment_count":0,"last_comment_updated_at":null,"project":3,"updated_by":1,"comment_authors":[]},{"id":22,"annotations":[{"id":17,"completed_by":1,"result":[{"value":{"start":0,"end":5,"text":"Porto","labels":["LOCAL"]},"id":"2T8D6lKa6v","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":7,"end":27,"text":"8 de janeiro de 2024","labels":["DATA"]},"id":"5qAkkNxvSO","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":33,"end":81,"text":"Departamento de Cibercrime da Polícia Judiciária","labels":["ORGANIZACAO"]},"id":"JbkLtqRYnC","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":106,"end":123,"text":"burla informática","labels":["CRIME"]},"id":"SdK07JAjfx","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":166,"end":179,"text":"380 000 euros","labels":["MONTANTE"]},"id":"e90K7EdnEi","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":206,"end":236,"text":"Gonçalo Armando Ferreira Lopes","labels":["PESSOA"]},"id":"t5GCoZtBeP","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":252,"end":276,"text":"Marta Sofia Vieira Cunha","labels":["PESSOA"]},"id":"nHyrsQ8smP","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":310,"end":315,"text":"Porto","labels":["LOCAL"]},"id":"JcLElmKuC2","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":333,"end":353,"text":"5 de janeiro de 2024","labels":["DATA"]},"id":"g1Rf-uYeoS","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":378,"end":394,"text":"Rua de Cedofeita","labels":["LOCAL"]},"id":"ROiqnSSpWA","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":469,"end":503,"text":"goncalo.investimentos.pt@gmail.com","labels":["EMAIL"]},"id":"Zf1V9Q5E7v","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":706,"end":748,"text":"bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh","labels":["CRIPTO"]},"id":"GD3QhnWipY","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":815,"end":826,"text":"Marta Cunha","labels":["PESSOA"]},"id":"ZOaKpd8nQ7","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":912,"end":953,"text":"marta.investimentos.secure@protonmail.com","labels":["EMAIL"]},"id":"FfInXgYJBk","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1001,"end":1014,"text":"Gonçalo Lopes","labels":["PESSOA"]},"id":"9kjGk4YQGw","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1149,"end":1191,"text":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F","labels":["CRIPTO"]},"id":"-tXThpOzzs","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1211,"end":1223,"text":"95 000 euros","labels":["MONTANTE"]},"id":"ABd84Ta3-9","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1256,"end":1295,"text":"Tribunal de Instrução Criminal do Porto","labels":["ORGANIZACAO"]},"id":"6ai0Im2phS","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1359,"end":1376,"text":"burla qualificada","labels":["CRIME"]},"id":"IyOPI4yM1w","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1378,"end":1403,"text":"branqueamento de capitais","labels":["CRIME"]},"id":"pZZG58MqOf","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1406,"end":1446,"text":"acesso ilegítimo a sistemas informáticos","labels":["CRIME"]},"id":"ErTywOyDFL","from_name":"label","to_name":"text","type":"labels","origin":"manual"}],"was_cancelled":false,"ground_truth":false,"created_at":"2026-04-02T14:32:41.286025Z","updated_at":"2026-04-02T14:32:41.286025Z","draft_created_at":"2026-04-02T14:19:48.628969Z","lead_time":338.50299999999993,"prediction":{},"result_count":21,"unique_id":"8b73fe1e-fcd1-44f1-b290-b0bd03ce13b6","import_id":null,"last_action":null,"bulk_created":false,"task":22,"project":3,"updated_by":1,"parent_prediction":null,"parent_annotation":null,"last_created_by":null}],"file_upload":"c5ee5604-lucas_5noticias2.json","drafts":[],"predictions":[],"data":{"text":"Porto, 8 de janeiro de 2024. — O Departamento de Cibercrime da Polícia Judiciária desmantelou uma rede de burla informática que lesou mais de 40 vítimas num total de 380 000 euros. Os principais suspeitos, Gonçalo Armando Ferreira Lopes, de 41 anos, e Marta Sofia Vieira Cunha, de 36 anos, ambos residentes no Porto, foram detidos a 5 de janeiro de 2024 nas suas residências na Rua de Cedofeita. O esquema consistia no envio de emails fraudulentos a partir do endereço goncalo.investimentos.pt@gmail.com, que simulavam comunicações de uma suposta plataforma de investimento em criptomoedas denominada CryptoLucroPT. As vítimas eram induzidas a transferir fundos para uma carteira de Bitcoin com o endereço bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh, a partir da qual os arguidos convertiam os valores em numerário. Marta Cunha era responsável pela gestão das comunicações por email, utilizando também o endereço marta.investimentos.secure@protonmail.com para contactar vítimas de perfil mais elevado. Gonçalo Lopes tratava da movimentação dos fundos entre carteiras cripto, tendo sido identificadas transferências para um segundo endereço Ethereum, 0x71C7656EC7ab88b098defB751B7401B5f6d8976F, no valor total de 95 000 euros. Os arguidos foram presentes ao Tribunal de Instrução Criminal do Porto, onde lhes foi aplicada prisão preventiva. Ambos respondem por burla qualificada, branqueamento de capitais e acesso ilegítimo a sistemas informáticos.","original_id":"SIN-002"},"meta":{},"created_at":"2026-04-02T12:06:54.674527Z","updated_at":"2026-04-02T14:32:41.338456Z","allow_skip":true,"inner_id":2,"total_annotations":1,"cancelled_annotations":0,"total_predictions":0,"comment_count":0,"unresolved_comment_count":0,"last_comment_updated_at":null,"project":3,"updated_by":1,"comment_authors":[]},{"id":23,"annotations":[{"id":18,"completed_by":1,"result":[{"value":{"start":0,"end":5,"text":"Braga","labels":["LOCAL"]},"id":"MxeBMC7nxm","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":7,"end":30,"text":"22 de fevereiro de 2024","labels":["DATA"]},"id":"kFjo0wzRkd","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":65,"end":103,"text":"Núcleo de Investigação Criminal da GNR","labels":["ORGANIZACAO"]},"id":"qe8w86nPj7","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":161,"end":179,"text":"roubos de viaturas","labels":["CRIME"]},"id":"uFR5-rSl-a","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":182,"end":190,"text":"extorsão","labels":["CRIME"]},"id":"pIddZfFUE0","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":214,"end":219,"text":"Minho","labels":["LOCAL"]},"id":"XLvkZM0-8q","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":226,"end":241,"text":"outubro de 2023","labels":["DATA"]},"id":"RBlqlB9UtO","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":244,"end":261,"text":"fevereiro de 2024","labels":["DATA"]},"id":"aGgYdD1YdL","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":278,"end":306,"text":"Hélder Augusto Machado Pires","labels":["PESSOA"]},"id":"b5UGDKKxhY","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":320,"end":346,"text":"Tiago Manuel Correia Basto","labels":["PESSOA"]},"id":"EXQrztiFrr","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":362,"end":393,"text":"Fábio Renato Oliveira Magalhães","labels":["PESSOA"]},"id":"uG4ukWW0gX","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":425,"end":430,"text":"Braga","labels":["LOCAL"]},"id":"hTbcNJ-Yxh","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":470,"end":486,"text":"furtava viaturas","labels":["CRIME"]},"id":"UDmMUR5q7Q","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":532,"end":540,"text":"assaltos","labels":["CRIME"]},"id":"TczeGOyvEu","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":590,"end":601,"text":"BMW Série 5","labels":["VIATURA"]},"id":"XCS3ItSnwp","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":618,"end":626,"text":"19-QR-47","labels":["MATRICULA"]},"id":"YFwV7pC9ln","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":631,"end":653,"text":"Mercedes-Benz Classe C","labels":["VIATURA"]},"id":"cnaqI_xbeS","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":670,"end":678,"text":"57-TK-83","labels":["MATRICULA"]},"id":"YA5h_hGLr9","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":684,"end":691,"text":"Audi A6","labels":["VIATURA"]},"id":"so9XwMoguO","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":708,"end":716,"text":"33-PL-92","labels":["MATRICULA"]},"id":"-8940-FmFm","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":786,"end":797,"text":"912 308 774","labels":["TELEMOVEL"]},"id":"CAiIN9fiCw","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":800,"end":811,"text":"935 621 049","labels":["TELEMOVEL"]},"id":"atKX27uGa8","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":875,"end":895,"text":"5 000 e 15 000 euros","labels":["MONTANTE"]},"id":"pqIGS4Vlq8","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":967,"end":976,"text":"extorsões","labels":["CRIME"]},"id":"1mS5hiTejw","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":988,"end":1000,"text":"47 500 euros","labels":["MONTANTE"]},"id":"7oVYqkCUf4","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1096,"end":1122,"text":"Tribunal Judicial de Braga","labels":["ORGANIZACAO"]},"id":"149c1uD00l","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1124,"end":1136,"text":"Hélder Pires","labels":["PESSOA"]},"id":"ivWvLUD_9X","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1196,"end":1207,"text":"Tiago Basto","labels":["PESSOA"]},"id":"n2OWsMBR95","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1210,"end":1225,"text":"Fábio Magalhães","labels":["PESSOA"]},"id":"bAEf7i1_Nt","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1326,"end":1343,"text":"furto qualificado","labels":["CRIME"]},"id":"17P-qhgf8A","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1345,"end":1353,"text":"extorsão","labels":["CRIME"]},"id":"iigpvc61NE","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1356,"end":1376,"text":"associação criminosa","labels":["CRIME"]},"id":"eoFs8MJHxm","from_name":"label","to_name":"text","type":"labels","origin":"manual"}],"was_cancelled":false,"ground_truth":false,"created_at":"2026-04-02T14:32:43.181182Z","updated_at":"2026-04-02T14:32:43.181182Z","draft_created_at":"2026-04-02T14:26:24.077839Z","lead_time":410.331,"prediction":{},"result_count":32,"unique_id":"a9dddf67-dbac-444f-981c-d6465b81b0a0","import_id":null,"last_action":null,"bulk_created":false,"task":23,"project":3,"updated_by":1,"parent_prediction":null,"parent_annotation":null,"last_created_by":null}],"file_upload":"c5ee5604-lucas_5noticias2.json","drafts":[],"predictions":[],"data":{"text":"Braga, 22 de fevereiro de 2024. — Três homens foram detidos pelo Núcleo de Investigação Criminal da GNR de Braga na sequência de uma investigação a uma série de roubos de viaturas e extorsão que afetou a região do Minho entre outubro de 2023 e fevereiro de 2024. Os detidos são Hélder Augusto Machado Pires, de 29 anos, Tiago Manuel Correia Basto, de 27 anos, e Fábio Renato Oliveira Magalhães, de 23 anos, todos naturais de Braga. De acordo com a investigação, o grupo furtava viaturas de gama alta que posteriormente utilizava em assaltos. Entre os veículos recuperados encontravam-se um BMW Série 5 com a matrícula 19-QR-47, um Mercedes-Benz Classe C com a matrícula 57-TK-83 e um Audi A6 com a matrícula 33-PL-92. Os suspeitos contactavam as vítimas por telemóvel, sendo os números 912 308 774 e 935 621 049 os mais utilizados nas comunicações extorsivas, exigindo entre 5 000 e 15 000 euros pelo não divulgação de alegadas gravações comprometedoras. O total das extorsões ascendeu a 47 500 euros. A investigação teve a duração de quatro meses e envolveu escutas telefónicas autorizadas pelo Tribunal Judicial de Braga. Hélder Pires, considerado o líder do grupo, ficou em prisão preventiva. Tiago Basto e Fábio Magalhães ficaram sujeitos a apresentações periódicas e proibição de contacto entre si. Os três respondem por furto qualificado, extorsão e associação criminosa.","original_id":"SIN-003"},"meta":{},"created_at":"2026-04-02T12:06:54.674527Z","updated_at":"2026-04-02T14:32:43.234737Z","allow_skip":true,"inner_id":3,"total_annotations":1,"cancelled_annotations":0,"total_predictions":0,"comment_count":0,"unresolved_comment_count":0,"last_comment_updated_at":null,"project":3,"updated_by":1,"comment_authors":[]},{"id":24,"annotations":[{"id":29,"completed_by":1,"result":[{"value":{"start":0,"end":4,"text":"Faro","labels":["LOCAL"]},"id":"vRmNgvPWRI","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":6,"end":24,"text":"3 de abril de 2024","labels":["DATA"]},"id":"e2Q9IalMtC","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":41,"end":66,"text":"Estrangeiros e Fronteiras","labels":["ORGANIZACAO"]},"id":"CuE4B_JZdH","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":89,"end":115,"text":"Polícia Judiciária de Faro","labels":["ORGANIZACAO"]},"id":"ST7fOOzyaU","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":142,"end":166,"text":"tráfico de seres humanos","labels":["CRIME"]},"id":"HyD0JvaXWV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":182,"end":189,"text":"Algarve","labels":["LOCAL"]},"id":"IU4BY7Tvu5","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":370,"end":388,"text":"1 de abril de 2024","labels":["DATA"]},"id":"FI5xtaRnO2","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":401,"end":409,"text":"Portimão","labels":["LOCAL"]},"id":"u9temfvDa0","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":427,"end":452,"text":"Vasile Constantin Dumitru","labels":["PESSOA"]},"id":"dchgoNzFgM","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":491,"end":515,"text":"Florin Alexandru Ionescu","labels":["PESSOA"]},"id":"nhfjDi3E9C","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":544,"end":574,"text":"Ana Cristina Barbosa Rodrigues","labels":["PESSOA"]},"id":"VrwfOfkEPa","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":599,"end":603,"text":"Faro","labels":["LOCAL"]},"id":"cIEkQp_tFV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":607,"end":634,"text":"Sérgio Miguel Pinto Tavares","labels":["PESSOA"]},"id":"Y7Y-fmVxf0","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":659,"end":667,"text":"Portimão","labels":["LOCAL"]},"id":"Aa_eYyHJ1Y","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":735,"end":766,"text":"carrinha Mercedes-Benz Sprinter","labels":["VIATURA"]},"id":"3f_7ZapSDB","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":783,"end":791,"text":"08-AX-64","labels":["MATRICULA"]},"id":"fhvw3pYaHU","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":796,"end":810,"text":"Renault Trafic","labels":["VIATURA"]},"id":"ss49OZrqXT","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":827,"end":835,"text":"72-BN-15","labels":["MATRICULA"]},"id":"5FCxHD-xs8","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":841,"end":853,"text":"Ford Transit","labels":["VIATURA"]},"id":"k86nD9IipR","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":870,"end":878,"text":"41-ZM-88","labels":["MATRICULA"]},"id":"EEzvQCu4F3","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":966,"end":977,"text":"926 183 540","labels":["TELEMOVEL"]},"id":"J34j6Dk7RB","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":993,"end":1007,"text":"Vasile Dumitru","labels":["PESSOA"]},"id":"LJME2QC90c","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1011,"end":1022,"text":"911 742 863","labels":["TELEMOVEL"]},"id":"K7GCIBe4Gu","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1038,"end":1052,"text":"Florin Ionescu","labels":["PESSOA"]},"id":"Qcwcmxx_SW","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1092,"end":1125,"text":"vasiledumitru.transport@yahoo.com","labels":["EMAIL"]},"id":"CRo81utl9T","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1277,"end":1293,"text":"trabalho forçado","labels":["CRIME"]},"id":"xHKRH3oHVj","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1322,"end":1329,"text":"Algarve","labels":["LOCAL"]},"id":"TV5F5GwQmr","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1333,"end":1359,"text":"Ministério Público de Faro","labels":["ORGANIZACAO"]},"id":"rrm5RHSVAh","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1381,"end":1414,"text":"tráfico de seres humanos agravado","labels":["CRIME"]},"id":"t0W_ID4ddu","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1416,"end":1438,"text":"exploração do trabalho","labels":["CRIME"]},"id":"H_Naw62wSV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1441,"end":1461,"text":"associação criminosa","labels":["CRIME"]},"id":"dv1Uqz3LhN","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1463,"end":1477,"text":"Vasile Dumitru","labels":["PESSOA"]},"id":"JXy3ocIsSq","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1480,"end":1494,"text":"Florin Ionescu","labels":["PESSOA"]},"id":"YpPtWtT1F7","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1525,"end":1538,"text":"Ana Rodrigues","labels":["PESSOA"]},"id":"ae6HzVt8s9","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1541,"end":1555,"text":"Sérgio Tavares","labels":["PESSOA"]},"id":"kpz_dVzL_u","from_name":"label","to_name":"text","type":"labels","origin":"manual"}],"was_cancelled":false,"ground_truth":false,"created_at":"2026-04-03T15:29:10.642813Z","updated_at":"2026-04-03T15:29:10.642813Z","draft_created_at":"2026-04-03T15:26:07.383468Z","lead_time":198.605,"prediction":{},"result_count":35,"unique_id":"3268581d-71a1-4f3c-ab97-4c9900c62ce0","import_id":null,"last_action":null,"bulk_created":false,"task":24,"project":3,"updated_by":1,"parent_prediction":null,"parent_annotation":null,"last_created_by":null}],"file_upload":"c5ee5604-lucas_5noticias2.json","drafts":[],"predictions":[],"data":{"text":"Faro, 3 de abril de 2024. — O Serviço de Estrangeiros e Fronteiras, em colaboração com a Polícia Judiciária de Faro, desarticulou uma rede de tráfico de seres humanos que operava no Algarve e que utilizava o território português como ponto de passagem para outros países europeus. A operação, denominada Operação Litoral, resultou na detenção de quatro suspeitos no dia 1 de abril de 2024, na área de Portimão. Os arguidos são Vasile Constantin Dumitru, de 38 anos, de nacionalidade romena, Florin Alexandru Ionescu, de 33 anos, também romeno, Ana Cristina Barbosa Rodrigues, de 44 anos, natural de Faro, e Sérgio Miguel Pinto Tavares, de 31 anos, natural de Portimão. A rede utilizava três viaturas para o transporte das vítimas: uma carrinha Mercedes-Benz Sprinter com a matrícula 08-AX-64, um Renault Trafic com a matrícula 72-BN-15 e um Ford Transit com a matrícula 41-ZM-88. As comunicações entre os membros da rede eram feitas através dos números de telemóvel 926 183 540, utilizado por Vasile Dumitru, e 911 742 863, utilizado por Florin Ionescu, bem como através do endereço de email vasiledumitru.transport@yahoo.com. As vítimas, maioritariamente de nacionalidade moldava e ucraniana, eram aliciadas com promessas de emprego em Portugal e posteriormente exploradas em trabalho forçado em explorações agrícolas do Algarve. O Ministério Público de Faro deduziu acusação por tráfico de seres humanos agravado, exploração do trabalho e associação criminosa. Vasile Dumitru e Florin Ionescu ficaram em prisão preventiva. Ana Rodrigues e Sérgio Tavares ficaram sujeitos a prisão domiciliária com pulseira eletrónica.","original_id":"SIN-004"},"meta":{},"created_at":"2026-04-02T12:06:54.674527Z","updated_at":"2026-04-03T15:29:10.690212Z","allow_skip":true,"inner_id":4,"total_annotations":1,"cancelled_annotations":0,"total_predictions":0,"comment_count":0,"unresolved_comment_count":0,"last_comment_updated_at":null,"project":3,"updated_by":1,"comment_authors":[]},{"id":25,"annotations":[{"id":30,"completed_by":1,"result":[{"value":{"start":0,"end":6,"text":"Lisboa","labels":["LOCAL"]},"id":"pvVpUQPpMX","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":8,"end":26,"text":"17 de maio de 2024","labels":["DATA"]},"id":"6bE6HoaSQ4","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":32,"end":83,"text":"Departamento de Investigação e Ação Penal de Lisboa","labels":["ORGANIZACAO"]},"id":"14jPAFnI7I","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":103,"end":136,"text":"Autoridade Tributária e Aduaneira","labels":["ORGANIZACAO"]},"id":"ZxPvEIL8di","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":175,"end":188,"text":"fraude fiscal","labels":["CRIME"]},"id":"8aBVTD1jlb","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":191,"end":216,"text":"branqueamento de capitais","labels":["CRIME"]},"id":"3T8AE3ues8","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":285,"end":300,"text":"2 300 000 euros","labels":["MONTANTE"]},"id":"nrMctdVWzx","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":318,"end":349,"text":"Paulo Alexandre Mendes Ferreira","labels":["PESSOA"]},"id":"X8AQ33SsVr","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":418,"end":424,"text":"Lisboa","labels":["LOCAL"]},"id":"rK3emWek9W","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":428,"end":457,"text":"Luís Filipe Carvalho Nogueira","labels":["PESSOA"]},"id":"Wh5QcLn7LL","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":536,"end":552,"text":"setembro de 2022","labels":["DATA"]},"id":"Cmy8_RcNHW","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":742,"end":784,"text":"bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq","labels":["CRIPTO"]},"id":"BiyMXF7DnV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":787,"end":821,"text":"3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5","labels":["CRIPTO"]},"id":"jrQ55wa2kg","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":836,"end":851,"text":"1 450 000 euros","labels":["MONTANTE"]},"id":"9Eq1NiOiFE","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":880,"end":922,"text":"0x2170Ed0880ac9A755fd29B2688956BD959F933F8","labels":["CRIPTO"]},"id":"xtP72aVEoV","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":941,"end":954,"text":"380 000 euros","labels":["MONTANTE"]},"id":"seXEhxATwo","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":956,"end":970,"text":"Paulo Ferreira","labels":["PESSOA"]},"id":"XxVzV6kH-D","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1006,"end":1017,"text":"964 231 876","labels":["TELEMOVEL"]},"id":"x0KpklbZ9j","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1056,"end":1069,"text":"Luís Nogueira","labels":["PESSOA"]},"id":"mEK6aGZ9Yt","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1089,"end":1100,"text":"937 854 210","labels":["TELEMOVEL"]},"id":"ibA4GYli8Z","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1170,"end":1203,"text":"paulomendes.consultoria@gmail.com","labels":["EMAIL"]},"id":"XyuXTj4bTP","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1206,"end":1237,"text":"lf.nogueira.business@outlook.pt","labels":["EMAIL"]},"id":"16dkJD4Pjf","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1284,"end":1299,"text":"Porsche Cayenne","labels":["VIATURA"]},"id":"Ji0GdzKurX","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1316,"end":1324,"text":"22-LK-57","labels":["MATRICULA"]},"id":"WcaNAkKzcy","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1331,"end":1344,"text":"Tesla Model 3","labels":["VIATURA"]},"id":"7yAQUiEcVe","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1361,"end":1369,"text":"18-XP-34","labels":["MATRICULA"]},"id":"AOpXONPSjv","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1428,"end":1476,"text":"Tribunal Central de Instrução Criminal de Lisboa","labels":["ORGANIZACAO"]},"id":"16VFKrPa46","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1511,"end":1525,"text":"Paulo Ferreira","labels":["PESSOA"]},"id":"R_WVO2E9Xz","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1571,"end":1584,"text":"Luís Nogueira","labels":["PESSOA"]},"id":"3ji9Oh_P37","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1655,"end":1680,"text":"fraude fiscal qualificada","labels":["CRIME"]},"id":"22qAzQqjIN","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1682,"end":1707,"text":"branqueamento de capitais","labels":["CRIME"]},"id":"RlVSOfJAD2","from_name":"label","to_name":"text","type":"labels","origin":"manual"},{"value":{"start":1710,"end":1736,"text":"falsificação de documentos","labels":["CRIME"]},"id":"afTvOnpbGi","from_name":"label","to_name":"text","type":"labels","origin":"manual"}],"was_cancelled":false,"ground_truth":false,"created_at":"2026-04-03T15:32:29.252515Z","updated_at":"2026-04-03T15:32:29.252515Z","draft_created_at":"2026-04-03T15:29:21.973598Z","lead_time":191.774,"prediction":{},"result_count":32,"unique_id":"19b6ce67-c8d4-429f-8539-d25457abf907","import_id":null,"last_action":null,"bulk_created":false,"task":25,"project":3,"updated_by":1,"parent_prediction":null,"parent_annotation":null,"last_created_by":null}],"file_upload":"c5ee5604-lucas_5noticias2.json","drafts":[],"predictions":[],"data":{"text":"Lisboa, 17 de maio de 2024. — O Departamento de Investigação e Ação Penal de Lisboa, em conjunto com a Autoridade Tributária e Aduaneira, deteve dois empresários suspeitos de fraude fiscal e branqueamento de capitais através de criptomoedas, causando um prejuízo estimado ao Estado de 2 300 000 euros. Os arguidos são Paulo Alexandre Mendes Ferreira, de 52 anos, administrador de uma empresa de consultoria sediada em Lisboa, e Luís Filipe Carvalho Nogueira, de 47 anos, sócio da mesma empresa. De acordo com a investigação iniciada em setembro de 2022, os dois arguidos utilizavam um esquema de faturação falsa para transferir fundos para carteiras de criptomoedas não declaradas. Foram identificadas movimentações para os endereços Bitcoin bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq e 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5, num total de 1 450 000 euros, e para o endereço Ethereum 0x2170Ed0880ac9A755fd29B2688956BD959F933F8, correspondente a 380 000 euros. Paulo Ferreira utilizava o telemóvel com o número 964 231 876 para coordenar as operações, enquanto Luís Nogueira utilizava o número 937 854 210. As comunicações escritas eram feitas através dos endereços de email paulomendes.consultoria@gmail.com e lf.nogueira.business@outlook.pt. Os arguidos deslocavam-se frequentemente num Porsche Cayenne com a matrícula 22-LK-57 e num Tesla Model 3 com a matrícula 18-XP-34 para reuniões com clientes que participavam no esquema. O Tribunal Central de Instrução Criminal de Lisboa determinou a prisão preventiva de Paulo Ferreira e a obrigação de apresentação periódica para Luís Nogueira, com proibição de saída do país para ambos. Os arguidos respondem por fraude fiscal qualificada, branqueamento de capitais e falsificação de documentos.","original_id":"SIN-005"},"meta":{},"created_at":"2026-04-02T12:06:54.674527Z","updated_at":"2026-04-03T15:32:29.300377Z","allow_skip":true,"inner_id":5,"total_annotations":1,"cancelled_annotations":0,"total_predictions":0,"comment_count":0,"unresolved_comment_count":0,"last_comment_updated_at":null,"project":3,"updated_by":1,"comment_authors":[]}]
+[
+  {
+    "id": 21,
+    "annotations": [
+      {
+        "id": 16,
+        "completed_by": 1,
+        "result": [
+          {
+            "value": {
+              "start": 8,
+              "end": 27,
+              "text": "14 de março de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "H6a2NW7TuD",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 0,
+              "end": 6,
+              "text": "Lisboa",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "kzl---V9wi",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 31,
+              "end": 59,
+              "text": "Ricardo Filipe Andrade Sousa",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "JqxxOe3rIc",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 84,
+              "end": 92,
+              "text": "Odivelas",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "nhq2gwy-A9",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 110,
+              "end": 128,
+              "text": "Polícia Judiciária",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "mSXbN8iAjJ",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 136,
+              "end": 155,
+              "text": "12 de março de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "XwSWiPxvVz",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 159,
+              "end": 178,
+              "text": "Rotunda da Mouraria",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "Z4LUk49PkM",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 183,
+              "end": 189,
+              "text": "Lisboa",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "To-jmj70bV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 234,
+              "end": 260,
+              "text": "tráfico de estupefacientes",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "MEnCfBnbv8",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 324,
+              "end": 345,
+              "text": "Volkswagen Golf preto",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "6oY4OMJEaG",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 363,
+              "end": 371,
+              "text": "47-GH-29",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "1-QMzAF_MR",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 411,
+              "end": 468,
+              "text": "Unidade Nacional de Combate ao Tráfico de Estupefacientes",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "1L8Y6gK4eR",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 559,
+              "end": 570,
+              "text": "4 850 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "bRZpWQqoIg",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 623,
+              "end": 634,
+              "text": "963 417 285",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "IcbrlvLws2",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 796,
+              "end": 809,
+              "text": "Ricardo Sousa",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "t95LqPdKuu",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 861,
+              "end": 901,
+              "text": "Tribunal de Instrução Criminal de Lisboa",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "2zW90mdYlD",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 978,
+              "end": 1003,
+              "text": "tráfico de droga agravado",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "2TCctW2V7t",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1006,
+              "end": 1026,
+              "text": "associação criminosa",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "RUQlOeeTr9",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1085,
+              "end": 1093,
+              "text": "Odivelas",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "TizoDpHM2_",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1099,
+              "end": 1106,
+              "text": "Amadora",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "mTAYMPkv6X",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1170,
+              "end": 1183,
+              "text": "120 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "4fg9yzNYD_",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1231,
+              "end": 1283,
+              "text": " Departamento de Investigação e Ação Penal de Lisboa",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "WLfCCH103f",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          }
+        ],
+        "was_cancelled": false,
+        "ground_truth": false,
+        "created_at": "2026-04-02T14:32:39.448708Z",
+        "updated_at": "2026-04-02T14:32:39.448708Z",
+        "draft_created_at": "2026-04-02T13:39:16.723683Z",
+        "lead_time": 175.62400000000002,
+        "prediction": {},
+        "result_count": 22,
+        "unique_id": "b56566ce-5ccb-4baa-a79a-f41155a27e5e",
+        "import_id": null,
+        "last_action": null,
+        "bulk_created": false,
+        "task": 21,
+        "project": 3,
+        "updated_by": 1,
+        "parent_prediction": null,
+        "parent_annotation": null,
+        "last_created_by": null
+      }
+    ],
+    "file_upload": "c5ee5604-lucas_5noticias2.json",
+    "drafts": [],
+    "predictions": [],
+    "data": {
+      "text": "Lisboa, 14 de março de 2024. — Ricardo Filipe Andrade Sousa, de 34 anos, natural de Odivelas, foi detido pela Polícia Judiciária no dia 12 de março de 2024 na Rotunda da Mouraria, em Lisboa, na sequência de uma operação de combate ao tráfico de estupefacientes que decorreu durante três semanas. O suspeito deslocava-se num Volkswagen Golf preto, com a matrícula 47-GH-29, quando foi intercetado por agentes da Unidade Nacional de Combate ao Tráfico de Estupefacientes. No interior do veículo foram encontrados 2,3 kg de cocaína e 1,4 kg de heroína, bem como 4 850 euros em numerário. No telemóvel apreendido, com o número 963 417 285, as autoridades encontraram registos de comunicações com fornecedores e compradores, incluindo mensagens com coordenadas de entregas em vários pontos da cidade. Ricardo Sousa foi presente a primeiro interrogatório judicial no Tribunal de Instrução Criminal de Lisboa, tendo o juiz determinado a prisão preventiva. O arguido está indiciado por tráfico de droga agravado e associação criminosa. A investigação revelou que o suspeito operava na zona de Odivelas e da Amadora há pelo menos dois anos, com um volume de negócios estimado em 120 000 euros mensais. A operação contou com a colaboração do Departamento de Investigação e Ação Penal de Lisboa.",
+      "original_id": "SIN-001"
+    },
+    "meta": {},
+    "created_at": "2026-04-02T12:06:54.674527Z",
+    "updated_at": "2026-04-02T14:32:39.501044Z",
+    "allow_skip": true,
+    "inner_id": 1,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 3,
+    "updated_by": 1,
+    "comment_authors": []
+  },
+  {
+    "id": 22,
+    "annotations": [
+      {
+        "id": 17,
+        "completed_by": 1,
+        "result": [
+          {
+            "value": {
+              "start": 0,
+              "end": 5,
+              "text": "Porto",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "2T8D6lKa6v",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 7,
+              "end": 27,
+              "text": "8 de janeiro de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "5qAkkNxvSO",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 33,
+              "end": 81,
+              "text": "Departamento de Cibercrime da Polícia Judiciária",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "JbkLtqRYnC",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 106,
+              "end": 123,
+              "text": "burla informática",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "SdK07JAjfx",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 166,
+              "end": 179,
+              "text": "380 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "e90K7EdnEi",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 206,
+              "end": 236,
+              "text": "Gonçalo Armando Ferreira Lopes",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "t5GCoZtBeP",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 252,
+              "end": 276,
+              "text": "Marta Sofia Vieira Cunha",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "nHyrsQ8smP",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 310,
+              "end": 315,
+              "text": "Porto",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "JcLElmKuC2",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 333,
+              "end": 353,
+              "text": "5 de janeiro de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "g1Rf-uYeoS",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 378,
+              "end": 394,
+              "text": "Rua de Cedofeita",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "ROiqnSSpWA",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 469,
+              "end": 503,
+              "text": "goncalo.investimentos.pt@gmail.com",
+              "labels": [
+                "EMAIL"
+              ]
+            },
+            "id": "Zf1V9Q5E7v",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 706,
+              "end": 748,
+              "text": "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+              "labels": [
+                "CRIPTO"
+              ]
+            },
+            "id": "GD3QhnWipY",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 815,
+              "end": 826,
+              "text": "Marta Cunha",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "ZOaKpd8nQ7",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 912,
+              "end": 953,
+              "text": "marta.investimentos.secure@protonmail.com",
+              "labels": [
+                "EMAIL"
+              ]
+            },
+            "id": "FfInXgYJBk",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1001,
+              "end": 1014,
+              "text": "Gonçalo Lopes",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "9kjGk4YQGw",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1149,
+              "end": 1191,
+              "text": "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
+              "labels": [
+                "CRIPTO"
+              ]
+            },
+            "id": "-tXThpOzzs",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1211,
+              "end": 1223,
+              "text": "95 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "ABd84Ta3-9",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1256,
+              "end": 1295,
+              "text": "Tribunal de Instrução Criminal do Porto",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "6ai0Im2phS",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1359,
+              "end": 1376,
+              "text": "burla qualificada",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "IyOPI4yM1w",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1378,
+              "end": 1403,
+              "text": "branqueamento de capitais",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "pZZG58MqOf",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1406,
+              "end": 1446,
+              "text": "acesso ilegítimo a sistemas informáticos",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "ErTywOyDFL",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          }
+        ],
+        "was_cancelled": false,
+        "ground_truth": false,
+        "created_at": "2026-04-02T14:32:41.286025Z",
+        "updated_at": "2026-04-02T14:32:41.286025Z",
+        "draft_created_at": "2026-04-02T14:19:48.628969Z",
+        "lead_time": 338.50299999999993,
+        "prediction": {},
+        "result_count": 21,
+        "unique_id": "8b73fe1e-fcd1-44f1-b290-b0bd03ce13b6",
+        "import_id": null,
+        "last_action": null,
+        "bulk_created": false,
+        "task": 22,
+        "project": 3,
+        "updated_by": 1,
+        "parent_prediction": null,
+        "parent_annotation": null,
+        "last_created_by": null
+      }
+    ],
+    "file_upload": "c5ee5604-lucas_5noticias2.json",
+    "drafts": [],
+    "predictions": [],
+    "data": {
+      "text": "Porto, 8 de janeiro de 2024. — O Departamento de Cibercrime da Polícia Judiciária desmantelou uma rede de burla informática que lesou mais de 40 vítimas num total de 380 000 euros. Os principais suspeitos, Gonçalo Armando Ferreira Lopes, de 41 anos, e Marta Sofia Vieira Cunha, de 36 anos, ambos residentes no Porto, foram detidos a 5 de janeiro de 2024 nas suas residências na Rua de Cedofeita. O esquema consistia no envio de emails fraudulentos a partir do endereço goncalo.investimentos.pt@gmail.com, que simulavam comunicações de uma suposta plataforma de investimento em criptomoedas denominada CryptoLucroPT. As vítimas eram induzidas a transferir fundos para uma carteira de Bitcoin com o endereço bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh, a partir da qual os arguidos convertiam os valores em numerário. Marta Cunha era responsável pela gestão das comunicações por email, utilizando também o endereço marta.investimentos.secure@protonmail.com para contactar vítimas de perfil mais elevado. Gonçalo Lopes tratava da movimentação dos fundos entre carteiras cripto, tendo sido identificadas transferências para um segundo endereço Ethereum, 0x71C7656EC7ab88b098defB751B7401B5f6d8976F, no valor total de 95 000 euros. Os arguidos foram presentes ao Tribunal de Instrução Criminal do Porto, onde lhes foi aplicada prisão preventiva. Ambos respondem por burla qualificada, branqueamento de capitais e acesso ilegítimo a sistemas informáticos.",
+      "original_id": "SIN-002"
+    },
+    "meta": {},
+    "created_at": "2026-04-02T12:06:54.674527Z",
+    "updated_at": "2026-04-02T14:32:41.338456Z",
+    "allow_skip": true,
+    "inner_id": 2,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 3,
+    "updated_by": 1,
+    "comment_authors": []
+  },
+  {
+    "id": 23,
+    "annotations": [
+      {
+        "id": 18,
+        "completed_by": 1,
+        "result": [
+          {
+            "value": {
+              "start": 0,
+              "end": 5,
+              "text": "Braga",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "MxeBMC7nxm",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 7,
+              "end": 30,
+              "text": "22 de fevereiro de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "kFjo0wzRkd",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 65,
+              "end": 103,
+              "text": "Núcleo de Investigação Criminal da GNR",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "qe8w86nPj7",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 161,
+              "end": 179,
+              "text": "roubos de viaturas",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "uFR5-rSl-a",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 182,
+              "end": 190,
+              "text": "extorsão",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "pIddZfFUE0",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 214,
+              "end": 219,
+              "text": "Minho",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "XLvkZM0-8q",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 226,
+              "end": 241,
+              "text": "outubro de 2023",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "RBlqlB9UtO",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 244,
+              "end": 261,
+              "text": "fevereiro de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "aGgYdD1YdL",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 278,
+              "end": 306,
+              "text": "Hélder Augusto Machado Pires",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "b5UGDKKxhY",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 320,
+              "end": 346,
+              "text": "Tiago Manuel Correia Basto",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "EXQrztiFrr",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 362,
+              "end": 393,
+              "text": "Fábio Renato Oliveira Magalhães",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "uG4ukWW0gX",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 425,
+              "end": 430,
+              "text": "Braga",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "hTbcNJ-Yxh",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 470,
+              "end": 486,
+              "text": "furtava viaturas",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "UDmMUR5q7Q",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 532,
+              "end": 540,
+              "text": "assaltos",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "TczeGOyvEu",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 590,
+              "end": 601,
+              "text": "BMW Série 5",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "XCS3ItSnwp",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 618,
+              "end": 626,
+              "text": "19-QR-47",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "YFwV7pC9ln",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 631,
+              "end": 653,
+              "text": "Mercedes-Benz Classe C",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "cnaqI_xbeS",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 670,
+              "end": 678,
+              "text": "57-TK-83",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "YA5h_hGLr9",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 684,
+              "end": 691,
+              "text": "Audi A6",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "so9XwMoguO",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 708,
+              "end": 716,
+              "text": "33-PL-92",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "-8940-FmFm",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 786,
+              "end": 797,
+              "text": "912 308 774",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "CAiIN9fiCw",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 800,
+              "end": 811,
+              "text": "935 621 049",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "atKX27uGa8",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 875,
+              "end": 895,
+              "text": "5 000 e 15 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "pqIGS4Vlq8",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 967,
+              "end": 976,
+              "text": "extorsões",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "1mS5hiTejw",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 988,
+              "end": 1000,
+              "text": "47 500 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "7oVYqkCUf4",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1096,
+              "end": 1122,
+              "text": "Tribunal Judicial de Braga",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "149c1uD00l",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1124,
+              "end": 1136,
+              "text": "Hélder Pires",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "ivWvLUD_9X",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1196,
+              "end": 1207,
+              "text": "Tiago Basto",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "n2OWsMBR95",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1210,
+              "end": 1225,
+              "text": "Fábio Magalhães",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "bAEf7i1_Nt",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1326,
+              "end": 1343,
+              "text": "furto qualificado",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "17P-qhgf8A",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1345,
+              "end": 1353,
+              "text": "extorsão",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "iigpvc61NE",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1356,
+              "end": 1376,
+              "text": "associação criminosa",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "eoFs8MJHxm",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          }
+        ],
+        "was_cancelled": false,
+        "ground_truth": false,
+        "created_at": "2026-04-02T14:32:43.181182Z",
+        "updated_at": "2026-04-02T14:32:43.181182Z",
+        "draft_created_at": "2026-04-02T14:26:24.077839Z",
+        "lead_time": 410.331,
+        "prediction": {},
+        "result_count": 32,
+        "unique_id": "a9dddf67-dbac-444f-981c-d6465b81b0a0",
+        "import_id": null,
+        "last_action": null,
+        "bulk_created": false,
+        "task": 23,
+        "project": 3,
+        "updated_by": 1,
+        "parent_prediction": null,
+        "parent_annotation": null,
+        "last_created_by": null
+      }
+    ],
+    "file_upload": "c5ee5604-lucas_5noticias2.json",
+    "drafts": [],
+    "predictions": [],
+    "data": {
+      "text": "Braga, 22 de fevereiro de 2024. — Três homens foram detidos pelo Núcleo de Investigação Criminal da GNR de Braga na sequência de uma investigação a uma série de roubos de viaturas e extorsão que afetou a região do Minho entre outubro de 2023 e fevereiro de 2024. Os detidos são Hélder Augusto Machado Pires, de 29 anos, Tiago Manuel Correia Basto, de 27 anos, e Fábio Renato Oliveira Magalhães, de 23 anos, todos naturais de Braga. De acordo com a investigação, o grupo furtava viaturas de gama alta que posteriormente utilizava em assaltos. Entre os veículos recuperados encontravam-se um BMW Série 5 com a matrícula 19-QR-47, um Mercedes-Benz Classe C com a matrícula 57-TK-83 e um Audi A6 com a matrícula 33-PL-92. Os suspeitos contactavam as vítimas por telemóvel, sendo os números 912 308 774 e 935 621 049 os mais utilizados nas comunicações extorsivas, exigindo entre 5 000 e 15 000 euros pelo não divulgação de alegadas gravações comprometedoras. O total das extorsões ascendeu a 47 500 euros. A investigação teve a duração de quatro meses e envolveu escutas telefónicas autorizadas pelo Tribunal Judicial de Braga. Hélder Pires, considerado o líder do grupo, ficou em prisão preventiva. Tiago Basto e Fábio Magalhães ficaram sujeitos a apresentações periódicas e proibição de contacto entre si. Os três respondem por furto qualificado, extorsão e associação criminosa.",
+      "original_id": "SIN-003"
+    },
+    "meta": {},
+    "created_at": "2026-04-02T12:06:54.674527Z",
+    "updated_at": "2026-04-02T14:32:43.234737Z",
+    "allow_skip": true,
+    "inner_id": 3,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 3,
+    "updated_by": 1,
+    "comment_authors": []
+  },
+  {
+    "id": 24,
+    "annotations": [
+      {
+        "id": 29,
+        "completed_by": 1,
+        "result": [
+          {
+            "value": {
+              "start": 0,
+              "end": 4,
+              "text": "Faro",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "vRmNgvPWRI",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 6,
+              "end": 24,
+              "text": "3 de abril de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "e2Q9IalMtC",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 41,
+              "end": 66,
+              "text": "Estrangeiros e Fronteiras",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "CuE4B_JZdH",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 89,
+              "end": 115,
+              "text": "Polícia Judiciária de Faro",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "ST7fOOzyaU",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 142,
+              "end": 166,
+              "text": "tráfico de seres humanos",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "HyD0JvaXWV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 182,
+              "end": 189,
+              "text": "Algarve",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "IU4BY7Tvu5",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 370,
+              "end": 388,
+              "text": "1 de abril de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "FI5xtaRnO2",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 401,
+              "end": 409,
+              "text": "Portimão",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "u9temfvDa0",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 427,
+              "end": 452,
+              "text": "Vasile Constantin Dumitru",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "dchgoNzFgM",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 491,
+              "end": 515,
+              "text": "Florin Alexandru Ionescu",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "nhfjDi3E9C",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 544,
+              "end": 574,
+              "text": "Ana Cristina Barbosa Rodrigues",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "VrwfOfkEPa",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 599,
+              "end": 603,
+              "text": "Faro",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "cIEkQp_tFV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 607,
+              "end": 634,
+              "text": "Sérgio Miguel Pinto Tavares",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "Y7Y-fmVxf0",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 659,
+              "end": 667,
+              "text": "Portimão",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "Aa_eYyHJ1Y",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 735,
+              "end": 766,
+              "text": "carrinha Mercedes-Benz Sprinter",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "3f_7ZapSDB",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 783,
+              "end": 791,
+              "text": "08-AX-64",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "fhvw3pYaHU",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 796,
+              "end": 810,
+              "text": "Renault Trafic",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "ss49OZrqXT",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 827,
+              "end": 835,
+              "text": "72-BN-15",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "5FCxHD-xs8",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 841,
+              "end": 853,
+              "text": "Ford Transit",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "k86nD9IipR",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 870,
+              "end": 878,
+              "text": "41-ZM-88",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "EEzvQCu4F3",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 966,
+              "end": 977,
+              "text": "926 183 540",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "J34j6Dk7RB",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 993,
+              "end": 1007,
+              "text": "Vasile Dumitru",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "LJME2QC90c",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1011,
+              "end": 1022,
+              "text": "911 742 863",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "K7GCIBe4Gu",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1038,
+              "end": 1052,
+              "text": "Florin Ionescu",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "Qcwcmxx_SW",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1092,
+              "end": 1125,
+              "text": "vasiledumitru.transport@yahoo.com",
+              "labels": [
+                "EMAIL"
+              ]
+            },
+            "id": "CRo81utl9T",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1277,
+              "end": 1293,
+              "text": "trabalho forçado",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "xHKRH3oHVj",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1322,
+              "end": 1329,
+              "text": "Algarve",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "TV5F5GwQmr",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1333,
+              "end": 1359,
+              "text": "Ministério Público de Faro",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "rrm5RHSVAh",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1381,
+              "end": 1414,
+              "text": "tráfico de seres humanos agravado",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "t0W_ID4ddu",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1416,
+              "end": 1438,
+              "text": "exploração do trabalho",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "H_Naw62wSV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1441,
+              "end": 1461,
+              "text": "associação criminosa",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "dv1Uqz3LhN",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1463,
+              "end": 1477,
+              "text": "Vasile Dumitru",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "JXy3ocIsSq",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1480,
+              "end": 1494,
+              "text": "Florin Ionescu",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "YpPtWtT1F7",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1525,
+              "end": 1538,
+              "text": "Ana Rodrigues",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "ae6HzVt8s9",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1541,
+              "end": 1555,
+              "text": "Sérgio Tavares",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "kpz_dVzL_u",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          }
+        ],
+        "was_cancelled": false,
+        "ground_truth": false,
+        "created_at": "2026-04-03T15:29:10.642813Z",
+        "updated_at": "2026-04-03T15:29:10.642813Z",
+        "draft_created_at": "2026-04-03T15:26:07.383468Z",
+        "lead_time": 198.605,
+        "prediction": {},
+        "result_count": 35,
+        "unique_id": "3268581d-71a1-4f3c-ab97-4c9900c62ce0",
+        "import_id": null,
+        "last_action": null,
+        "bulk_created": false,
+        "task": 24,
+        "project": 3,
+        "updated_by": 1,
+        "parent_prediction": null,
+        "parent_annotation": null,
+        "last_created_by": null
+      }
+    ],
+    "file_upload": "c5ee5604-lucas_5noticias2.json",
+    "drafts": [],
+    "predictions": [],
+    "data": {
+      "text": "Faro, 3 de abril de 2024. — O Serviço de Estrangeiros e Fronteiras, em colaboração com a Polícia Judiciária de Faro, desarticulou uma rede de tráfico de seres humanos que operava no Algarve e que utilizava o território português como ponto de passagem para outros países europeus. A operação, denominada Operação Litoral, resultou na detenção de quatro suspeitos no dia 1 de abril de 2024, na área de Portimão. Os arguidos são Vasile Constantin Dumitru, de 38 anos, de nacionalidade romena, Florin Alexandru Ionescu, de 33 anos, também romeno, Ana Cristina Barbosa Rodrigues, de 44 anos, natural de Faro, e Sérgio Miguel Pinto Tavares, de 31 anos, natural de Portimão. A rede utilizava três viaturas para o transporte das vítimas: uma carrinha Mercedes-Benz Sprinter com a matrícula 08-AX-64, um Renault Trafic com a matrícula 72-BN-15 e um Ford Transit com a matrícula 41-ZM-88. As comunicações entre os membros da rede eram feitas através dos números de telemóvel 926 183 540, utilizado por Vasile Dumitru, e 911 742 863, utilizado por Florin Ionescu, bem como através do endereço de email vasiledumitru.transport@yahoo.com. As vítimas, maioritariamente de nacionalidade moldava e ucraniana, eram aliciadas com promessas de emprego em Portugal e posteriormente exploradas em trabalho forçado em explorações agrícolas do Algarve. O Ministério Público de Faro deduziu acusação por tráfico de seres humanos agravado, exploração do trabalho e associação criminosa. Vasile Dumitru e Florin Ionescu ficaram em prisão preventiva. Ana Rodrigues e Sérgio Tavares ficaram sujeitos a prisão domiciliária com pulseira eletrónica.",
+      "original_id": "SIN-004"
+    },
+    "meta": {},
+    "created_at": "2026-04-02T12:06:54.674527Z",
+    "updated_at": "2026-04-03T15:29:10.690212Z",
+    "allow_skip": true,
+    "inner_id": 4,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 3,
+    "updated_by": 1,
+    "comment_authors": []
+  },
+  {
+    "id": 25,
+    "annotations": [
+      {
+        "id": 30,
+        "completed_by": 1,
+        "result": [
+          {
+            "value": {
+              "start": 0,
+              "end": 6,
+              "text": "Lisboa",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "pvVpUQPpMX",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 8,
+              "end": 26,
+              "text": "17 de maio de 2024",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "6bE6HoaSQ4",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 32,
+              "end": 83,
+              "text": "Departamento de Investigação e Ação Penal de Lisboa",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "14jPAFnI7I",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 103,
+              "end": 136,
+              "text": "Autoridade Tributária e Aduaneira",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "ZxPvEIL8di",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 175,
+              "end": 188,
+              "text": "fraude fiscal",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "8aBVTD1jlb",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 191,
+              "end": 216,
+              "text": "branqueamento de capitais",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "3T8AE3ues8",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 285,
+              "end": 300,
+              "text": "2 300 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "nrMctdVWzx",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 318,
+              "end": 349,
+              "text": "Paulo Alexandre Mendes Ferreira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "X8AQ33SsVr",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 418,
+              "end": 424,
+              "text": "Lisboa",
+              "labels": [
+                "LOCAL"
+              ]
+            },
+            "id": "rK3emWek9W",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 428,
+              "end": 457,
+              "text": "Luís Filipe Carvalho Nogueira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "Wh5QcLn7LL",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 536,
+              "end": 552,
+              "text": "setembro de 2022",
+              "labels": [
+                "DATA"
+              ]
+            },
+            "id": "Cmy8_RcNHW",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 742,
+              "end": 784,
+              "text": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+              "labels": [
+                "CRIPTO"
+              ]
+            },
+            "id": "BiyMXF7DnV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 787,
+              "end": 821,
+              "text": "3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5",
+              "labels": [
+                "CRIPTO"
+              ]
+            },
+            "id": "jrQ55wa2kg",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 836,
+              "end": 851,
+              "text": "1 450 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "9Eq1NiOiFE",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 880,
+              "end": 922,
+              "text": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+              "labels": [
+                "CRIPTO"
+              ]
+            },
+            "id": "xtP72aVEoV",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 941,
+              "end": 954,
+              "text": "380 000 euros",
+              "labels": [
+                "MONTANTE"
+              ]
+            },
+            "id": "seXEhxATwo",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 956,
+              "end": 970,
+              "text": "Paulo Ferreira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "XxVzV6kH-D",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1006,
+              "end": 1017,
+              "text": "964 231 876",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "x0KpklbZ9j",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1056,
+              "end": 1069,
+              "text": "Luís Nogueira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "mEK6aGZ9Yt",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1089,
+              "end": 1100,
+              "text": "937 854 210",
+              "labels": [
+                "TELEMOVEL"
+              ]
+            },
+            "id": "ibA4GYli8Z",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1170,
+              "end": 1203,
+              "text": "paulomendes.consultoria@gmail.com",
+              "labels": [
+                "EMAIL"
+              ]
+            },
+            "id": "XyuXTj4bTP",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1206,
+              "end": 1237,
+              "text": "lf.nogueira.business@outlook.pt",
+              "labels": [
+                "EMAIL"
+              ]
+            },
+            "id": "16dkJD4Pjf",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1284,
+              "end": 1299,
+              "text": "Porsche Cayenne",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "Ji0GdzKurX",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1316,
+              "end": 1324,
+              "text": "22-LK-57",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "WcaNAkKzcy",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1331,
+              "end": 1344,
+              "text": "Tesla Model 3",
+              "labels": [
+                "VIATURA"
+              ]
+            },
+            "id": "7yAQUiEcVe",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1361,
+              "end": 1369,
+              "text": "18-XP-34",
+              "labels": [
+                "MATRICULA"
+              ]
+            },
+            "id": "AOpXONPSjv",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1428,
+              "end": 1476,
+              "text": "Tribunal Central de Instrução Criminal de Lisboa",
+              "labels": [
+                "ORGANIZACAO"
+              ]
+            },
+            "id": "16VFKrPa46",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1511,
+              "end": 1525,
+              "text": "Paulo Ferreira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "R_WVO2E9Xz",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1571,
+              "end": 1584,
+              "text": "Luís Nogueira",
+              "labels": [
+                "PESSOA"
+              ]
+            },
+            "id": "3ji9Oh_P37",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1655,
+              "end": 1680,
+              "text": "fraude fiscal qualificada",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "22qAzQqjIN",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1682,
+              "end": 1707,
+              "text": "branqueamento de capitais",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "RlVSOfJAD2",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          },
+          {
+            "value": {
+              "start": 1710,
+              "end": 1736,
+              "text": "falsificação de documentos",
+              "labels": [
+                "CRIME"
+              ]
+            },
+            "id": "afTvOnpbGi",
+            "from_name": "label",
+            "to_name": "text",
+            "type": "labels",
+            "origin": "manual"
+          }
+        ],
+        "was_cancelled": false,
+        "ground_truth": false,
+        "created_at": "2026-04-03T15:32:29.252515Z",
+        "updated_at": "2026-04-03T15:32:29.252515Z",
+        "draft_created_at": "2026-04-03T15:29:21.973598Z",
+        "lead_time": 191.774,
+        "prediction": {},
+        "result_count": 32,
+        "unique_id": "19b6ce67-c8d4-429f-8539-d25457abf907",
+        "import_id": null,
+        "last_action": null,
+        "bulk_created": false,
+        "task": 25,
+        "project": 3,
+        "updated_by": 1,
+        "parent_prediction": null,
+        "parent_annotation": null,
+        "last_created_by": null
+      }
+    ],
+    "file_upload": "c5ee5604-lucas_5noticias2.json",
+    "drafts": [],
+    "predictions": [],
+    "data": {
+      "text": "Lisboa, 17 de maio de 2024. — O Departamento de Investigação e Ação Penal de Lisboa, em conjunto com a Autoridade Tributária e Aduaneira, deteve dois empresários suspeitos de fraude fiscal e branqueamento de capitais através de criptomoedas, causando um prejuízo estimado ao Estado de 2 300 000 euros. Os arguidos são Paulo Alexandre Mendes Ferreira, de 52 anos, administrador de uma empresa de consultoria sediada em Lisboa, e Luís Filipe Carvalho Nogueira, de 47 anos, sócio da mesma empresa. De acordo com a investigação iniciada em setembro de 2022, os dois arguidos utilizavam um esquema de faturação falsa para transferir fundos para carteiras de criptomoedas não declaradas. Foram identificadas movimentações para os endereços Bitcoin bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq e 3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5, num total de 1 450 000 euros, e para o endereço Ethereum 0x2170Ed0880ac9A755fd29B2688956BD959F933F8, correspondente a 380 000 euros. Paulo Ferreira utilizava o telemóvel com o número 964 231 876 para coordenar as operações, enquanto Luís Nogueira utilizava o número 937 854 210. As comunicações escritas eram feitas através dos endereços de email paulomendes.consultoria@gmail.com e lf.nogueira.business@outlook.pt. Os arguidos deslocavam-se frequentemente num Porsche Cayenne com a matrícula 22-LK-57 e num Tesla Model 3 com a matrícula 18-XP-34 para reuniões com clientes que participavam no esquema. O Tribunal Central de Instrução Criminal de Lisboa determinou a prisão preventiva de Paulo Ferreira e a obrigação de apresentação periódica para Luís Nogueira, com proibição de saída do país para ambos. Os arguidos respondem por fraude fiscal qualificada, branqueamento de capitais e falsificação de documentos.",
+      "original_id": "SIN-005"
+    },
+    "meta": {},
+    "created_at": "2026-04-02T12:06:54.674527Z",
+    "updated_at": "2026-04-03T15:32:29.300377Z",
+    "allow_skip": true,
+    "inner_id": 5,
+    "total_annotations": 1,
+    "cancelled_annotations": 0,
+    "total_predictions": 0,
+    "comment_count": 0,
+    "unresolved_comment_count": 0,
+    "last_comment_updated_at": null,
+    "project": 3,
+    "updated_by": 1,
+    "comment_authors": []
+  }
+]
