@@ -1,0 +1,12 @@
+torch
+transformers
+seqeval
+accelerate
+deepl
+label-studio
+numpy
+scikit-learn
+sentencepiece
+
+# torch -- instalar manualmente para GPU NVIDIA:
+# pip install torch --index-url https://download.pytorch.org/whl/cu118

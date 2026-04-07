@@ -1,17 +1,16 @@
-# data/verify_dataset.py
-import json
+# verify.py
+from data.json_dataset import load_bio_from_json
+from data.labels import LABEL_LIST
+data = load_bio_from_json("dataset_anotado.json")
 
-with open("dataset_anotado.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-print(f"Total de notícias: {len(data)}\n")
-
-for article in data:
-    entities = article["entities"]
-    print(f"  ID: {article['id']}")
-    print(f"  Entidades: {len(entities)}")
-    for label in ["PESSOA", "LOCAL", "ORGANIZACAO", "CRIME", "DATA", "MONTANTE"]:
-        count = sum(1 for e in entities if e["label"] == label)
-        if count > 0:
-            print(f"    {label}: {count}")
-    print()
+print(f"Total de notícias: {len(data)}")
+print(f"Treino (~80%): {int(len(data) * 0.8)}")
+print(f"Validação (~20%): {len(data) - int(len(data) * 0.8)}")
+print()
+print(f"\nLabels definidas: {len(LABEL_LIST)}")
+print(LABEL_LIST)
+# Mostrar algumas entidades da primeira notícia
+print("Amostra da primeira notícia:")
+for word, label in data[0]:
+    if label != "O":
+        print(f"  {word:30} → {label}")

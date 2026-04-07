@@ -3,19 +3,19 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from transformers import AutoTokenizer, XLMRobertaForTokenClassification
-from data.dataset import ID2LABEL
+from data.labels import ID2LABEL
 
 
 MODEL_PATH = "./saved_model"
 
-print(f"📂 A carregar modelo de {MODEL_PATH}...")
+print(f"A carregar modelo de {MODEL_PATH}...")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = XLMRobertaForTokenClassification.from_pretrained(MODEL_PATH)      # ← mudou
+model = XLMRobertaForTokenClassification.from_pretrained(MODEL_PATH)
 model.eval()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
-print("✅ Modelo carregado!\n")
+print("Modelo carregado!\n")
 
 
 def predict_entities(text: str) -> list[dict]:
@@ -75,7 +75,7 @@ def predict_entities(text: str) -> list[dict]:
 def print_entities(text, entities):
     print(f"\n📝 Texto: {text}")
     if entities:
-        print("🔍 Entidades encontradas:")
+        print("Entidades encontradas:")
         for ent in entities:
             print(f"   [{ent['label']}] → '{ent['text']}'")
     else:
@@ -84,10 +84,11 @@ def print_entities(text, entities):
 
 
 test_sentences = [
-    "João Silva foi detido em Lisboa pela PSP.",
-    "O Ministério Público abriu inquérito por homicídio em Braga.",
-    "Ana Costa foi identificada como suspeita de burla no Porto.",
-    "A Polícia Judiciária prendeu três suspeitos em Setúbal.",
+    "João Silva foi detido pela PSP em Lisboa no dia 3 de março de 2024.",
+    "O suspeito conduzia um BMW Serie 3 com a matrícula 45-AB-12 quando foi intercetado.",
+    "As autoridades apreenderam o telemóvel com o número 963 412 871 e encontraram emails enviados para suspeito.anonimo@gmail.com.",
+    "Foram identificadas transferências para a carteira Bitcoin bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh no valor de 45 000 euros.",
+    "A Polícia Judiciária de Braga deteve Pedro Alves Ferreira por tráfico de droga em fevereiro de 2024.",
 ]
 
 print("=" * 60)
