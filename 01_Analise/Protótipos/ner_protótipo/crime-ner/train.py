@@ -12,7 +12,7 @@ from model.ner_model import NERDataset, load_model
 
 CONFIG = {
     "model_save_path": "./saved_model",
-    "num_epochs": 40,        # ← era 10, dataset pequeno precisa de mais
+    "num_epochs": 15,        # ← era 10, dataset pequeno precisa de mais
     "batch_size": 2,
     "learning_rate": 3e-5,   # ← era 2e-5, ligeiramente maior
     "max_length": 128,

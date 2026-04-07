@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0f1220;
+  color: #eaeaea;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 260px 1fr 280px;
+  height: 100vh;
+}
+
+/* ESQUERDA */
+.sidebar {
+  border-right: 1px solid #2b2f45;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #14182b;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.news-item {
+  background-color: #1b2038;
+  color: #eaeaea;
+  border: 1px solid #2f3655;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.news-item:hover {
+  background-color: #242b49;
+}
+
+.news-item.active {
+  border: 1px solid #6f8cff;
+  background-color: #2a3154;
+}
+
+/* CENTRO */
+.main-content {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.main-content h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 42px;
+  text-align: center;
+}
+
+.labels-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.label-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+/* cores das entidades */
+.label-chip.pessoa {
+  background-color: #3b82f6;
+}
+
+.label-chip.local {
+  background-color: #10b981;
+}
+
+.label-chip.crime {
+  background-color: #ef4444;
+}
+
+.label-chip.organizacao {
+  background-color: #8b5cf6;
+}
+
+.label-chip.data {
+  background-color: #f59e0b;
+}
+
+.label-chip.viatura {
+  background-color: #06b6d4;
+}
+
+.label-chip.montante {
+  background-color: #ec4899;
+}
+
+.news-full {
+  background-color: #14182b;
+  border: 1px solid #2b2f45;
+  border-radius: 12px;
+  padding: 20px;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+/* DIREITA */
+.right-panel {
+  border-left: 1px solid #2b2f45;
+  padding: 20px;
+  background-color: #14182b;
+}
+
+.right-panel h2 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.neo4j-placeholder {
+  margin-top: 20px;
+  min-height: 200px;
+  border: 1px dashed #3a4265;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aab0c5;
+  text-align: center;
+  padding: 20px;
+}
+
+.highlight {
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.highlight.pessoa {
+  background-color: rgba(59, 130, 246, 0.35);
+}
+
+.highlight.local {
+  background-color: rgba(16, 185, 129, 0.35);
+}
+
+.highlight.crime {
+  background-color: rgba(239, 68, 68, 0.35);
+}
+
+.highlight.organizacao {
+  background-color: rgba(139, 92, 246, 0.35);
+}
+
+.highlight.data {
+  background-color: rgba(245, 158, 11, 0.35);
+}
+
+.highlight.viatura {
+  background-color: rgba(6, 182, 212, 0.35);
+}
+
+.highlight.montante {
+  background-color: rgba(236, 72, 153, 0.35);
+}
