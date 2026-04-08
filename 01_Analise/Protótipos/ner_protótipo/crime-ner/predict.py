@@ -83,26 +83,29 @@ def print_entities(text, entities):
     print()
 
 
-test_sentences = [
-    "João Silva foi detido pela PSP em Lisboa no dia 3 de março de 2024.",
-    "O suspeito conduzia um BMW Serie 3 com a matrícula 45-AB-12 quando foi intercetado.",
-    "As autoridades apreenderam o telemóvel com o número 963 412 871 e encontraram emails enviados para suspeito.anonimo@gmail.com.",
-    "Foram identificadas transferências para a carteira Bitcoin bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh no valor de 45 000 euros.",
-    "A Polícia Judiciária de Braga deteve Pedro Alves Ferreira por tráfico de droga em fevereiro de 2024.",
-]
+# No fim do predict.py, substitui tudo a partir dos testes por isto:
 
-print("=" * 60)
-print("TESTES AUTOMÁTICOS")
-print("=" * 60)
-for sentence in test_sentences:
-    print_entities(sentence, predict_entities(sentence))
+if __name__ == "__main__":
+    test_sentences = [
+        "João Silva foi detido pela PSP em Lisboa no dia 3 de março de 2024.",
+        "O suspeito conduzia um BMW Serie 3 com a matrícula 45-AB-12 quando foi intercetado.",
+        "As autoridades apreenderam o telemóvel com o número 963 412 871 e encontraram emails enviados para suspeito.anonimo@gmail.com.",
+        "Foram identificadas transferências para a carteira Bitcoin bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh no valor de 45 000 euros.",
+        "A Polícia Judiciária de Braga deteve Pedro Alves Ferreira por tráfico de droga em fevereiro de 2024.",
+    ]
 
-print("=" * 60)
-print("MODO INTERATIVO (escreve 'sair' para terminar)")
-print("=" * 60)
-while True:
-    text = input("\nFrase: ").strip()
-    if text.lower() == "sair":
-        break
-    if text:
-        print_entities(text, predict_entities(text))
+    print("=" * 60)
+    print("TESTES AUTOMÁTICOS")
+    print("=" * 60)
+    for sentence in test_sentences:
+        print_entities(sentence, predict_entities(sentence))
+
+    print("=" * 60)
+    print("MODO INTERATIVO (escreve 'sair' para terminar)")
+    print("=" * 60)
+    while True:
+        text = input("\nFrase: ").strip()
+        if text.lower() == "sair":
+            break
+        if text:
+            print_entities(text, predict_entities(text))
