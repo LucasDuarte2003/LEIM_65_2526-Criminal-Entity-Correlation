@@ -1,0 +1,17 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Remove estilos default do browser para mark */
+mark {
+  background: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

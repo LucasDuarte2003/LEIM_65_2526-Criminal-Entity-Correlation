@@ -1,0 +1,21 @@
+# API
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+
+# Base de dados
+neo4j
+
+# NER — torch precisa de versão mínima por causa dos modelos guardados
+torch>=2.0.0
+transformers>=4.30.0
+tokenizers
+safetensors
+sentencepiece
+accelerate
+
+# Utilitários
+numpy
+pydantic>=2.0.0
+requests
