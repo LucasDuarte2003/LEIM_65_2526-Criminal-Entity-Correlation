@@ -9,10 +9,15 @@ export default function LabelBar({ labels, labelSelecionada, onSelecionar }) {
         <button
           key={label.nome}
           className={`label-chip ${labelSelecionada === label.nome ? "active-chip" : ""}`}
-          style={{ backgroundColor: label.cor, opacity: labelSelecionada === label.nome ? 1 : 0.55 }}
+          style={{
+            backgroundColor: label.cor,
+            opacity: labelSelecionada === label.nome ? 1 : 0.55
+          }}
           onClick={() => onSelecionar(labelSelecionada === label.nome ? null : label.nome)}
+          title={`Atalho: ${label.shortcut || "-"}`}
         >
-          {label.nome}
+          <span className="label-shortcut">{label.shortcut}</span>
+          <span className="label-name">{label.nome}</span>
         </button>
       ))}
     </div>

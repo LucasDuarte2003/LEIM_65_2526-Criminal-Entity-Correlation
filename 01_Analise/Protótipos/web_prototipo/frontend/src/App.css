@@ -116,6 +116,14 @@ body {
   background-color: #ec4899;
 }
 
+.label-chip.telemovel {
+  background-color: #15803d;
+}
+
+.label-chip.email {
+  background-color: #f97316;
+}
+
 .news-full {
   background-color: #14182b;
   border: 1px solid #2b2f45;
@@ -182,6 +190,14 @@ body {
 
 .highlight.montante {
   background-color: rgba(236, 72, 153, 0.35);
+}
+
+.highlight.telemovel {
+  background-color: rgba(21, 128, 61, 0.35);
+}
+
+.highlight.email {
+  background-color: rgba(249, 115, 22, 0.35);
 }
 
 .active-chip {
