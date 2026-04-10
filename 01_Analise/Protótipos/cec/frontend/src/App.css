@@ -133,7 +133,10 @@ body {
 }
 
 .label-chip {
-  padding: 3px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px 3px 3px;
   border: none;
   border-radius: 3px;
   font-family: 'IBM Plex Mono', monospace;
@@ -144,6 +147,12 @@ body {
   color: #fff;
   transition: all 0.15s;
   opacity: 0.45;
+}
+
+.label-shortcut {
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 2px 5px;
+  border-radius: 2px;
 }
 .label-chip:hover { opacity: 0.75; transform: translateY(-1px); }
 .label-chip.active-chip { opacity: 1; box-shadow: 0 0 0 1.5px rgba(255,255,255,0.25); transform: translateY(-1px); }
