@@ -11,6 +11,7 @@ export default function GraphPanel({
 }) {
   const [nosRemovidosIds, setNosRemovidosIds] = useState([]);
 
+  
   const nosVisiveis = grafo
     ? grafo.nos.filter((n) => !nosRemovidosIds.includes(n.id))
     : [];
@@ -128,7 +129,7 @@ export default function GraphPanel({
             <ForceGraph2D
               graphData={graphData}
               width={280}
-              height={220}
+              height={360}
               nodeLabel={(n) => `${n.name} (${n.tipo})`}
               nodeRelSize={6}
               linkColor={() => "#444"}
@@ -158,7 +159,7 @@ export default function GraphPanel({
                   <ForceGraph2D
                     graphData={graphRelacionadasData}
                     width={280}
-                    height={220}
+                    height={380}
                     nodeLabel={(n) =>
                       n.origem
                         ? `${n.name} (${n.tipo})`
