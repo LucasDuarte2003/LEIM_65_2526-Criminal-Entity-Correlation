@@ -307,27 +307,78 @@ body {
   padding: 10px 16px 4px;
 }
 
-.label-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* ── Painel direito — layout 50/50 ── */
+.panel-body-split {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
 }
 
-.label-shortcut {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 4px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.18);
-  font-size: 9px;
+.panel-grafo-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-grafo-relacionadas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Botão pesquisar — integrado no estilo da página ── */
+.btn-pesquisar {
+  margin: 6px 14px 10px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
   font-weight: 700;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.95);
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.btn-pesquisar:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.btn-pesquisar:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-.label-name {
-  font-size: 9.5px;
+/* ── Relacionadas ── */
+.relacionadas-header {
+  padding: 10px 14px 4px;
+  font-size: 10px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
+
+.relacionadas-legenda {
+  display: flex;
+  gap: 12px;
+  padding: 0 14px 6px;
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  flex-shrink: 0;
+}
+
+.legenda-total   { color: #4f7cff; }
+.legenda-parcial { color: #f59e0b; }

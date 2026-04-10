@@ -93,19 +93,27 @@ def save_noticia(noticia: Dict) -> None:
 
 
 def _write_noticia(tx, noticia: Dict) -> None:
-    # Remove versão anterior se existir
+    noticia_id = noticia["id"]
+
+    # 1. Apaga CO_OCORRE_COM das frases desta notícia ANTES de apagar as frases
+    tx.run("""
+        MATCH (n:Noticia {id: $id})-[:TEM_FRASE]->(f:Frase)
+        MATCH ()-[r:CO_OCORRE_COM {frase_id: f.id}]-()
+        DELETE r
+    """, id=noticia_id)
+
+    # 2. Apaga frases e relações MENCIONADA_EM
     tx.run("""
         MATCH (n:Noticia {id: $id})
         OPTIONAL MATCH (n)-[:TEM_FRASE]->(f:Frase)
-        OPTIONAL MATCH (e:Entidade)-[:MENCIONADA_EM]->(f)
         DETACH DELETE f
-    """, id=noticia["id"])
+    """, id=noticia_id)
 
-    # Cria nó Noticia
+    # 3. Cria/atualiza nó Noticia
     tx.run("""
         MERGE (n:Noticia {id: $id})
         SET n.titulo = $titulo
-    """, id=noticia["id"], titulo=noticia["titulo"])
+    """, id=noticia_id, titulo=noticia["titulo"])
 
     for frase in noticia["frases"]:
         # Cria nó Frase
@@ -202,3 +210,86 @@ def get_grafo_frase(frase_id: str) -> Dict:
             })
 
         return {"nos": list(nos_vistos.values()), "arestas": arestas}
+
+def get_grafo_relacionadas(frase_id: str, nomes_visiveis: list) -> Dict:
+    """
+    Dado o id de uma frase e os nomes dos nós visíveis,
+    procura entidades noutras frases/notícias que co-ocorram
+    com essas entidades. Separa em totais e parciais.
+    """
+    with get_driver().session(database="cec") as session:
+
+        # Busca co-ocorrências noutras frases que não esta
+        result = session.run("""
+            UNWIND $nomes AS nome
+            MATCH (origem:Entidade {nome: nome})-[r:CO_OCORRE_COM]->(nova:Entidade)
+            MATCH (nova)-[:MENCIONADA_EM]->(f:Frase)-[:TEM_FRASE]-(n:Noticia)
+            WHERE r.frase_id <> $frase_id
+            AND NOT nova.nome IN $nomes
+            RETURN nova.nome AS nome,
+                   nova.tipo AS tipo,
+                   collect(DISTINCT origem.nome) AS ligada_a,
+                   n.id AS noticia_id,
+                   n.titulo AS noticia_titulo,
+                   r.frase_id AS frase_origem
+        """, nomes=nomes_visiveis, frase_id=frase_id)
+
+        nos_origem = {
+            nome: {"id": nome, "nome": nome, "tipo": None, "origem": True}
+            for nome in nomes_visiveis
+        }
+
+        # Busca tipos das entidades origem
+        tipos_result = session.run("""
+            UNWIND $nomes AS nome
+            MATCH (e:Entidade {nome: nome})
+            RETURN e.nome AS nome, e.tipo AS tipo
+        """, nomes=nomes_visiveis)
+        for row in tipos_result:
+            if row["nome"] in nos_origem:
+                nos_origem[row["nome"]]["tipo"] = row["tipo"]
+
+        nos_novos = {}
+        arestas = []
+
+        for row in result:
+            nome_novo = row["nome"]
+            ligada_a = row["ligada_a"]
+
+            # Classifica como total ou parcial
+            eh_total = all(n in ligada_a for n in nomes_visiveis)
+            tipo_ligacao = "total" if eh_total else "parcial"
+
+            # Adiciona nó novo se ainda não existe
+            chave = f"{nome_novo}_{row['noticia_id']}"
+            if chave not in nos_novos:
+                nos_novos[chave] = {
+                    "id": chave,
+                    "nome": nome_novo,
+                    "tipo": row["tipo"],
+                    "noticia_id": row["noticia_id"],
+                    "noticia_titulo": row["noticia_titulo"],
+                    "origem": False,
+                }
+
+            # Cria arestas para cada entidade origem a que está ligada
+            for origem_nome in ligada_a:
+                if origem_nome in nomes_visiveis:
+                    arestas.append({
+                        "origem": origem_nome,
+                        "destino": chave,
+                        "relacao": tipo_ligacao,
+                    })
+
+        # Remove arestas duplicadas
+        arestas_unicas = list({
+            f"{a['origem']}_{a['destino']}": a for a in arestas
+        }.values())
+
+        todos_nos = list(nos_origem.values()) + list(nos_novos.values())
+
+        return {
+            "nos": todos_nos,
+            "arestas": arestas_unicas,
+            "tem_resultados": len(nos_novos) > 0,
+        }

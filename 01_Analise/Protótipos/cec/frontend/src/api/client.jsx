@@ -41,3 +41,9 @@ export const getLabels = () =>
 
 export const getGrafoFrase = (fraseId) =>
   request(`/grafo/frase/${fraseId}`);
+
+export const getGrafoRelacionadas = (fraseId, nos) =>
+  request(`/grafo/frase/${fraseId}/relacionadas`, {
+    method: "POST",
+    body: JSON.stringify({ nos }),
+  });
