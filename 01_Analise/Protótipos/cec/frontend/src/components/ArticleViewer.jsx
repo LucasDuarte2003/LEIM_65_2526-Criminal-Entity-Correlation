@@ -4,8 +4,10 @@ export default function ArticleViewer({
   noticia,
   labelMap,
   fraseAtiva,
+  fraseFundida,
   entidadeSelecionada,
   onFraseClick,
+  onFraseFundir,
   onEntidadeClick,
   onTextSelect,
 }) {
@@ -17,53 +19,61 @@ export default function ArticleViewer({
 
   return (
     <div className="news-full">
-      {noticia.frases.map((frase) => (
-        <span
-          key={frase.id}
-          className={`frase ${fraseAtiva === frase.id ? "frase-ativa" : ""}`}
-          ref={(el) => (refs.current[frase.id] = el)}
-          onMouseUp={(e) => {
-            onTextSelect(e, frase);
-          }}
-        >
-          {/* Botão para ver o grafo desta frase */}
-          <button
-            className="frase-grafo-btn"
-            title="Ver grafo desta frase"
-            onClick={() => onFraseClick(frase.id)}
+      {noticia.frases.map((frase) => {
+        const isAtiva = fraseAtiva === frase.id;
+        const isFundida = fraseFundida === frase.id;
+        const podeSerFundida = fraseAtiva && !isAtiva;
+
+        return (
+          <span
+            key={frase.id}
+            className={`frase ${isAtiva ? "frase-ativa" : ""} ${isFundida ? "frase-fundida" : ""}`}
+            ref={(el) => (refs.current[frase.id] = el)}
+            onMouseUp={(e) => onTextSelect(e, frase)}
           >
-            ◉
-          </button>
+            {/* Botão principal — ver grafo da frase */}
+            <button
+              className="frase-grafo-btn"
+              title="Ver grafo desta frase"
+              onClick={() => onFraseClick(frase.id)}
+            >
+              ◉
+            </button>
 
-          {/* Texto da frase com entidades destacadas */}
-          {renderFrase(frase, labelMap, entidadeSelecionada, onEntidadeClick)}
+            {/* Botão de fusão — só aparece quando há uma frase ativa e esta não é a ativa */}
+            {podeSerFundida && (
+              <button
+                className={`frase-fundir-btn ${isFundida ? "ativa" : ""}`}
+                title={isFundida ? "Desfazer fusão" : "Fundir com frase ativa"}
+                onClick={() => onFraseFundir(frase.id)}
+              >
+                ⊕
+              </button>
+            )}
 
-          {" "}
-        </span>
-      ))}
+            {/* Texto da frase com entidades destacadas */}
+            {renderFrase(frase, labelMap, entidadeSelecionada, onEntidadeClick)}
+
+            {" "}
+          </span>
+        );
+      })}
     </div>
   );
 }
 
 function calcularOffsets(texto, ent) {
-  // Usa o nome da entidade para verificar se os offsets estão corretos.
-  // Se o slice não bater certo, procura o nome no texto a partir do inicio.
   const slice = texto.slice(ent.inicio, ent.fim);
   if (slice === ent.nome) return { inicio: ent.inicio, fim: ent.fim };
-
-  // Offset desalinhado — procura o nome a partir de uma janela à volta do inicio
   const searchFrom = Math.max(0, ent.inicio - 3);
   const found = texto.indexOf(ent.nome, searchFrom);
   if (found !== -1) return { inicio: found, fim: found + ent.nome.length };
-
-  // Fallback — usa os offsets originais mesmo que errados
   return { inicio: ent.inicio, fim: ent.fim };
 }
 
 function renderFrase(frase, labelMap, entidadeSelecionada, onEntidadeClick) {
   const texto = frase.texto;
 
-  // Corrige offsets e reordena
   const entidades = [...frase.entidades]
     .map((ent) => ({ ...ent, ...calcularOffsets(texto, ent) }))
     .sort((a, b) => a.inicio - b.inicio);
@@ -72,7 +82,7 @@ function renderFrase(frase, labelMap, entidadeSelecionada, onEntidadeClick) {
   let cursor = 0;
 
   entidades.forEach((ent, idx) => {
-    if (ent.inicio < cursor) return; // sobreposição, ignora
+    if (ent.inicio < cursor) return;
 
     if (cursor < ent.inicio) {
       parts.push(

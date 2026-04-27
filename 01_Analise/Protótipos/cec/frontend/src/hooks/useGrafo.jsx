@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { getGrafoFrase, getGrafoRelacionadas } from "../api/client";
+import { getGrafoFrase, getGrafoRelacionadas, getGrafoFundido } from "../api/client";
 
 export function useGrafo() {
   const [grafo, setGrafo] = useState(null);
   const [grafoRelacionadas, setGrafoRelacionadas] = useState(null);
   const [fraseAtiva, setFraseAtiva] = useState(null);
+  const [fraseFundida, setFraseFundida] = useState(null); // id da segunda frase
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingRelacionadas, setIsLoadingRelacionadas] = useState(false);
 
@@ -12,11 +13,13 @@ export function useGrafo() {
     if (fraseAtiva === fraseId) {
       setGrafo(null);
       setFraseAtiva(null);
+      setFraseFundida(null);
       setGrafoRelacionadas(null);
       return;
     }
     setIsLoading(true);
     setGrafoRelacionadas(null);
+    setFraseFundida(null);
     try {
       const data = await getGrafoFrase(fraseId);
       setGrafo(data);
@@ -29,11 +32,34 @@ export function useGrafo() {
     }
   };
 
-  const pesquisarRelacionadas = async (nosVisiveis) => {
+  const fundirFrase = async (fraseId) => {
+    if (!fraseAtiva) return;
+    // Se clicar na frase já fundida, desfaz a fusão
+    if (fraseFundida === fraseId) {
+      setFraseFundida(null);
+      setGrafoRelacionadas(null);
+      const data = await getGrafoFrase(fraseAtiva);
+      setGrafo(data);
+      return;
+    }
+    setIsLoading(true);
+    setGrafoRelacionadas(null);
+    try {
+      const data = await getGrafoFundido([fraseAtiva, fraseId]);
+      setGrafo(data);
+      setFraseFundida(fraseId);
+    } catch {
+      setGrafo({ nos: [], arestas: [] });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const pesquisarRelacionadas = async (nosVisiveis, ambito = "global") => {
     if (!fraseAtiva || nosVisiveis.length === 0) return;
     setIsLoadingRelacionadas(true);
     try {
-      const data = await getGrafoRelacionadas(fraseAtiva, nosVisiveis);
+      const data = await getGrafoRelacionadas(fraseAtiva, nosVisiveis, ambito);
       setGrafoRelacionadas(data);
     } catch {
       setGrafoRelacionadas({ nos: [], arestas: [], tem_resultados: false });
@@ -45,6 +71,11 @@ export function useGrafo() {
   const limparGrafo = () => {
     setGrafo(null);
     setFraseAtiva(null);
+    setFraseFundida(null);
+    setGrafoRelacionadas(null);
+  };
+
+  const limparRelacionadas = () => {
     setGrafoRelacionadas(null);
   };
 
@@ -52,10 +83,13 @@ export function useGrafo() {
     grafo,
     grafoRelacionadas,
     fraseAtiva,
+    fraseFundida,
     isLoading,
     isLoadingRelacionadas,
     carregarGrafo,
+    fundirFrase,
     pesquisarRelacionadas,
     limparGrafo,
+    limparRelacionadas,
   };
 }

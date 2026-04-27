@@ -9,10 +9,12 @@ async function request(path, options = {}) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail || `Erro ${res.status}`);
   }
+  // 204 No Content não tem body
+  if (res.status === 204) return null;
   return res.json();
 }
 
-// --- Notícias ---
+// ── Notícias ────────────────────────────────────────────────────
 
 export const getNoticias = () =>
   request("/noticias/");
@@ -20,10 +22,10 @@ export const getNoticias = () =>
 export const getNoticia = (id) =>
   request(`/noticias/${id}`);
 
-export const predictNoticia = (texto) =>
+export const predictNoticia = (texto, pastaId) =>
   request("/noticias/predict", {
     method: "POST",
-    body: JSON.stringify({ texto }),
+    body: JSON.stringify({ texto, pasta_id: pastaId }),
   });
 
 export const guardarNoticia = (noticia) =>
@@ -32,18 +34,80 @@ export const guardarNoticia = (noticia) =>
     body: JSON.stringify(noticia),
   });
 
-// --- Labels ---
+export const apagarNoticia = (id) =>
+  request(`/noticias/${id}`, { method: "DELETE" });
+
+// ── Labels ──────────────────────────────────────────────────────
 
 export const getLabels = () =>
   request("/labels/");
 
-// --- Grafo ---
+// ── Grafo ───────────────────────────────────────────────────────
 
 export const getGrafoFrase = (fraseId) =>
   request(`/grafo/frase/${fraseId}`);
 
-export const getGrafoRelacionadas = (fraseId, nos) =>
+export const getGrafoRelacionadas = (fraseId, nos, ambito = "global") =>
   request(`/grafo/frase/${fraseId}/relacionadas`, {
     method: "POST",
-    body: JSON.stringify({ nos }),
+    body: JSON.stringify({ nos, ambito }),
+  });
+
+// ── Projetos ────────────────────────────────────────────────────
+
+export const getProjetos = () =>
+  request("/projetos/");
+
+export const getProjeto = (id) =>
+  request(`/projetos/${id}`);
+
+export const criarProjeto = (nome, descricao) =>
+  request("/projetos/", {
+    method: "POST",
+    body: JSON.stringify({ nome, descricao }),
+  });
+
+export const atualizarProjeto = (id, nome, descricao) =>
+  request(`/projetos/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ nome, descricao }),
+  });
+
+export const eliminarProjeto = (id) =>
+  request(`/projetos/${id}`, { method: "DELETE" });
+
+// ── Pastas ──────────────────────────────────────────────────────
+
+export const getPasta = (projetoId, pastaId) =>
+  request(`/projetos/${projetoId}/pastas/${pastaId}`);
+
+export const criarPasta = (projetoId, nome) =>
+  request(`/projetos/${projetoId}/pastas`, {
+    method: "POST",
+    body: JSON.stringify({ nome, projeto_id: projetoId }),
+  });
+
+export const atualizarPasta = (projetoId, pastaId, nome) =>
+  request(`/projetos/${projetoId}/pastas/${pastaId}`, {
+    method: "PUT",
+    body: JSON.stringify({ nome }),
+  });
+
+export const eliminarPasta = (projetoId, pastaId) =>
+  request(`/projetos/${projetoId}/pastas/${pastaId}`, { method: "DELETE" });
+
+
+export const getTodasAsPastas = () =>
+  request("/projetos/todas-as-pastas");
+
+export const moverNoticia = (noticiaId, pastaIdDestino) =>
+  request(`/noticias/${noticiaId}/mover`, {
+    method: "PUT",
+    body: JSON.stringify({ pasta_id_destino: pastaIdDestino }),
+  });
+
+export const getGrafoFundido = (fraseIds) =>
+  request("/grafo/frases/fundir", {
+    method: "POST",
+    body: JSON.stringify({ frase_ids: fraseIds }),
   });

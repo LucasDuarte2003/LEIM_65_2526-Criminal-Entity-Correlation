@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from models.schemas import GrafoFrase
 from services import neo4j_service
 from pydantic import BaseModel
+
 router = APIRouter(prefix="/grafo", tags=["grafo"])
 
 
@@ -19,15 +20,31 @@ def grafo_frase(frase_id: str):
 
 class RelacionadasInput(BaseModel):
     nos: list[str]
+    ambito: str = "global"  # "documento" | "pasta" | "projeto" | "global"
+
 
 @router.post("/frase/{frase_id}/relacionadas")
 def grafo_relacionadas(frase_id: str, body: RelacionadasInput):
     """
-    Procura entidades noutras notícias que co-ocorram
-    com os nós visíveis atualmente no grafo.
+    Procura entidades noutras frases que co-ocorram
+    com os nós visíveis, filtrado pelo âmbito escolhido.
     """
     if not body.nos:
         raise HTTPException(status_code=400, detail="Lista de nós vazia")
 
-    resultado = neo4j_service.get_grafo_relacionadas(frase_id, body.nos)
+    resultado = neo4j_service.get_grafo_relacionadas(frase_id, body.nos, body.ambito)
+    return resultado
+
+class FundirInput(BaseModel):
+    frase_ids: list[str]
+
+@router.post("/frases/fundir")
+def grafo_fundir(body: FundirInput):
+    """
+    Devolve o grafo combinado de duas frases.
+    Não altera a base de dados.
+    """
+    if len(body.frase_ids) != 2:
+        raise HTTPException(status_code=400, detail="Exactamente 2 frases necessárias")
+    resultado = neo4j_service.get_grafo_frases_fundidas(body.frase_ids)
     return resultado

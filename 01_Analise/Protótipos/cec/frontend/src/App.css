@@ -22,8 +22,6 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  height: 100vh;
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -31,6 +29,7 @@ body {
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr var(--panel-w);
   height: 100vh;
+  overflow: hidden;
 }
 
 /* ── Sidebar ── */
@@ -148,7 +147,6 @@ body {
   transition: all 0.15s;
   opacity: 0.45;
 }
-
 .label-shortcut {
   background-color: rgba(0, 0, 0, 0.25);
   padding: 2px 5px;
@@ -246,7 +244,6 @@ body {
 }
 .frase-grafo-btn:hover, .frase-ativa .frase-grafo-btn { color: var(--accent); }
 
-/* Entidade — background suave + underline colorido, texto sempre legível */
 .entidade {
   border-radius: 2px;
   padding: 0;
@@ -316,7 +313,6 @@ body {
   padding: 10px 16px 4px;
 }
 
-/* ── Painel direito — layout 50/50 ── */
 .panel-body-split {
   display: flex;
   flex-direction: column;
@@ -342,7 +338,6 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* ── Botão pesquisar — integrado no estilo da página ── */
 .btn-pesquisar {
   margin: 6px 14px 10px;
   padding: 6px 12px;
@@ -360,89 +355,9 @@ body {
   flex-shrink: 0;
   margin-top: auto;
 }
+.btn-pesquisar:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+.btn-pesquisar:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* Botão de expandir */
-.btn-expand {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 12px;
-  cursor: pointer;
-  margin-left: 8px;
-  transition: color 0.2s;
-}
-
-.btn-expand:hover {
-  color: var(--text);
-}
-
-/* Overlay escuro */
-.graph-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(10, 11, 15, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  backdrop-filter: blur(4px);
-}
-
-/* Janela modal */
-.graph-modal {
-  width: 70vw;
-  height: 70vh;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Cabeçalho da modal */
-.graph-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.graph-modal-header h2 {
-  font-size: 12px;
-  font-family: 'Syne', sans-serif;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* Botão de fechar */
-.btn-close {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn-close:hover {
-  color: var(--text);
-}
-.btn-pesquisar:hover:not(:disabled) {
-  border-color: var(--accent);
-  color: var(--text);
-}
-.btn-pesquisar:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* ── Relacionadas ── */
 .relacionadas-header {
   padding: 10px 14px 4px;
   font-size: 10px;
@@ -452,9 +367,6 @@ body {
   text-transform: uppercase;
   color: var(--text-muted);
   flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .relacionadas-legenda {
@@ -468,3 +380,210 @@ body {
 
 .legenda-total   { color: #4f7cff; }
 .legenda-parcial { color: #f59e0b; }
+
+/* ── Sidebar — botão voltar e apagar notícia ── */
+.btn-voltar {
+  margin: 10px 10px 0;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.btn-voltar:hover { color: var(--text); }
+
+.news-item-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.news-item-row .news-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.btn-apagar-noticia {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.4;
+  padding: 2px 4px;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.btn-apagar-noticia:hover { opacity: 1; }
+
+/* ── Modal de expansão do grafo ── */
+.btn-expand {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s;
+  padding: 0 4px;
+}
+.btn-expand:hover { color: var(--text); }
+
+.graph-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 15, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.graph-modal {
+  width: 70vw;
+  height: 70vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.graph-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.graph-modal-header h2 {
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.btn-close:hover { color: var(--text); }
+
+.btn-mover-noticia {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0.4;
+  padding: 2px 4px;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+  color: var(--text);
+}
+.btn-mover-noticia:hover { opacity: 1; }
+
+.mover-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 4px;
+}
+
+.mover-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mover-projeto-nome {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 4px 0 2px;
+  font-family: 'Syne', sans-serif;
+}
+
+.mover-pasta-btn {
+  padding: 7px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.mover-pasta-btn:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--border-2);
+  color: var(--text);
+}
+.mover-pasta-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Seletor de âmbito ── */
+.ambito-selector {
+  display: flex;
+  gap: 4px;
+  padding: 6px 14px 0;
+  flex-shrink: 0;
+}
+
+.ambito-btn {
+  flex: 1;
+  padding: 4px 0;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ambito-btn:hover { border-color: var(--accent); color: var(--text); }
+.ambito-btn.active {
+  background: var(--accent-glow);
+  border-color: rgba(79,124,255,0.4);
+  color: #7da4ff;
+}
+
+/* ── Fusão de frases ── */
+.frase-fundida {
+  background: rgba(79, 124, 255, 0.06);
+  border-radius: 2px;
+}
+
+.frase-fundir-btn {
+  background: none;
+  border: none;
+  color: var(--border-2);
+  cursor: pointer;
+  font-size: 10px;
+  padding: 0 3px;
+  vertical-align: middle;
+  transition: color 0.15s;
+}
+.frase-fundir-btn:hover { color: var(--accent); }
+.frase-fundir-btn.ativa { color: var(--accent); }

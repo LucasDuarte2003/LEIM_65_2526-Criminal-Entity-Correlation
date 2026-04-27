@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-/* Remove estilos default do browser para mark */
 mark {
   background: none;
   color: inherit;
