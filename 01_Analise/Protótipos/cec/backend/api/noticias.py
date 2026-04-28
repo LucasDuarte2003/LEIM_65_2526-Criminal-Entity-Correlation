@@ -43,16 +43,15 @@ def predict(body: PredictInput):
 
 @router.put("/{noticia_id}", response_model=Noticia)
 def guardar_noticia(noticia_id: str, body: GuardarInput):
-    """
-    Guarda a notícia no Neo4j com as entidades validadas pelo utilizador.
-    Liga à pasta se ainda não estiver ligada.
-    """
     if noticia_id != body.id:
         raise HTTPException(status_code=400, detail="ID inconsistente")
     noticia = body.model_dump()
     neo4j_service.save_noticia(noticia)
     if body.pasta_id:
         neo4j_service.ligar_noticia_a_pasta(noticia_id, body.pasta_id)
+    # Notifica o trainer que há dados novos
+    from main import trainer
+    trainer.notificar_nova_noticia()
     return noticia
 
 

@@ -2,6 +2,7 @@ import os
 from typing import List, Dict, Optional
 from neo4j import GraphDatabase
 from services.graph_builder import build_cooccurrences
+from ner_model.data.labels import LABEL2ID
 
 # --- Ligação ---
 
@@ -551,3 +552,54 @@ def get_grafo_frases_fundidas(frase_ids: list) -> Dict:
         }.values())
 
         return {"nos": list(nos_vistos.values()), "arestas": arestas_unicas}
+def exportar_dados_treino() -> list:
+    """
+    Exporta todas as notícias anotadas do Neo4j em formato de treino.
+    Devolve lista de {"tokens": [...], "labels": [...]} por frase.
+    """
+
+    with get_driver().session(database="cec") as session:
+        result = session.run("""
+            MATCH (n:Noticia)-[:TEM_FRASE]->(f:Frase)
+            OPTIONAL MATCH (e:Entidade)-[r:MENCIONADA_EM]->(f)
+            RETURN f.texto AS texto,
+                   collect({
+                       nome: e.nome,
+                       tipo: e.tipo,
+                       inicio: r.inicio,
+                       fim: r.fim
+                   }) AS entidades
+            ORDER BY f.noticia_id, f.ordem
+        """)
+
+        dados = []
+        for row in result:
+            texto = row["texto"]
+            entidades = [e for e in row["entidades"] if e["nome"] is not None]
+            tokens = texto.split()
+
+            # Calcula posições de início de cada palavra
+            word_starts = []
+            pos = 0
+            for palavra in tokens:
+                pos = texto.find(palavra, pos)
+                word_starts.append(pos)
+                pos += len(palavra)
+
+            # Atribui labels BIO a cada token
+            labels = ["O"] * len(tokens)
+            for ent in entidades:
+                tipo = ent["tipo"]
+                inicio = ent["inicio"]
+                fim = ent["fim"]
+                primeiro = True
+                for i, (word, start) in enumerate(zip(tokens, word_starts)):
+                    end = start + len(word)
+                    if start >= inicio and end <= fim:
+                        labels[i] = f"{'B' if primeiro else 'I'}-{tipo}"
+                        primeiro = False
+
+            if any(l != "O" for l in labels):
+                dados.append({"tokens": tokens, "labels": labels})
+
+        return dados

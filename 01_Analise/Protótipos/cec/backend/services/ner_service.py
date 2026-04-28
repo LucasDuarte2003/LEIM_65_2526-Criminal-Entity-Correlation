@@ -2,21 +2,18 @@ import os
 import sys
 from typing import List, Dict
 
-MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "ner_model")
-sys.path.insert(0, MODEL_DIR)
-
-from predict import predict_entities  # noqa: E402
 from services.regex_entities import extract_regex_entities
-
 
 REGEX_PRIORITY_TYPES = {"EMAIL", "TELEMOVEL", "MATRICULA", "CRIPTO"}
 
 
 def run_ner(texto: str) -> List[Dict]:
     """
-    Corre o modelo NER e complementa com entidades extraídas por regex.
+    Corre o modelo NER via NERManager e complementa com regex.
     """
-    raw = predict_entities(texto)
+    from ner_model.ner_manager import ner_manager
+
+    raw = ner_manager.predict_entities(texto)
     entidades_modelo = _convert_offsets(texto, raw)
     entidades_regex = extract_regex_entities(texto)
 
@@ -58,33 +55,22 @@ def _same_span(e1: Dict, e2: Dict) -> bool:
 
 
 def _merge_entities(entidades_modelo: List[Dict], entidades_regex: List[Dict]) -> List[Dict]:
-    """
-    Junta entidades do modelo com entidades encontradas por regex.
-    Para EMAIL, TELEMOVEL, MATRICULA e CRIPTO, as regex têm prioridade.
-    """
     resultado = []
 
-    # 1. Primeiro adiciona entidades regex
     for ent_regex in entidades_regex:
         resultado.append(ent_regex)
 
-    # 2. Depois adiciona entidades do modelo apenas se não conflitarem
     for ent_modelo in entidades_modelo:
         conflito = False
-
         for ent_final in resultado:
             if _same_span(ent_modelo, ent_final):
                 conflito = True
                 break
-
             if ent_final["tipo"] in REGEX_PRIORITY_TYPES and _overlap(ent_modelo, ent_final):
                 conflito = True
                 break
-
         if not conflito:
             resultado.append(ent_modelo)
 
-    # 3. Ordena por posição no texto
     resultado.sort(key=lambda e: (e["inicio"], e["fim"]))
-
     return resultado
