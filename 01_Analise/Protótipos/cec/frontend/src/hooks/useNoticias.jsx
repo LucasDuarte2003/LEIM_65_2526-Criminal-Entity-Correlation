@@ -10,7 +10,6 @@ export function useNoticias(pastaId) {
   const [isLoading, setIsLoading] = useState(false);
   const [erro, setErro] = useState(null);
 
-  // Carrega notícias da pasta ao montar ou quando pastaId muda
   useEffect(() => {
     if (!pastaId) return;
     getPasta("_", pastaId)
@@ -34,6 +33,8 @@ export function useNoticias(pastaId) {
     setIsLoading(true);
     try {
       const nova = await predictNoticia(texto, pastaIdDestino);
+      // Adiciona à lista mas NÃO guarda no Neo4j ainda
+      // O utilizador revê e clica em Guardar
       setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
       setNoticia(nova);
     } catch (e) {
@@ -47,7 +48,8 @@ export function useNoticias(pastaId) {
     if (!noticia) return;
     setIsLoading(true);
     try {
-      await guardarNoticia(noticia);
+      // Passa o pastaId para o backend ligar a notícia à pasta ao guardar
+      await guardarNoticia({ ...noticia, pasta_id: pastaId });
       alert("Notícia guardada com sucesso!");
       if (onSucesso) onSucesso();
     } catch (e) {
@@ -86,6 +88,7 @@ export function useNoticias(pastaId) {
 
   return {
     lista, noticia, isLoading, erro,
-    selecionar, adicionarNoticia, guardar, apagarNoticia, atualizarFrase,
+    selecionar, adicionarNoticia, guardar,
+    apagarNoticia, atualizarFrase, removerDaLista,
   };
 }

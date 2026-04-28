@@ -41,7 +41,8 @@ class PredictInput(BaseModel):
 class GuardarInput(BaseModel):
     id: str
     titulo: str
-    frases: List[Frase]
+    frases: list
+    pasta_id: Optional[str] = None
 
 
 # --- Labels ---
