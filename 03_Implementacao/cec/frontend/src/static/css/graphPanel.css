@@ -1,0 +1,238 @@
+.right-panel {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.panel-header h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.btn-reset {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  color: var(--text-dim);
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 10.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-reset:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.panel-msg {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-style: italic;
+  text-align: center;
+  margin-top: 40px;
+  line-height: 1.7;
+  padding: 0 20px;
+}
+
+.panel-hint {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 10px 16px 4px;
+}
+
+.panel-inline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-body-split {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.panel-grafo-principal,
+.panel-grafo-relacionadas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-grafo-relacionadas {
+  border-top: 1px solid var(--border);
+}
+
+.btn-pesquisar {
+  margin: 6px 14px 10px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 5px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.btn-pesquisar:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.btn-pesquisar:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.relacionadas-header {
+  padding: 10px 14px 4px;
+  font-size: 10px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.relacionadas-legenda {
+  display: flex;
+  gap: 12px;
+  padding: 0 14px 6px;
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  flex-shrink: 0;
+}
+
+.legenda-total { color: #4f7cff; }
+.legenda-parcial { color: #f59e0b; }
+
+.btn-expand {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s;
+  padding: 0 4px;
+}
+
+.btn-expand:hover {
+  color: var(--text);
+}
+
+.graph-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 15, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.graph-modal {
+  width: 70vw;
+  height: 70vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.graph-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.graph-modal-header h2 {
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.btn-close:hover {
+  color: var(--text);
+}
+
+.ambito-selector {
+  display: flex;
+  gap: 4px;
+  padding: 6px 14px 0;
+  flex-shrink: 0;
+}
+
+.ambito-btn {
+  flex: 1;
+  padding: 4px 0;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ambito-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.ambito-btn.active {
+  background: var(--accent-glow);
+  border-color: rgba(79, 124, 255, 0.4);
+  color: #7da4ff;
+}
+
