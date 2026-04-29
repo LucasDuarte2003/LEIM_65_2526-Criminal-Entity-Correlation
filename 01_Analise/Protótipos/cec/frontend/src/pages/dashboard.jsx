@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getProjetos, getProjeto, criarProjeto, atualizarProjeto, eliminarProjeto,
-  criarPasta, atualizarPasta, eliminarPasta,
-} from "../api/client";
+  criarPasta, atualizarPasta, eliminarPasta, getModeloStatus, retreinarModelo, alterarTipoModelo } from "../api/client";
 import "./Dashboard.css";
 
 export default function Dashboard() {
@@ -16,6 +15,8 @@ export default function Dashboard() {
   const [modalPasta, setModalPasta] = useState(null);
   const [inputNome, setInputNome] = useState("");
   const [inputDesc, setInputDesc] = useState("");
+
+  const [modeloStatus, setModeloStatus] = useState(null);
 
   const carregar = () =>
       getProjetos().then(setProjetos).catch(console.error);
@@ -99,6 +100,24 @@ export default function Dashboard() {
     navigate(`/projeto/${projetoId}/pasta/${pastaId}`);
   };
 
+  useEffect(() => {
+  const carregar = () =>
+    getModeloStatus().then(setModeloStatus).catch(console.error);
+  carregar();
+  const intervalo = setInterval(carregar, 5000); // atualiza a cada 5s
+  return () => clearInterval(intervalo);
+}, []);
+
+const handleRetreinar = async () => {
+  await retreinarModelo();
+  alert("Retreino iniciado em background.");
+};
+
+const handleAlterarTipo = async (tipo) => {
+  await alterarTipoModelo(tipo);
+  setModeloStatus((prev) => ({ ...prev, tipo }));
+};
+
   return (
     <div className="dashboard">
       <header className="dashboard-header">
@@ -151,6 +170,55 @@ export default function Dashboard() {
             </div>
           );
         })}
+
+        {/* ── Painel do modelo ── */}
+        <div className="modelo-painel">
+          <h2>Modelo NER</h2>
+          {modeloStatus ? (
+            <>
+              <div className="modelo-info">
+                <span>Modelo ativo:</span>
+                <strong>{modeloStatus.tipo}</strong>
+              </div>
+              <div className="modelo-info">
+                <span>Último treino:</span>
+                <strong>{modeloStatus.ultimo_treino ?? "Nunca"}</strong>
+              </div>
+              <div className="modelo-info">
+                <span>Estado:</span>
+                <strong className={modeloStatus.a_treinar ? "estado-treino" : "estado-ok"}>
+                  {modeloStatus.a_treinar ? "A retreinar..." : "Disponível"}
+                </strong>
+              </div>
+              <div className="modelo-botoes">
+                <button
+                  className={`btn-modelo ${modeloStatus.tipo === "xlm-roberta" ? "active" : ""}`}
+                  onClick={() => handleAlterarTipo("xlm-roberta")}
+                  disabled={modeloStatus.tipo === "xlm-roberta" || modeloStatus.a_treinar}
+                >
+                  Usar XLM-RoBERTa
+                </button>
+                <button
+                  className={`btn-modelo ${modeloStatus.tipo === "gliner" ? "active" : ""}`}
+                  onClick={() => handleAlterarTipo("gliner")}
+                  disabled={modeloStatus.tipo === "gliner" || modeloStatus.a_treinar}
+                >
+                  Usar GLiNER
+                </button>
+                <button
+                  className="btn-retreinar"
+                  onClick={handleRetreinar}
+                  disabled={modeloStatus.a_treinar}
+                >
+                  {modeloStatus.a_treinar ? "A retreinar..." : "Retreinar agora"}
+                </button>
+              </div>
+            </>
+          ) : (
+            <p className="pastas-empty">A carregar estado do modelo...</p>
+          )}
+        </div>
+
       </main>
 
       {modalProjeto && (

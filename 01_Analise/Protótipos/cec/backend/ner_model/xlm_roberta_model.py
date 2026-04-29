@@ -3,11 +3,10 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from transformers import AutoTokenizer, XLMRobertaForTokenClassification
 from data.labels import ID2LABEL, LABEL_LIST, LABEL2ID
 from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset
-from transformers import get_linear_schedule_with_warmup
+from transformers import AutoTokenizer, XLMRobertaForTokenClassification, get_linear_schedule_with_warmup
 
 MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "saved_model")
 
@@ -87,7 +86,9 @@ class NERModel:
         Retreina o modelo com novos dados anotados.
         dados: lista de {"texto": str, "entidades": [...]}
         """
-
+        print(f"[Treino] Device: {device}")
+        print(f"[Treino] Model device: {next(self.model.parameters()).device}")
+        print(f"[Treino] Nº de frases: {len(dados)}")
         NUM_EPOCHS = 5
         BATCH_SIZE = 2
         LEARNING_RATE = 3e-5

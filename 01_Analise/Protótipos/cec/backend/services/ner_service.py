@@ -3,7 +3,7 @@ import sys
 from typing import List, Dict
 
 from services.regex_entities import extract_regex_entities
-
+from ner_model.ner_manager import ner_manager
 REGEX_PRIORITY_TYPES = {"EMAIL", "TELEMOVEL", "MATRICULA", "CRIPTO"}
 
 
@@ -11,16 +11,21 @@ def run_ner(texto: str) -> List[Dict]:
     """
     Corre o modelo NER via NERManager e complementa com regex.
     """
-    from ner_model.ner_manager import ner_manager
-
     raw = ner_manager.predict_entities(texto)
-    entidades_modelo = _convert_offsets(texto, raw)
-    entidades_regex = extract_regex_entities(texto)
 
+    # GLiNER devolve offsets de caracteres diretamente
+    # XLM-RoBERTa devolve start_word/end_word
+    if raw and "start_word" in raw[0]:
+        entidades_modelo = _convert_offsets_words(texto, raw)
+    else:
+        entidades_modelo = raw  # GLiNER já tem o formato correto
+
+    entidades_regex = extract_regex_entities(texto)
     return _merge_entities(entidades_modelo, entidades_regex)
 
 
-def _convert_offsets(texto: str, entidades_raw: List[Dict]) -> List[Dict]:
+def _convert_offsets_words(texto: str, entidades_raw: List[Dict]) -> List[Dict]:
+    """Converte offsets de palavras para offsets de caracteres (xlm-roberta)."""
     palavras = texto.split()
 
     word_starts = []

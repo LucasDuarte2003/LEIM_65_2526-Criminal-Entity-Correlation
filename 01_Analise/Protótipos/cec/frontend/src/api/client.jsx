@@ -111,3 +111,17 @@ export const getGrafoFundido = (fraseIds) =>
     method: "POST",
     body: JSON.stringify({ frase_ids: fraseIds }),
   });
+
+// ── Modelo ──────────────────────────────────────────────────────
+
+export const getModeloStatus = () =>
+  request("/modelo/status");
+
+export const retreinarModelo = () =>
+  request("/modelo/retreinar", { method: "POST" });
+
+export const alterarTipoModelo = (tipo) =>
+  request("/modelo/tipo", {
+    method: "POST",
+    body: JSON.stringify({ tipo }),
+  });

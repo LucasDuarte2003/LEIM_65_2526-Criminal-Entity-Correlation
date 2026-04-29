@@ -20,7 +20,7 @@ class NERManager:
 
     def carregar_modelo_inicial(self):
         """Carrega o modelo ao arrancar o servidor."""
-        from ner_model.predict import NERModel
+        from ner_model.xlm_roberta_model import NERModel
         logger.info("A carregar modelo inicial...")
         with self._lock:
             self._modelo = NERModel()
@@ -58,7 +58,7 @@ class NERManager:
             self._tipo = tipo
             # Carrega o modelo do novo tipo imediatamente
             if tipo == "xlm-roberta":
-                from ner_model.predict import NERModel
+                from ner_model.xlm_roberta_model import NERModel
                 self._modelo = NERModel()
             elif tipo == "gliner":
                 from ner_model.gliner_model import GLiNERModel

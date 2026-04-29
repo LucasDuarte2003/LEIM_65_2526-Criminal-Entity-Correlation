@@ -557,19 +557,22 @@ def exportar_dados_treino() -> list:
     Exporta todas as notícias anotadas do Neo4j em formato de treino.
     Devolve lista de {"tokens": [...], "labels": [...]} por frase.
     """
-
     with get_driver().session(database="cec") as session:
         result = session.run("""
             MATCH (n:Noticia)-[:TEM_FRASE]->(f:Frase)
             OPTIONAL MATCH (e:Entidade)-[r:MENCIONADA_EM]->(f)
-            RETURN f.texto AS texto,
-                   collect({
-                       nome: e.nome,
-                       tipo: e.tipo,
-                       inicio: r.inicio,
-                       fim: r.fim
-                   }) AS entidades
-            ORDER BY f.noticia_id, f.ordem
+            WITH f.id AS frase_id,
+                 f.texto AS texto,
+                 f.noticia_id AS noticia_id,
+                 f.ordem AS ordem,
+                 collect({
+                     nome: e.nome,
+                     tipo: e.tipo,
+                     inicio: r.inicio,
+                     fim: r.fim
+                 }) AS entidades
+            ORDER BY noticia_id, ordem
+            RETURN frase_id, texto, entidades
         """)
 
         dados = []
@@ -578,7 +581,6 @@ def exportar_dados_treino() -> list:
             entidades = [e for e in row["entidades"] if e["nome"] is not None]
             tokens = texto.split()
 
-            # Calcula posições de início de cada palavra
             word_starts = []
             pos = 0
             for palavra in tokens:
@@ -586,7 +588,6 @@ def exportar_dados_treino() -> list:
                 word_starts.append(pos)
                 pos += len(palavra)
 
-            # Atribui labels BIO a cada token
             labels = ["O"] * len(tokens)
             for ent in entidades:
                 tipo = ent["tipo"]

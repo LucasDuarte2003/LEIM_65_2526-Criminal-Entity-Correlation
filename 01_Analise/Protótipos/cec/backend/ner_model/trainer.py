@@ -79,7 +79,7 @@ class Trainer:
             tipo = self._ner_manager._tipo
 
             if tipo == "xlm-roberta":
-                from ner_model.predict import NERModel
+                from ner_model.xlm_roberta_model import NERModel
                 novo_modelo = NERModel()
                 novo_modelo.train(dados)
             elif tipo == "gliner":
