@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from models.schemas import GrafoFrase
 from pydantic import BaseModel
 
-from .base_router import BaseApiRouter
+from ..base_router import BaseApiRouter
 
 
 class RelacionadasInput(BaseModel):

@@ -2,11 +2,11 @@ from typing import Any
 
 from fastapi import APIRouter
 
-from .grafo import GrafoRouter
-from .labels import LabelsRouter
-from .modelo import ModeloRouter
-from .noticias import NoticiasRouter
-from .projetos import ProjetosRouter
+from .routes.grafo import GrafoRouter
+from .routes.labels import LabelsRouter
+from .routes.modelo import ModeloRouter
+from .routes.noticias import NoticiasRouter
+from .routes.projetos import ProjetosRouter
 
 
 class RouterFactory:
@@ -43,4 +43,3 @@ class RouterFactory:
             ProjetosRouter(neo4j_service=self._neo4j_service).router,
             ModeloRouter(ner_manager=self._ner_manager, trainer=self._trainer).router,
         ]
-

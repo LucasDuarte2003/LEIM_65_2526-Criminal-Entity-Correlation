@@ -604,3 +604,89 @@ def exportar_dados_treino() -> list:
                 dados.append({"tokens": tokens, "labels": labels})
 
         return dados
+
+def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
+    """
+    Devolve as notícias mais semelhantes à notícia indicada,
+    com base em entidades partilhadas ponderadas por tipo.
+    """
+    pesos = {
+        "PESSOA":      5,
+        "MATRICULA":   5,
+        "TELEMOVEL":   5,
+        "CRIME":       4,
+        "EMAIL":       4,
+        "CRIPTO":      4,
+        "LOCAL":       3,
+        "ORGANIZACAO": 3,
+        "VIATURA":     3,
+        "DATA":        2,
+        "MONTANTE":    2,
+    }
+
+    with get_driver().session(database="cec") as session:
+        result = session.run("""
+            MATCH (origem:Noticia {id: $noticia_id})-[:TEM_FRASE]->(f1:Frase)
+            MATCH (e:Entidade)-[:MENCIONADA_EM]->(f1)
+            WITH origem, collect(DISTINCT {nome: e.nome, tipo: e.tipo}) AS entidades_origem
+
+            MATCH (outra:Noticia) WHERE outra.id <> $noticia_id
+            MATCH (outra)-[:TEM_FRASE]->(f2:Frase)
+            MATCH (e2:Entidade)-[:MENCIONADA_EM]->(f2)
+            WHERE e2.nome IN [x IN entidades_origem | x.nome]
+
+            WITH outra, entidades_origem,
+                 collect(DISTINCT {nome: e2.nome, tipo: e2.tipo}) AS entidades_outra
+
+            WITH outra,
+                 [x IN entidades_origem WHERE x.nome IN [y IN entidades_outra | y.nome]] AS comuns
+
+            WITH outra, comuns,
+                 reduce(score = 0, e IN comuns |
+                     score + CASE e.tipo
+                         WHEN 'PESSOA'      THEN 5
+                         WHEN 'MATRICULA'   THEN 5
+                         WHEN 'TELEMOVEL'   THEN 5
+                         WHEN 'CRIME'       THEN 4
+                         WHEN 'EMAIL'       THEN 4
+                         WHEN 'CRIPTO'      THEN 4
+                         WHEN 'LOCAL'       THEN 3
+                         WHEN 'ORGANIZACAO' THEN 3
+                         WHEN 'VIATURA'     THEN 3
+                         WHEN 'DATA'        THEN 2
+                         WHEN 'MONTANTE'    THEN 2
+                         ELSE 1
+                     END
+                 ) AS score
+
+            WHERE score > 0
+            ORDER BY score DESC
+            LIMIT $limite
+
+            OPTIONAL MATCH (p:Pasta)-[:CONTEM_NOTICIA]->(outra)
+            OPTIONAL MATCH (proj:Projeto)-[:TEM_PASTA]->(p)
+
+            RETURN outra.id AS id,
+                   outra.titulo AS titulo,
+                   score,
+                   p.nome AS pasta_nome,
+                   proj.nome AS projeto_nome,
+                   size(comuns) AS entidades_comuns
+        """, noticia_id=noticia_id, limite=limite)
+
+        # Calcula score máximo possível para normalizar
+        score_maximo = sum(pesos.values()) * 3  # estimativa razoável
+        resultados = []
+        for row in result:
+            percentagem = min(100, round((row["score"] / score_maximo) * 100))
+            resultados.append({
+                "id": row["id"],
+                "titulo": row["titulo"],
+                "score": row["score"],
+                "percentagem": percentagem,
+                "pasta_nome": row["pasta_nome"],
+                "projeto_nome": row["projeto_nome"],
+                "entidades_comuns": row["entidades_comuns"],
+            })
+
+        return resultados

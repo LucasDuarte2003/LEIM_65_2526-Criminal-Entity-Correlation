@@ -125,3 +125,6 @@ export const alterarTipoModelo = (tipo) =>
     method: "POST",
     body: JSON.stringify({ tipo }),
   });
+
+export const getNoticias_semelhantes = (noticiaId) =>
+  request(`/noticias/${noticiaId}/semelhantes`);

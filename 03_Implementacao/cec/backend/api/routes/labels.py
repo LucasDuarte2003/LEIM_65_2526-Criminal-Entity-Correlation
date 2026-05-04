@@ -2,7 +2,7 @@ from typing import Any
 
 from models.schemas import Label
 
-from .base_router import BaseApiRouter
+from ..base_router import BaseApiRouter
 
 
 class LabelsRouter(BaseApiRouter):

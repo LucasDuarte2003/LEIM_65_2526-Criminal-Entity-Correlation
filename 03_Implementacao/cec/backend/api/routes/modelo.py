@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import BackgroundTasks, HTTPException
 from pydantic import BaseModel
 
-from .base_router import BaseApiRouter
+from ..base_router import BaseApiRouter
 
 class AlterarTipoInput(BaseModel):
     tipo: str  # "xlm-roberta" | "gliner"

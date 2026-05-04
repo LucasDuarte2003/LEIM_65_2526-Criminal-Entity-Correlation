@@ -17,9 +17,11 @@ class ActionBarPresenter {
       selectedTextText: this.props.textoSelecionado ? `"${this.props.textoSelecionado}"` : "nenhuma",
       saveButtonLabel: this.props.isLoading ? SAVE_BUTTON_LABELS.loading : SAVE_BUTTON_LABELS.default,
       isSaveDisabled: this.props.isLoading,
+      isSemelhantesDisabled: !this.props.noticiaId,
       onUpdate: this.props.onUpdate,
       onRemover: this.props.onRemover,
       onGuardar: this.props.onGuardar,
+      onSemelhantes: this.props.onSemelhantes,
     };
   }
 }
@@ -51,6 +53,14 @@ export default class ActionBar extends React.Component {
         </button>
         <button className="btn btn-remove" onClick={viewModel.onRemover}>
           Remover entidade
+        </button>
+        <button
+          className="btn btn-semelhantes"
+          onClick={viewModel.onSemelhantes}
+          disabled={viewModel.isSemelhantesDisabled}
+          title="Procurar notícias semelhantes"
+        >
+          Semelhantes
         </button>
         <button className="btn btn-save" onClick={viewModel.onGuardar} disabled={viewModel.isSaveDisabled}>
           {viewModel.saveButtonLabel}

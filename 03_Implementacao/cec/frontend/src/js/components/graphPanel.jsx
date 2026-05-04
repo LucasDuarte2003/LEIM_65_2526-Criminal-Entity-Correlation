@@ -10,6 +10,13 @@ const AMBITOS = [
   { id: "global", label: "Global" },
 ];
 
+const LAYOUTS = [
+  { id: "forca", label: "Força" },
+  { id: "circular", label: "Circular" },
+  { id: "hierarquico", label: "Hierárquico" },
+  { id: "radial", label: "Radial" },
+];
+
 const GRAPH_VARIANTS = Object.freeze({
   principal: "principal",
   relacionadas: "relacionadas",
@@ -47,12 +54,15 @@ class GraphPanelHandler {
 
   buildViewModel() {
     const { grafo, grafoRelacionadas, isLoading, isLoadingRelacionadas } = this.component.props;
-    const { nosRemovidosIds, expandedGraph, ambito } = this.component.state;
+    const { nosRemovidosIds, expandedGraph, expandedLayout, ambito } = this.component.state;
     const visibleNodes = this.createVisibleNodes(grafo, nosRemovidosIds);
     const visibleLinks = this.createVisibleLinks(grafo, nosRemovidosIds);
     const graphData = this.createMainGraphData(visibleNodes, visibleLinks);
     const graphRelacionadasData = this.createRelatedGraphData(visibleNodes, grafoRelacionadas);
     const ambitoLabel = this.getAmbitoLabel(ambito);
+
+    const expandedGraphDataRaw = expandedGraph === GRAPH_VARIANTS.principal ? graphData : graphRelacionadasData;
+    const expandedGraphData = this.applyLayout(expandedGraphDataRaw, expandedLayout);
 
     return {
       grafo,
@@ -61,9 +71,11 @@ class GraphPanelHandler {
       graphData,
       graphRelacionadasData,
       ambitoButtons: AMBITOS.map((scope) => this.createAmbitoButtonViewModel(scope, ambito)),
+      layoutButtons: LAYOUTS.map((layout) => this.createLayoutButtonViewModel(layout, expandedLayout)),
       ambitoLabel,
       expandedGraph,
-      expandedGraphData: expandedGraph === GRAPH_VARIANTS.principal ? graphData : graphRelacionadasData,
+      expandedLayout,
+      expandedGraphData,
       expandedGraphTitle: expandedGraph === GRAPH_VARIANTS.principal ? "Grafo Principal" : `Relações — ${ambitoLabel}`,
       shouldShowReset: Boolean(grafo) && nosRemovidosIds.length > 0,
       shouldShowEmptyGraphMessage: !isLoading && Boolean(grafo) && graphData.nodes.length === 0,
@@ -71,6 +83,7 @@ class GraphPanelHandler {
       shouldShowRelacionadas: Boolean(grafoRelacionadas),
       shouldShowRelacionadasResults: Boolean(grafoRelacionadas?.tem_resultados),
       isSearchDisabled: isLoadingRelacionadas || visibleNodes.length === 0,
+      useFixedLayout: expandedLayout !== "forca",
       mainNodeLabel: (node) => this.getMainNodeLabel(node),
       relatedNodeLabel: (node) => this.getRelatedNodeLabel(node),
       expandedNodeLabel: (node) => this.getExpandedNodeLabel(node, expandedGraph),
@@ -86,6 +99,104 @@ class GraphPanelHandler {
     };
   }
 
+  // ── Layouts ────────────────────────────────────────────────────
+
+applyLayout(graphData, layout) {
+  if (!graphData || layout === "forca") return graphData;
+
+  const nodes = graphData.nodes.map((n) => ({ ...n }));
+
+  // Cria cópias frescas das arestas com ids como strings
+  // (o D3 muta source/target para object references após a simulação)
+  const links = graphData.links.map((l) => ({
+    ...l,
+    source: typeof l.source === "object" ? l.source.id : l.source,
+    target: typeof l.target === "object" ? l.target.id : l.target,
+  }));
+
+  if (layout === "circular") {
+    this._applyCircularLayout(nodes, 0, 0, 200);
+  } else if (layout === "hierarquico") {
+    this._applyHierarchicalLayout(nodes, links, 0, 0);
+  } else if (layout === "radial") {
+    this._applyRadialLayout(nodes, links, 0, 0);
+  }
+
+  return { nodes, links };
+}
+
+_applyCircularLayout(nodes, cx, cy, radius) {
+  const count = nodes.length;
+  nodes.forEach((node, i) => {
+    const angle = (2 * Math.PI * i) / count - Math.PI / 2;
+    node.x = node.fx = radius * Math.cos(angle);
+    node.y = node.fy = radius * Math.sin(angle);
+  });
+}
+
+_applyHierarchicalLayout(nodes, links, width, height) {
+  const degree = {};
+  nodes.forEach((n) => { degree[n.id] = 0; });
+  links.forEach((l) => {
+    const src = typeof l.source === "object" ? l.source.id : l.source;
+    const tgt = typeof l.target === "object" ? l.target.id : l.target;
+    if (degree[src] !== undefined) degree[src]++;
+    if (degree[tgt] !== undefined) degree[tgt]++;
+  });
+
+  const sorted = [...nodes].sort((a, b) => (degree[b.id] || 0) - (degree[a.id] || 0));
+  const layers = 4;
+  const perLayer = Math.ceil(sorted.length / layers);
+  const layerHeight = 120;
+  const nodeSpacing = 100;
+
+  sorted.forEach((node, i) => {
+    const layer = Math.floor(i / perLayer);
+    const posInLayer = i % perLayer;
+    const layerCount = Math.min(perLayer, sorted.length - layer * perLayer);
+    const target = nodes.find((n) => n.id === node.id);
+    if (target) {
+      target.x = target.fx = (posInLayer - (layerCount - 1) / 2) * nodeSpacing;
+      target.y = target.fy = (layer - (layers - 1) / 2) * layerHeight;
+    }
+  });
+}
+
+_applyRadialLayout(nodes, links, cx, cy) {
+  if (nodes.length === 0) return;
+
+  const degree = {};
+  nodes.forEach((n) => { degree[n.id] = 0; });
+  links.forEach((l) => {
+    const src = typeof l.source === "object" ? l.source.id : l.source;
+    const tgt = typeof l.target === "object" ? l.target.id : l.target;
+    if (degree[src] !== undefined) degree[src]++;
+    if (degree[tgt] !== undefined) degree[tgt]++;
+  });
+
+  const sorted = [...nodes].sort((a, b) => (degree[b.id] || 0) - (degree[a.id] || 0));
+  const ringSize = 6;
+  const ringRadius = 100;
+
+  sorted.forEach((node, i) => {
+    const target = nodes.find((n) => n.id === node.id);
+    if (!target) return;
+    if (i === 0) {
+      target.x = target.fx = 0;
+      target.y = target.fy = 0;
+      return;
+    }
+    const ring = Math.ceil(i / ringSize);
+    const posInRing = (i - 1) % ringSize;
+    const countInRing = Math.min(ringSize, sorted.length - 1 - (ring - 1) * ringSize);
+    const angle = (2 * Math.PI * posInRing) / countInRing - Math.PI / 2;
+    target.x = target.fx = ringRadius * ring * Math.cos(angle);
+    target.y = target.fy = ringRadius * ring * Math.sin(angle);
+  });
+}
+
+  // ── View model helpers ─────────────────────────────────────────
+
   createVisibleNodes(grafo, removedNodeIds) {
     if (!grafo) return [];
     return grafo.nos.filter((node) => !removedNodeIds.includes(node.id));
@@ -93,11 +204,8 @@ class GraphPanelHandler {
 
   createVisibleLinks(grafo, removedNodeIds) {
     if (!grafo) return [];
-
     return grafo.arestas.filter((edge) => {
-      const isSourceVisible = !removedNodeIds.includes(edge.origem);
-      const isTargetVisible = !removedNodeIds.includes(edge.destino);
-      return isSourceVisible && isTargetVisible;
+      return !removedNodeIds.includes(edge.origem) && !removedNodeIds.includes(edge.destino);
     });
   }
 
@@ -110,7 +218,6 @@ class GraphPanelHandler {
 
   createRelatedGraphData(visibleNodes, grafoRelacionadas) {
     if (!grafoRelacionadas) return null;
-
     return {
       nodes: [
         ...visibleNodes.map((node) => this.createRelatedSourceNode(node)),
@@ -126,35 +233,17 @@ class GraphPanelHandler {
 
   createMainNode(node) {
     const { labelMap } = this.component.props;
-    return {
-      id: node.id,
-      name: node.nome,
-      tipo: node.tipo,
-      color: labelMap[node.tipo] || GRAPH_COLORS.defaultNode,
-    };
+    return { id: node.id, name: node.nome, tipo: node.tipo, color: labelMap[node.tipo] || GRAPH_COLORS.defaultNode };
   }
 
   createRelatedSourceNode(node) {
     const { labelMap } = this.component.props;
-    return {
-      id: node.nome,
-      name: node.nome,
-      tipo: node.tipo,
-      color: labelMap[node.tipo] || GRAPH_COLORS.defaultNode,
-      origem: true,
-    };
+    return { id: node.nome, name: node.nome, tipo: node.tipo, color: labelMap[node.tipo] || GRAPH_COLORS.defaultNode, origem: true };
   }
 
   createRelatedTargetNode(node) {
     const { labelMap } = this.component.props;
-    return {
-      id: node.id,
-      name: node.nome,
-      tipo: node.tipo,
-      color: labelMap[node.tipo] || GRAPH_COLORS.relatedNode,
-      origem: false,
-      noticia_id: node.noticia_id,
-    };
+    return { id: node.id, name: node.nome, tipo: node.tipo, color: labelMap[node.tipo] || GRAPH_COLORS.relatedNode, origem: false, noticia_id: node.noticia_id };
   }
 
   createAmbitoButtonViewModel(scope, ambitoAtual) {
@@ -166,13 +255,20 @@ class GraphPanelHandler {
     };
   }
 
+  createLayoutButtonViewModel(layout, layoutAtual) {
+    return {
+      id: layout.id,
+      label: layout.label,
+      className: `layout-btn ${layoutAtual === layout.id ? "active" : ""}`,
+      onClick: () => this.component.handleLayoutChange(layout.id),
+    };
+  }
+
   getAmbitoLabel(ambitoId) {
     return AMBITOS.find((scope) => scope.id === ambitoId)?.label || "Global";
   }
 
-  getMainNodeLabel(node) {
-    return `${node.name} (${node.tipo})`;
-  }
+  getMainNodeLabel(node) { return `${node.name} (${node.tipo})`; }
 
   getRelatedNodeLabel(node) {
     return node.origem ? `${node.name} (${node.tipo})` : `${node.name} (${node.tipo}) — ${node.noticia_id}`;
@@ -233,9 +329,7 @@ class GraphPanelRenderer {
       <div className="panel-header">
         <h2>Grafo</h2>
         {viewModel.shouldShowReset && (
-          <button className="btn-reset" onClick={component.handleReset}>
-            Repor
-          </button>
+          <button className="btn-reset" onClick={component.handleReset}>Repor</button>
         )}
       </div>
     );
@@ -246,20 +340,24 @@ class GraphPanelRenderer {
       <>
         {viewModel.isLoading && <p className="panel-msg">A carregar grafo...</p>}
         {!viewModel.isLoading && !viewModel.grafo && (
-          <p className="panel-msg">
-            Clica em <strong>◉</strong> numa frase para ver as relações.
-          </p>
+          <p className="panel-msg">Clica em <strong>◉</strong> numa frase para ver as relações.</p>
         )}
-        {viewModel.shouldShowEmptyGraphMessage && <p className="panel-msg">Esta frase não tem entidades relacionadas.</p>}
+        {viewModel.shouldShowEmptyGraphMessage && (
+          <p className="panel-msg">Esta frase não tem entidades relacionadas.</p>
+        )}
       </>
     );
   }
 
   renderAmbitoButtons(viewModel) {
     return viewModel.ambitoButtons.map((button) => (
-      <button key={button.id} className={button.className} onClick={button.onClick}>
-        {button.label}
-      </button>
+      <button key={button.id} className={button.className} onClick={button.onClick}>{button.label}</button>
+    ));
+  }
+
+  renderLayoutButtons(viewModel) {
+    return viewModel.layoutButtons.map((button) => (
+      <button key={button.id} className={button.className} onClick={button.onClick}>{button.label}</button>
     ));
   }
 
@@ -268,11 +366,8 @@ class GraphPanelRenderer {
       <div className="panel-grafo-principal">
         <div className="panel-hint panel-inline-header">
           <span>Clica num nó para o remover.</span>
-          <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenPrincipal}>
-            ⛶
-          </button>
+          <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenPrincipal}>⛶</button>
         </div>
-
         <ForceGraph2D
           graphData={viewModel.graphData}
           width={GRAPH_SIZES.panelWidth}
@@ -283,9 +378,7 @@ class GraphPanelRenderer {
           nodeCanvasObject={viewModel.renderPrimaryNode}
           onNodeClick={component.handleNodeClick}
         />
-
         <div className="ambito-selector">{this.renderAmbitoButtons(viewModel)}</div>
-
         <button className="btn-pesquisar" onClick={viewModel.handlePesquisar} disabled={viewModel.isSearchDisabled}>
           {viewModel.isLoadingRelacionadas ? "A pesquisar..." : "Procurar relações"}
         </button>
@@ -295,16 +388,12 @@ class GraphPanelRenderer {
 
   renderRelatedGraph(viewModel, component) {
     if (!viewModel.shouldShowRelacionadas) return null;
-
     return (
       <div className="panel-grafo-relacionadas">
         <div className="relacionadas-header panel-inline-header">
           <span>Relações — {viewModel.ambitoLabel}</span>
-          <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenRelacionadas}>
-            ⛶
-          </button>
+          <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenRelacionadas}>⛶</button>
         </div>
-
         {!viewModel.shouldShowRelacionadasResults ? (
           <p className="panel-msg">Não foram encontradas relações neste âmbito.</p>
         ) : (
@@ -337,9 +426,10 @@ class GraphPanelRenderer {
         <div className="graph-modal" onClick={component.handleModalContentClick}>
           <div className="graph-modal-header">
             <h2>{viewModel.expandedGraphTitle}</h2>
-            <button className="btn-close" onClick={component.handleCloseExpanded}>
-              ✕
-            </button>
+            <div className="layout-selector">
+              {this.renderLayoutButtons(viewModel)}
+            </div>
+            <button className="btn-close" onClick={component.handleCloseExpanded}>✕</button>
           </div>
           <ForceGraph2D
             graphData={viewModel.expandedGraphData}
@@ -351,6 +441,8 @@ class GraphPanelRenderer {
             linkWidth={viewModel.expandedLinkWidth}
             nodeCanvasObject={viewModel.renderExpandedNode}
             onNodeClick={viewModel.expandedGraph === GRAPH_VARIANTS.principal ? component.handleNodeClick : undefined}
+            cooldownTicks={viewModel.useFixedLayout ? 0 : undefined}
+            dagMode={null}
           />
         </div>
       </div>,
@@ -360,7 +452,6 @@ class GraphPanelRenderer {
 
   renderMainContent(viewModel, component) {
     if (!viewModel.shouldShowMainContent) return null;
-
     return (
       <div className="panel-body-split">
         {this.renderMainGraph(viewModel, component)}
@@ -387,6 +478,7 @@ export default class GraphPanel extends React.Component {
     this.state = {
       nosRemovidosIds: [],
       expandedGraph: null,
+      expandedLayout: "forca",
       ambito: "global",
     };
     this.handler = new GraphPanelHandler(this);
@@ -400,30 +492,28 @@ export default class GraphPanel extends React.Component {
     });
   };
 
-  handleReset = () => {
-    this.setState({ nosRemovidosIds: [] });
-  };
+  handleReset = () => { this.setState({ nosRemovidosIds: [] }); };
 
   handleAmbitoChange = (novoAmbito) => {
     this.setState({ ambito: novoAmbito });
     this.props.onLimparRelacionadas();
   };
 
+  handleLayoutChange = (novoLayout) => {
+    this.setState({ expandedLayout: novoLayout });
+  };
+
   handleOpenPrincipal = () => {
-    this.setState({ expandedGraph: GRAPH_VARIANTS.principal });
+    this.setState({ expandedGraph: GRAPH_VARIANTS.principal, expandedLayout: "forca" });
   };
 
   handleOpenRelacionadas = () => {
-    this.setState({ expandedGraph: GRAPH_VARIANTS.relacionadas });
+    this.setState({ expandedGraph: GRAPH_VARIANTS.relacionadas, expandedLayout: "forca" });
   };
 
-  handleCloseExpanded = () => {
-    this.setState({ expandedGraph: null });
-  };
+  handleCloseExpanded = () => { this.setState({ expandedGraph: null }); };
 
-  handleModalContentClick = (event) => {
-    event.stopPropagation();
-  };
+  handleModalContentClick = (event) => { event.stopPropagation(); };
 
   render() {
     const viewModel = this.handler.buildViewModel();

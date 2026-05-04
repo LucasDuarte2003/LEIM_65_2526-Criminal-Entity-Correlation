@@ -85,3 +85,11 @@
   background: rgba(79, 124, 255, 0.22);
 }
 
+.btn-semelhantes {
+  background: rgba(155, 89, 182, 0.12);
+  border: 1px solid rgba(155, 89, 182, 0.35);
+  color: #c39bd3;
+}
+.btn-semelhantes:hover:not(:disabled) {
+  background: rgba(155, 89, 182, 0.22);
+}

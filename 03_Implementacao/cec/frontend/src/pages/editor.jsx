@@ -8,6 +8,7 @@ import LabelBar from "../js/components/LabelBar.jsx";
 import ActionBar from "../js/components/ActionBar.jsx";
 import ArticleViewer from "../js/components/ArticleViewer.jsx";
 import GraphPanel from "../js/components/GraphPanel.jsx";
+import { getNoticias_semelhantes } from "../js/api/client.jsx";
 import "../static/css/app.css";
 
 export default function Editor() {
@@ -30,6 +31,8 @@ export default function Editor() {
   const [labelSelecionada, setLabelSelecionada] = useState(null);
   const [entidadeSelecionada, setEntidadeSelecionada] = useState(null);
   const [pendingSelection, setPendingSelection] = useState(null);
+  const [semelhantes, setSemelhantes] = useState(null);
+  const [isLoadingSemelhantes, setIsLoadingSemelhantes] = useState(false);
 
   const ORDEM_LABELS = [
     "PESSOA", "LOCAL", "ORGANIZACAO", "CRIME", "DATA",
@@ -118,6 +121,19 @@ export default function Editor() {
     limparGrafo();
   };
 
+  const handleSemelhantes = async () => {
+    if (!noticia) return;
+    setIsLoadingSemelhantes(true);
+    try {
+      const resultado = await getNoticias_semelhantes(noticia.id);
+      setSemelhantes(resultado);
+    } catch {
+      alert("Erro ao procurar notícias semelhantes.");
+    } finally {
+      setIsLoadingSemelhantes(false);
+    }
+  };
+
   return (
     <div className="app">
       <NewsList
@@ -145,7 +161,9 @@ export default function Editor() {
           onUpdate={handleUpdate}
           onRemover={handleRemover}
           onGuardar={() => guardar(limparGrafo)}
-          isLoading={isLoading}
+          onSemelhantes={handleSemelhantes}
+          noticiaId={noticia?.id}
+          isLoading={isLoading || isLoadingSemelhantes}
         />
         <ArticleViewer
           noticia={noticia}
@@ -160,15 +178,53 @@ export default function Editor() {
         />
       </main>
 
-    <GraphPanel
-      grafo={grafo}
-      grafoRelacionadas={grafoRelacionadas}
-      labelMap={labelMap}
-      isLoading={grafoLoading}
-      isLoadingRelacionadas={isLoadingRelacionadas}
-      onPesquisarRelacionadas={pesquisarRelacionadas}
-      onLimparRelacionadas={limparRelacionadas}
-    />
+      <GraphPanel
+        grafo={grafo}
+        grafoRelacionadas={grafoRelacionadas}
+        labelMap={labelMap}
+        isLoading={grafoLoading}
+        isLoadingRelacionadas={isLoadingRelacionadas}
+        onPesquisarRelacionadas={pesquisarRelacionadas}
+        onLimparRelacionadas={limparRelacionadas}
+      />
+
+      {/* Modal de notícias semelhantes */}
+      {semelhantes && (
+        <div className="modal-overlay" onClick={() => setSemelhantes(null)}>
+          <div className="modal semelhantes-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Notícias Semelhantes</h2>
+            {semelhantes.length === 0 ? (
+              <p style={{ color: "var(--text-muted)", fontStyle: "italic", fontSize: "13px" }}>
+                Não foram encontradas notícias semelhantes.
+              </p>
+            ) : (
+              <div className="semelhantes-lista">
+                {semelhantes.map((n) => (
+                  <div key={n.id} className="semelhante-item" onClick={() => {
+                    selecionar(n.id);
+                    setSemelhantes(null);
+                  }}>
+                    <div className="semelhante-header">
+                      <span className="semelhante-titulo">{n.titulo}</span>
+                      <span className="semelhante-score">{n.percentagem}%</span>
+                    </div>
+                    <div className="semelhante-meta">
+                      <span>📁 {n.pasta_nome || "—"}</span>
+                      <span>📂 {n.projeto_nome || "—"}</span>
+                      <span>{n.entidades_comuns} entidade{n.entidades_comuns !== 1 ? "s" : ""} em comum</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="modal-actions">
+              <button className="btn-confirmar" onClick={() => setSemelhantes(null)}>
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

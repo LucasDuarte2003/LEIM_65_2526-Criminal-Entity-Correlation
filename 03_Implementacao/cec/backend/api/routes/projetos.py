@@ -7,7 +7,7 @@ from models.schemas import (
     Pasta, PastaResumo, CriarPastaInput, AtualizarPastaInput, MoverNoticiaInput
 )
 
-from .base_router import BaseApiRouter
+from ..base_router import BaseApiRouter
 
 
 class ProjetosRouter(BaseApiRouter):

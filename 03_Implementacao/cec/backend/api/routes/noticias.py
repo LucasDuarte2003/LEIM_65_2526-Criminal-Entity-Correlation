@@ -4,7 +4,7 @@ from typing import Any
 from fastapi import HTTPException
 from models.schemas import NoticiaResumo, Noticia, PredictInput, GuardarInput, MoverNoticiaInput
 
-from .base_router import BaseApiRouter
+from ..base_router import BaseApiRouter
 
 
 class NoticiasRouter(BaseApiRouter):
@@ -26,21 +26,12 @@ class NoticiasRouter(BaseApiRouter):
 
     def _register_routes(self) -> None:
         self.router.add_api_route("/", self.listar_noticias, methods=["GET"], response_model=list[NoticiaResumo])
-        self.router.add_api_route(
-            "/{noticia_id}",
-            self.obter_noticia,
-            methods=["GET"],
-            response_model=Noticia,
-        )
+        self.router.add_api_route("/{noticia_id}",self.obter_noticia,methods=["GET"],response_model=Noticia,)
         self.router.add_api_route("/predict", self.predict, methods=["POST"], response_model=Noticia)
-        self.router.add_api_route(
-            "/{noticia_id}",
-            self.guardar_noticia,
-            methods=["PUT"],
-            response_model=Noticia,
-        )
+        self.router.add_api_route("/{noticia_id}", self.guardar_noticia, methods=["PUT"], response_model=Noticia,)
         self.router.add_api_route("/{noticia_id}", self.apagar_noticia, methods=["DELETE"], status_code=204)
         self.router.add_api_route("/{noticia_id}/mover", self.mover_noticia, methods=["PUT"])
+        self.router.add_api_route("/{noticia_id}/semelhantes", self.noticias_semelhantes, methods=["GET"])
 
     def listar_noticias(self):
         """Devolve todas as notícias (usado no seed/debug)."""
@@ -93,3 +84,10 @@ class NoticiasRouter(BaseApiRouter):
         if len(texto) <= self.TITULO_PREVIEW_LENGTH:
             return texto
         return f"{texto[:self.TITULO_PREVIEW_LENGTH]}..."
+
+    def noticias_semelhantes(self, noticia_id: str):
+        """Devolve as 3 notícias mais semelhantes à notícia indicada."""
+        noticia = self._neo4j_service.get_noticia(noticia_id)
+        if not noticia:
+            raise HTTPException(status_code=404, detail="Notícia não encontrada")
+        return self._neo4j_service.get_noticias_semelhantes(noticia_id)
