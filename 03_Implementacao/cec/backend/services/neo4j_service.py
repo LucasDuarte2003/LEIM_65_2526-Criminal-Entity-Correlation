@@ -476,21 +476,25 @@ def get_grafo_relacionadas(frase_id: str, nomes_visiveis: list, ambito: str = "g
             ligada_a = row["ligada_a"]
             eh_total = all(n in ligada_a for n in nomes_visiveis)
             tipo_ligacao = "total" if eh_total else "parcial"
-            chave = f"{nome_novo}_{row['noticia_id']}"
-            if chave not in nos_novos:
-                nos_novos[chave] = {
-                    "id": chave,
+
+            # Usa só o nome como chave — deduplica entidades iguais
+            if nome_novo not in nos_novos:
+                nos_novos[nome_novo] = {
+                    "id": nome_novo,
                     "nome": nome_novo,
                     "tipo": row["tipo"],
-                    "noticia_id": row["noticia_id"],
-                    "noticia_titulo": row["noticia_titulo"],
+                    "noticia_ids": [],
                     "origem": False,
                 }
+            # Agrega notícias sem duplicar
+            if row["noticia_id"] not in nos_novos[nome_novo]["noticia_ids"]:
+                nos_novos[nome_novo]["noticia_ids"].append(row["noticia_id"])
+
             for origem_nome in ligada_a:
                 if origem_nome in nomes_visiveis:
                     arestas.append({
                         "origem": origem_nome,
-                        "destino": chave,
+                        "destino": nome_novo,
                         "relacao": tipo_ligacao,
                     })
 
