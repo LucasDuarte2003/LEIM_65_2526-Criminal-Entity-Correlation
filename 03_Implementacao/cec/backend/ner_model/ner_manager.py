@@ -33,6 +33,28 @@ class NERManager:
                 raise RuntimeError("Modelo não está carregado.")
             return self._modelo.predict_entities(texto)
 
+    def predict_entities_ambos(self, texto: str) -> dict:
+        """Corre os dois modelos em paralelo e devolve ambos os resultados."""
+        import concurrent.futures
+        from ner_model.xlm_roberta_model import NERModel
+        from ner_model.gliner_model import GLiNERModel
+
+        def run_xlm():
+            with self._lock:
+                modelo_xlm = NERModel()
+            return modelo_xlm.predict_entities(texto)
+
+        def run_gliner():
+            modelo_gliner = GLiNERModel()
+            return modelo_gliner.predict_entities(texto)
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+            future_xlm = executor.submit(run_xlm)
+            future_gliner = executor.submit(run_gliner)
+            entidades_xlm = future_xlm.result()
+            entidades_gliner = future_gliner.result()
+
+        return {"xlm": entidades_xlm, "gliner": entidades_gliner}
     def trocar_modelo(self, novo_modelo, tipo: str):
         """Hot-swap thread-safe."""
         with self._lock:

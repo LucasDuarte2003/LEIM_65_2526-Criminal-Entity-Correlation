@@ -7,6 +7,7 @@ import {
 export function useNoticias(pastaId) {
   const [lista, setLista] = useState([]);
   const [noticia, setNoticia] = useState(null);
+  const [frasesGliner, setFrasesGliner] = useState(null); // só preenchido no modo "ambos"
   const [isLoading, setIsLoading] = useState(false);
   const [erro, setErro] = useState(null);
 
@@ -19,6 +20,7 @@ export function useNoticias(pastaId) {
 
   const selecionar = async (id) => {
     setIsLoading(true);
+    setFrasesGliner(null);
     try {
       const data = await getNoticia(id);
       setNoticia(data);
@@ -31,12 +33,20 @@ export function useNoticias(pastaId) {
 
   const adicionarNoticia = async (texto, pastaIdDestino) => {
     setIsLoading(true);
+    setFrasesGliner(null);
+    const modo = localStorage.getItem("modoExtracao") || "xlm-roberta";
     try {
-      const nova = await predictNoticia(texto, pastaIdDestino);
-      // Adiciona à lista mas NÃO guarda no Neo4j ainda
-      // O utilizador revê e clica em Guardar
-      setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
-      setNoticia(nova);
+      const nova = await predictNoticia(texto, pastaIdDestino, modo);
+      if (nova.modo === "ambos") {
+        // Notícia base usa frases do xlm, guardamos gliner separado
+        const noticiaBase = { id: nova.id, titulo: nova.titulo, frases: nova.frases };
+        setFrasesGliner(nova.frases_gliner);
+        setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
+        setNoticia(noticiaBase);
+      } else {
+        setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
+        setNoticia(nova);
+      }
     } catch (e) {
       setErro(e.message);
     } finally {
@@ -48,7 +58,6 @@ export function useNoticias(pastaId) {
     if (!noticia) return;
     setIsLoading(true);
     try {
-      // Passa o pastaId para o backend ligar a notícia à pasta ao guardar
       await guardarNoticia({ ...noticia, pasta_id: pastaId });
       alert("Notícia guardada com sucesso!");
       if (onSucesso) onSucesso();
@@ -65,6 +74,7 @@ export function useNoticias(pastaId) {
       await apagarNoticiaApi(id);
       setLista((prev) => prev.filter((n) => n.id !== id));
       setNoticia(null);
+      setFrasesGliner(null);
     } catch (e) {
       setErro(e.message);
     } finally {
@@ -81,14 +91,31 @@ export function useNoticias(pastaId) {
     }));
   };
 
+  const atualizarFraseGliner = (fraseId, novasEntidades) => {
+    setFrasesGliner((prev) =>
+      prev.map((f) => f.id === fraseId ? { ...f, entidades: novasEntidades } : f)
+    );
+  };
+
   const removerDaLista = (id) => {
     setLista((prev) => prev.filter((n) => n.id !== id));
-    if (noticia?.id === id) setNoticia(null);
+    if (noticia?.id === id) { setNoticia(null); setFrasesGliner(null); }
+  };
+
+  // Muda as frases da notícia para as do modelo selecionado
+  const mudarParaModelo = (modelo) => {
+    if (!noticia || !frasesGliner) return;
+    if (modelo === "gliner") {
+      setNoticia((prev) => ({ ...prev, frases: frasesGliner }));
+      setFrasesGliner(noticia.frases);
+    }
+    // "xlm-roberta" já está em noticia.frases — não é preciso fazer nada
   };
 
   return {
-    lista, noticia, isLoading, erro,
+    lista, noticia, frasesGliner, isLoading, erro,
     selecionar, adicionarNoticia, guardar,
-    apagarNoticia, atualizarFrase, removerDaLista,
+    apagarNoticia, atualizarFrase, atualizarFraseGliner,
+    removerDaLista, mudarParaModelo,
   };
 }

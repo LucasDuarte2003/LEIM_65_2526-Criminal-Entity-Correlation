@@ -79,3 +79,33 @@ def _merge_entities(entidades_modelo: List[Dict], entidades_regex: List[Dict]) -
 
     resultado.sort(key=lambda e: (e["inicio"], e["fim"]))
     return resultado
+def run_ner_ambos(texto: str) -> dict:
+    """
+    Corre os dois modelos em paralelo e devolve entidades de cada um.
+    """
+    import concurrent.futures
+    from ner_model.xlm_roberta_model import NERModel
+    from ner_model.gliner_model import GLiNERModel
+
+    def run_xlm():
+        modelo = NERModel()
+        raw = modelo.predict_entities(texto)
+        if raw and "start_word" in raw[0]:
+            return _convert_offsets_words(texto, raw)
+        return raw
+
+    def run_gliner():
+        modelo = GLiNERModel()
+        return modelo.predict_entities(texto)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        future_xlm = executor.submit(run_xlm)
+        future_gliner = executor.submit(run_gliner)
+        entidades_xlm = future_xlm.result()
+        entidades_gliner = future_gliner.result()
+
+    entidades_regex = extract_regex_entities(texto)
+    return {
+        "xlm": _merge_entities(entidades_xlm, entidades_regex),
+        "gliner": _merge_entities(entidades_gliner, entidades_regex),
+    }

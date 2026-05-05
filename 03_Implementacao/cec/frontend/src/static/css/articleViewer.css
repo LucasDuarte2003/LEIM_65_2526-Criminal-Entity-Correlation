@@ -42,6 +42,13 @@
   border-radius: 2px;
 }
 
+/* ── Entidade em conflito entre modelos ── */
+.entidade--conflito {
+  background-color: rgba(231, 76, 60, 0.15) !important;
+  border-bottom: 2px solid #e74c3c !important;
+  cursor: pointer;
+}
+
 .frase-grafo-btn,
 .frase-fundir-btn {
   background: none;

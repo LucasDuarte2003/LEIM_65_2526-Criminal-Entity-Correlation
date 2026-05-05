@@ -26,12 +26,12 @@ class NoticiasRouter(BaseApiRouter):
 
     def _register_routes(self) -> None:
         self.router.add_api_route("/", self.listar_noticias, methods=["GET"], response_model=list[NoticiaResumo])
-        self.router.add_api_route("/{noticia_id}",self.obter_noticia,methods=["GET"],response_model=Noticia,)
-        self.router.add_api_route("/predict", self.predict, methods=["POST"], response_model=Noticia)
-        self.router.add_api_route("/{noticia_id}", self.guardar_noticia, methods=["PUT"], response_model=Noticia,)
-        self.router.add_api_route("/{noticia_id}", self.apagar_noticia, methods=["DELETE"], status_code=204)
+        self.router.add_api_route("/predict", self.predict, methods=["POST"])
         self.router.add_api_route("/{noticia_id}/mover", self.mover_noticia, methods=["PUT"])
         self.router.add_api_route("/{noticia_id}/semelhantes", self.noticias_semelhantes, methods=["GET"])
+        self.router.add_api_route("/{noticia_id}", self.obter_noticia, methods=["GET"], response_model=Noticia)
+        self.router.add_api_route("/{noticia_id}", self.guardar_noticia, methods=["PUT"], response_model=Noticia)
+        self.router.add_api_route("/{noticia_id}", self.apagar_noticia, methods=["DELETE"], status_code=204)
 
     def listar_noticias(self):
         """Devolve todas as notícias (usado no seed/debug)."""
@@ -49,12 +49,34 @@ class NoticiasRouter(BaseApiRouter):
         Recebe texto, corre o NER e devolve a notícia processada.
         NÃO guarda no Neo4j — o utilizador revê e clica em Guardar.
         """
+        from models.schemas import NoticiaAmbos
         noticia_id = self._generate_identifier()
         texto = body.texto.strip()
-        entidades_documento = self._ner_service.run_ner(texto)
-        frases = self._sentence_splitter.split_sentences(texto, noticia_id)
-        frases = self._graph_builder.assign_entities_to_sentences(frases, entidades_documento)
-        return {"id": noticia_id, "titulo": self._build_titulo(texto), "frases": frases}
+        titulo = self._build_titulo(texto)
+
+        if body.modo == "ambos":
+            import copy
+            resultado = self._ner_service.run_ner_ambos(texto)
+            # Gera as frases UMA vez — ambos os modelos partilham os mesmos IDs
+            frases_base = self._sentence_splitter.split_sentences(texto, noticia_id)
+            frases_xlm = self._graph_builder.assign_entities_to_sentences(
+                copy.deepcopy(frases_base), resultado["xlm"]
+            )
+            frases_gliner = self._graph_builder.assign_entities_to_sentences(
+                copy.deepcopy(frases_base), resultado["gliner"]
+            )
+            return NoticiaAmbos(
+                id=noticia_id,
+                titulo=titulo,
+                frases=frases_xlm,
+                frases_gliner=frases_gliner,
+                modo="ambos",
+            )
+        else:
+            entidades = self._ner_service.run_ner(texto)
+            frases = self._sentence_splitter.split_sentences(texto, noticia_id)
+            frases = self._graph_builder.assign_entities_to_sentences(frases, entidades)
+            return {"id": noticia_id, "titulo": titulo, "frases": frases}
 
     def guardar_noticia(self, noticia_id: str, body: GuardarInput):
         if noticia_id != body.id:

@@ -40,6 +40,34 @@
   padding: 2px 5px;
   border-radius: 2px;
 }
+/* ── Toggle de vista (ambos modelos) ── */
+.vista-toggle {
+  display: flex;
+  gap: 3px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.vista-btn {
+  padding: 3px 10px;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.vista-btn:hover { border-color: var(--accent); color: var(--text); }
+.vista-btn.active {
+  background: var(--accent-glow);
+  border-color: rgba(79,124,255,0.4);
+  color: #7da4ff;
+}
 
 .label-chip--default { background-color: #6b7280; }
 .label-chip--pessoa { background-color: #4A90D9; }

@@ -36,7 +36,15 @@ class NoticiaResumo(BaseModel):
 class PredictInput(BaseModel):
     texto: str
     pasta_id: str  # notícia é sempre adicionada a uma pasta
+    modo: str = "xlm-roberta" # "xlm-roberta" | "gliner" | "ambos"
 
+class NoticiaAmbos(BaseModel):
+    """Resposta quando modo='ambos' — contém frases de ambos os modelos."""
+    id: str
+    titulo: str
+    frases: List[Frase] = []           # frases com entidades do xlm-roberta
+    frases_gliner: List[Frase] = []    # frases com entidades do gliner
+    modo: str = "ambos"
 
 class GuardarInput(BaseModel):
     id: str

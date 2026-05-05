@@ -1,6 +1,12 @@
 import React from "react";
 import "../../static/css/labelBar.css";
 
+const MODO_LABELS = {
+  "xlm-roberta": "XLM-RoBERTa",
+  "ambos": "Ambos",
+  "gliner": "GLiNER",
+};
+
 class LabelBarPresenter {
   constructor(props) {
     this.props = props;
@@ -8,9 +14,13 @@ class LabelBarPresenter {
 
   buildViewModel() {
     const chips = this.props.labels.map((label) => this.createChipViewModel(label));
+    const mostrarToggle = this.props.modoExtracao === "ambos" && Boolean(this.props.vistaAtiva);
+
     return {
       hasLabels: chips.length > 0,
       chips,
+      mostrarToggle,
+      vistaAtiva: this.props.vistaAtiva || "xlm-roberta",
     };
   }
 
@@ -31,19 +41,9 @@ class LabelBarPresenter {
   getLabelTypeClassName(labelName) {
     const normalizedType = labelName.toLowerCase();
     const knownTypes = [
-      "pessoa",
-      "local",
-      "organizacao",
-      "crime",
-      "data",
-      "viatura",
-      "matricula",
-      "telemovel",
-      "email",
-      "cripto",
-      "montante",
+      "pessoa", "local", "organizacao", "crime", "data",
+      "viatura", "matricula", "telemovel", "email", "cripto", "montante",
     ];
-
     return knownTypes.includes(normalizedType) ? `label-chip--${normalizedType}` : "label-chip--default";
   }
 }
@@ -63,12 +63,33 @@ export default class LabelBar extends React.Component {
     );
   }
 
+  renderToggle(vistaAtiva) {
+    return (
+      <div className="vista-toggle">
+        {["xlm-roberta", "ambos", "gliner"].map((modo) => (
+          <button
+            key={modo}
+            className={`vista-btn ${vistaAtiva === modo ? "active" : ""}`}
+            onClick={() => this.props.onVistaChange?.(modo)}
+          >
+            {MODO_LABELS[modo]}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
   render() {
     this.presenter = new LabelBarPresenter(this.props);
     const viewModel = this.presenter.buildViewModel();
 
     if (!viewModel.hasLabels) return null;
 
-    return <div className="labels-bar">{viewModel.chips.map((chip) => this.renderChip(chip))}</div>;
+    return (
+      <div className="labels-bar">
+        {viewModel.chips.map((chip) => this.renderChip(chip))}
+        {viewModel.mostrarToggle && this.renderToggle(viewModel.vistaAtiva)}
+      </div>
+    );
   }
 }

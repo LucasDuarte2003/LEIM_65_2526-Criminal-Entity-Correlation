@@ -22,10 +22,10 @@ export const getNoticias = () =>
 export const getNoticia = (id) =>
   request(`/noticias/${id}`);
 
-export const predictNoticia = (texto, pastaId) =>
+export const predictNoticia = (texto, pastaId, modo = "xlm-roberta") =>
   request("/noticias/predict", {
     method: "POST",
-    body: JSON.stringify({ texto, pasta_id: pastaId }),
+    body: JSON.stringify({ texto, pasta_id: pastaId, modo }),
   });
 
 export const guardarNoticia = (noticia) =>
