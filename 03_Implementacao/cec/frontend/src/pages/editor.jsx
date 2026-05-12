@@ -1,20 +1,24 @@
-import {useEffect, useState} from "react";
-import {useParams, useNavigate} from "react-router-dom";
-import {useNoticias} from "../js/hooks/useNoticias.jsx";
-import {useLabels} from "../js/hooks/useLabels.jsx";
-import {useGrafo} from "../js/hooks/useGrafo.jsx";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useNoticias } from "../js/hooks/useNoticias.jsx";
+import { useLabels } from "../js/hooks/useLabels.jsx";
+import { useGrafo } from "../js/hooks/useGrafo.jsx";
+import { useTheme } from "../js/hooks/useTheme.jsx";
 import NewsList from "../js/components/NewsList.jsx";
 import LabelBar from "../js/components/LabelBar.jsx";
 import ActionBar from "../js/components/ActionBar.jsx";
 import ArticleViewer from "../js/components/ArticleViewer.jsx";
 import GraphPanel from "../js/components/GraphPanel.jsx";
-import {getNoticias_semelhantes} from "../js/api/client.jsx";
+import { getNoticias_semelhantes } from "../js/api/client.jsx";
 import "../static/css/app.css";
 
 export default function Editor() {
-    const {pastaId} = useParams();
+    const { pastaId } = useParams();
     const navigate = useNavigate();
-    const [vistaAtiva, setVistaAtiva] = useState("xlm-roberta")
+    const { theme, toggleTheme } = useTheme();
+    const [vistaAtiva, setVistaAtiva] = useState(
+    () => localStorage.getItem("modoExtracao") || "ambos"
+);
 
     const {
         lista, noticia, frasesGliner, isLoading,
@@ -22,7 +26,7 @@ export default function Editor() {
         atualizarFrase, atualizarFraseGliner, apagarNoticia, removerDaLista,
     } = useNoticias(pastaId);
 
-    const {labels, labelMap} = useLabels();
+    const { labels, labelMap } = useLabels();
     const {
         grafo, grafoRelacionadas, fraseAtiva, fraseFundida, isLoading: grafoLoading,
         isLoadingRelacionadas, carregarGrafo, fundirFrase, pesquisarRelacionadas,
@@ -76,7 +80,7 @@ export default function Editor() {
         preRange.setEnd(range.startContainer, range.startOffset);
         const inicio = preRange.toString().length;
         const fim = inicio + texto.length;
-        setPendingSelection({fraseId: frase.id, inicio, fim, texto});
+        setPendingSelection({ fraseId: frase.id, inicio, fim, texto });
         setEntidadeSelecionada(null);
     };
 
@@ -84,27 +88,32 @@ export default function Editor() {
         if (!labelSelecionada) return alert("Seleciona um tipo de entidade.");
         if (!pendingSelection) return alert("Seleciona texto na notícia.");
         if (!noticia) return;
+
         const frase = noticia.frases.find((f) => f.id === pendingSelection.fraseId);
         if (!frase) return;
-        const {inicio, fim, texto, fraseId} = pendingSelection;
+
+        const { inicio, fim, texto, fraseId } = pendingSelection;
         const overlap = frase.entidades.some((e) => inicio < e.fim && fim > e.inicio);
         if (overlap) return alert("A seleção sobrepõe-se a uma entidade existente.");
+
         const novasEntidades = [
             ...frase.entidades,
-            {nome: texto, tipo: labelSelecionada, inicio, fim},
+            { nome: texto, tipo: labelSelecionada, inicio, fim },
         ].sort((a, b) => a.inicio - b.inicio);
+
         atualizarFrase(fraseId, novasEntidades);
-        // Em modo "ambos", adiciona também ao gliner
+
         if (vistaAtiva === "ambos" && frasesGliner) {
             const fraseGliner = frasesGliner.find((f) => f.id === fraseId);
             if (fraseGliner) {
                 const novasEntidadesGliner = [
                     ...fraseGliner.entidades,
-                    {nome: texto, tipo: labelSelecionada, inicio, fim},
+                    { nome: texto, tipo: labelSelecionada, inicio, fim },
                 ].sort((a, b) => a.inicio - b.inicio);
                 atualizarFraseGliner(fraseId, novasEntidadesGliner);
             }
         }
+
         setPendingSelection(null);
         window.getSelection()?.removeAllRanges();
     };
@@ -112,17 +121,15 @@ export default function Editor() {
     const handleRemover = () => {
         if (!entidadeSelecionada) return alert("Clica numa entidade para a selecionar.");
         if (!noticia) return;
-        const {fraseId, index, entidade} = entidadeSelecionada;
+
+        const { fraseId, index, entidade } = entidadeSelecionada;
         const fonte = entidade?.fonte;
 
         if (vistaAtiva === "gliner" && frasesGliner) {
-            // Aba GLiNER — remove só do gliner
             const fraseGliner = frasesGliner.find((f) => f.id === fraseId);
             if (!fraseGliner) return;
             atualizarFraseGliner(fraseId, fraseGliner.entidades.filter((_, i) => i !== index));
-
         } else if (vistaAtiva === "ambos") {
-            // Aba Ambos — decide onde remover com base na fonte
             if (fonte === "xlm" || fonte === "ambos") {
                 const frase = noticia.frases.find((f) => f.id === fraseId);
                 if (frase) atualizarFrase(fraseId, frase.entidades.filter((_, i) => i !== index));
@@ -130,14 +137,12 @@ export default function Editor() {
             if (fonte === "gliner" || fonte === "ambos") {
                 const fraseGliner = frasesGliner?.find((f) => f.id === fraseId);
                 if (fraseGliner) {
-                    const entidadeRemovida = entidade;
                     atualizarFraseGliner(fraseId, fraseGliner.entidades.filter(
-                        (e) => !(e.nome === entidadeRemovida.nome && e.inicio === entidadeRemovida.inicio)
+                        (e) => !(e.nome === entidade.nome && e.inicio === entidade.inicio)
                     ));
                 }
             }
         } else {
-            // Aba XLM — remove só do xlm
             const frase = noticia.frases.find((f) => f.id === fraseId);
             if (!frase) return;
             atualizarFrase(fraseId, frase.entidades.filter((_, i) => i !== index));
@@ -147,7 +152,7 @@ export default function Editor() {
     };
 
     const handleEntidadeClick = (fraseId, index, entidade) => {
-        setEntidadeSelecionada({fraseId, index, entidade});
+        setEntidadeSelecionada({ fraseId, index, entidade });
         setLabelSelecionada(entidade.tipo);
         setPendingSelection(null);
     };
@@ -172,22 +177,33 @@ export default function Editor() {
         }
     };
 
+    const handleMudarPasta = (novoProjetoId, novaPastaId) => {
+      navigate(`/projeto/${novoProjetoId}/pasta/${novaPastaId}`);
+    };
+
     return (
         <div className="app">
             <NewsList
-                lista={lista}
                 noticiaAtiva={noticia}
+                noticiaCount={lista.length}
                 pastaId={pastaId}
                 onSelecionar={selecionar}
                 onAdicionar={(texto) => adicionarNoticia(texto, pastaId)}
                 onApagar={handleApagarNoticia}
                 onMover={removerDaLista}
+                onMudarPasta={handleMudarPasta}
                 onVoltar={() => navigate("/")}
                 isLoading={isLoading}
             />
 
             <main className="main-content">
-                <h1>Criminal Entity Correlation</h1>
+                <div className="editor-topbar">
+                    <h1>Criminal Entity Correlation</h1>
+                    <button className="btn-theme-toggle" onClick={toggleTheme}>
+                        {theme === "dark" ? "Modo claro" : "Modo escuro"}
+                    </button>
+                </div>
+
                 <LabelBar
                     labels={labelsComAtalho}
                     labelSelecionada={labelSelecionada}
@@ -196,6 +212,7 @@ export default function Editor() {
                     onVistaChange={setVistaAtiva}
                     modoExtracao={localStorage.getItem("modoExtracao") || "xlm-roberta"}
                 />
+
                 <ActionBar
                     labelSelecionada={labelSelecionada}
                     textoSelecionado={pendingSelection?.texto}
@@ -204,8 +221,9 @@ export default function Editor() {
                     onGuardar={() => guardar(limparGrafo)}
                     onSemelhantes={handleSemelhantes}
                     noticiaId={noticia?.id}
-                    isLoading={isLoading || isLoadingSemelhantes || vistaAtiva === "ambos"}
+                    isLoading={isLoading || isLoadingSemelhantes}
                 />
+
                 <ArticleViewer
                     noticia={noticia}
                     labelMap={labelMap}
@@ -231,13 +249,12 @@ export default function Editor() {
                 onLimparRelacionadas={limparRelacionadas}
             />
 
-            {/* Modal de notícias semelhantes */}
             {semelhantes && (
                 <div className="modal-overlay" onClick={() => setSemelhantes(null)}>
                     <div className="modal semelhantes-modal" onClick={(e) => e.stopPropagation()}>
                         <h2>Notícias Semelhantes</h2>
                         {semelhantes.length === 0 ? (
-                            <p style={{color: "var(--text-muted)", fontStyle: "italic", fontSize: "13px"}}>
+                            <p style={{ color: "var(--text-muted)", fontStyle: "italic", fontSize: "13px" }}>
                                 Não foram encontradas notícias semelhantes.
                             </p>
                         ) : (
@@ -254,7 +271,9 @@ export default function Editor() {
                                         <div className="semelhante-meta">
                                             <span>📁 {n.pasta_nome || "—"}</span>
                                             <span>📂 {n.projeto_nome || "—"}</span>
-                                            <span>{n.entidades_comuns} entidade{n.entidades_comuns !== 1 ? "s" : ""} em comum</span>
+                                            <span>
+                                                {n.entidades_comuns} entidade{n.entidades_comuns !== 1 ? "s" : ""} em comum
+                                            </span>
                                         </div>
                                     </div>
                                 ))}

@@ -14,7 +14,7 @@ class LabelBarPresenter {
 
   buildViewModel() {
     const chips = this.props.labels.map((label) => this.createChipViewModel(label));
-    const mostrarToggle = this.props.modoExtracao === "ambos" && Boolean(this.props.vistaAtiva);
+    const mostrarToggle = Boolean(this.props.vistaAtiva);
 
     return {
       hasLabels: chips.length > 0,
@@ -66,15 +66,15 @@ export default class LabelBar extends React.Component {
   renderToggle(vistaAtiva) {
     return (
       <div className="vista-toggle">
-        {["xlm-roberta", "ambos", "gliner"].map((modo) => (
-          <button
-            key={modo}
-            className={`vista-btn ${vistaAtiva === modo ? "active" : ""}`}
-            onClick={() => this.props.onVistaChange?.(modo)}
-          >
-            {MODO_LABELS[modo]}
-          </button>
-        ))}
+        <select
+          className="select-modelo"
+          value={vistaAtiva}
+          onChange={(e) => this.props.onVistaChange?.(e.target.value)}
+        >
+          {["xlm-roberta", "ambos", "gliner"].map((modo) => (
+            <option key={modo} value={modo}>{MODO_LABELS[modo]}</option>
+          ))}
+        </select>
       </div>
     );
   }

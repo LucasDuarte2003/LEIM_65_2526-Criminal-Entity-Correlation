@@ -23,6 +23,7 @@ class ProjetosRouter(BaseApiRouter):
 
     def _register_routes(self) -> None:
         self.router.add_api_route("/todas-as-pastas", self.listar_todas_as_pastas, methods=["GET"])
+        self.router.add_api_route("/hierarquia", self.listar_hierarquia, methods=["GET"])
         self.router.add_api_route("/", self.listar_projetos, methods=["GET"], response_model=list[ProjetoResumo])
         self.router.add_api_route("/{projeto_id}", self.obter_projeto, methods=["GET"], response_model=Projeto)
         self.router.add_api_route(
@@ -135,3 +136,7 @@ class ProjetosRouter(BaseApiRouter):
 
     def _generate_identifier(self) -> str:
         return str(uuid.uuid4())[:self.IDENTIFIER_LENGTH]
+
+    def listar_hierarquia(self):
+        """Devolve todos os projetos com pastas e notícias para a sidebar."""
+        return self._neo4j_service.get_hierarquia()

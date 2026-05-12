@@ -1,13 +1,16 @@
-import {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     getProjetos, getProjeto, criarProjeto, atualizarProjeto, eliminarProjeto,
     criarPasta, atualizarPasta, eliminarPasta, getModeloStatus, retreinarModelo, alterarTipoModelo
 } from "../js/api/client.jsx";
+import { useTheme } from "../js/hooks/useTheme.jsx";
 import "../static/css/dashboard.css";
 
 export default function Dashboard() {
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
+
     const [projetos, setProjetos] = useState([]);
     const [projetoExpandido, setProjetoExpandido] = useState(null);
     const [projetosCompletos, setProjetosCompletos] = useState({});
@@ -34,13 +37,13 @@ export default function Dashboard() {
         setProjetoExpandido(projetoId);
         if (!projetosCompletos[projetoId]) {
             const completo = await getProjeto(projetoId);
-            setProjetosCompletos((prev) => ({...prev, [projetoId]: completo}));
+            setProjetosCompletos((prev) => ({ ...prev, [projetoId]: completo }));
         }
     };
 
     const recarregarProjeto = async (projetoId) => {
         const completo = await getProjeto(projetoId);
-        setProjetosCompletos((prev) => ({...prev, [projetoId]: completo}));
+        setProjetosCompletos((prev) => ({ ...prev, [projetoId]: completo }));
         carregar();
     };
 
@@ -63,7 +66,7 @@ export default function Dashboard() {
         } else {
             await atualizarProjeto(modalProjeto.id, inputNome.trim(), inputDesc.trim() || null);
             setProjetosCompletos((prev) => {
-                const c = {...prev};
+                const c = { ...prev };
                 delete c[modalProjeto.id];
                 return c;
             });
@@ -77,7 +80,7 @@ export default function Dashboard() {
         await eliminarProjeto(id);
         if (projetoExpandido === id) setProjetoExpandido(null);
         setProjetosCompletos((prev) => {
-            const c = {...prev};
+            const c = { ...prev };
             delete c[id];
             return c;
         });
@@ -86,12 +89,12 @@ export default function Dashboard() {
 
     const abrirCriarPasta = (projetoId) => {
         setInputNome("");
-        setModalPasta({tipo: "criar", projetoId});
+        setModalPasta({ tipo: "criar", projetoId });
     };
 
     const abrirEditarPasta = (projetoId, pasta) => {
         setInputNome(pasta.nome);
-        setModalPasta({tipo: "editar", projetoId, id: pasta.id});
+        setModalPasta({ tipo: "editar", projetoId, id: pasta.id });
     };
 
     const confirmarPasta = async () => {
@@ -120,7 +123,7 @@ export default function Dashboard() {
         const carregar = () =>
             getModeloStatus().then(setModeloStatus).catch(console.error);
         carregar();
-        const intervalo = setInterval(carregar, 5000); // atualiza a cada 5s
+        const intervalo = setInterval(carregar, 5000);
         return () => clearInterval(intervalo);
     }, []);
 
@@ -130,16 +133,17 @@ export default function Dashboard() {
     };
 
     const [modoExtracao, setModoExtracao] = useState(
-        () => localStorage.getItem("modoExtracao") || "xlm-roberta"
+        () => localStorage.getItem("modoExtracao") || "ambos"
     );
+
 
     const handleAlterarModo = (tipo) => {
         setModoExtracao(tipo);
         localStorage.setItem("modoExtracao", tipo);
-        // Só altera o modelo no backend se não for "ambos"
+
         if (tipo !== "ambos") {
             alterarTipoModelo(tipo);
-            setModeloStatus((prev) => ({...prev, tipo}));
+            setModeloStatus((prev) => ({ ...prev, tipo }));
         }
     };
 
@@ -147,9 +151,16 @@ export default function Dashboard() {
         <div className="dashboard">
             <header className="dashboard-header">
                 <h1>Criminal Entity Correlation</h1>
-                <button className="btn-novo-projeto" onClick={abrirCriarProjeto}>
-                    + Novo projeto
-                </button>
+
+                <div className="dashboard-header-actions">
+                    <button className="btn-theme-toggle" onClick={toggleTheme}>
+                        {theme === "dark" ? "Modo claro" : "Modo escuro"}
+                    </button>
+
+                    <button className="btn-novo-projeto" onClick={abrirCriarProjeto}>
+                        + Novo projeto
+                    </button>
+                </div>
             </header>
 
             <main className="dashboard-main">
@@ -172,13 +183,11 @@ export default function Dashboard() {
                                     <button className="btn-icon" onClick={(e) => {
                                         e.stopPropagation();
                                         abrirEditarProjeto(proj);
-                                    }} title="Editar">✏️
-                                    </button>
+                                    }} title="Editar">✏️</button>
                                     <button className="btn-icon btn-danger" onClick={(e) => {
                                         e.stopPropagation();
                                         confirmarEliminarProjeto(proj.id);
-                                    }} title="Eliminar">🗑
-                                    </button>
+                                    }} title="Eliminar">🗑</button>
                                     <span className="projeto-chevron">{projetoExpandido === proj.id ? "▲" : "▼"}</span>
                                 </div>
                             </div>
@@ -192,20 +201,20 @@ export default function Dashboard() {
                                             <button className="pasta-btn" onClick={() => abrirPasta(proj.id, pasta.id)}>
                                                 <span className="pasta-icon">📁</span>
                                                 <span className="pasta-nome">{pasta.nome}</span>
-                                                <span
-                                                    className="pasta-count">{pasta.total_noticias} notícia{pasta.total_noticias !== 1 ? "s" : ""}</span>
+                                                <span className="pasta-count">
+                                                    {pasta.total_noticias} notícia{pasta.total_noticias !== 1 ? "s" : ""}
+                                                </span>
                                             </button>
                                             <button className="btn-icon"
-                                                    onClick={() => abrirEditarPasta(proj.id, pasta)} title="Editar">✏️
-                                            </button>
+                                                    onClick={() => abrirEditarPasta(proj.id, pasta)}
+                                                    title="Editar">✏️</button>
                                             <button className="btn-icon btn-danger"
                                                     onClick={() => confirmarEliminarPasta(proj.id, pasta.id)}
-                                                    title="Eliminar">🗑
-                                            </button>
+                                                    title="Eliminar">🗑</button>
                                         </div>
                                     ))}
-                                    <button className="btn-nova-pasta" onClick={() => abrirCriarPasta(proj.id)}>+ Nova
-                                        pasta
+                                    <button className="btn-nova-pasta" onClick={() => abrirCriarPasta(proj.id)}>
+                                        + Nova pasta
                                     </button>
                                 </div>
                             )}
@@ -213,7 +222,6 @@ export default function Dashboard() {
                     );
                 })}
 
-                {/* ── Painel do modelo ── */}
                 <div className="modelo-painel">
                     <h2>Modelo NER</h2>
                     {modeloStatus ? (
@@ -233,16 +241,16 @@ export default function Dashboard() {
                                 </strong>
                             </div>
                             <div className="modelo-botoes">
-                                {["xlm-roberta", "ambos", "gliner"].map((tipo) => (
-                                    <button
-                                        key={tipo}
-                                        className={`btn-modelo ${modoExtracao === tipo ? "active" : ""}`}
-                                        onClick={() => handleAlterarModo(tipo)}
-                                        disabled={modeloStatus?.a_treinar}
-                                    >
-                                        {tipo === "xlm-roberta" ? "XLM-RoBERTa" : tipo === "gliner" ? "GLiNER" : "Ambos"}
-                                    </button>
-                                ))}
+                                <select
+                                    className="select-modelo"
+                                    value={modoExtracao}
+                                    onChange={(e) => handleAlterarModo(e.target.value)}
+                                    disabled={modeloStatus?.a_treinar}
+                                >
+                                    <option value="ambos">Ambos</option>
+                                    <option value="xlm-roberta">XLM-RoBERTa</option>
+                                    <option value="gliner">GLiNER</option>
+                                </select>
                                 <button
                                     className="btn-retreinar"
                                     onClick={handleRetreinar}
@@ -256,7 +264,6 @@ export default function Dashboard() {
                         <p className="pastas-empty">A carregar estado do modelo...</p>
                     )}
                 </div>
-
             </main>
 
             {modalProjeto && (
@@ -266,14 +273,15 @@ export default function Dashboard() {
                         <label>Nome</label>
                         <input autoFocus value={inputNome} onChange={(e) => setInputNome(e.target.value)}
                                onKeyDown={(e) => e.key === "Enter" && confirmarProjeto()}
-                               placeholder="Nome do projeto"/>
+                               placeholder="Nome do projeto" />
                         <label>Descrição (opcional)</label>
                         <input value={inputDesc} onChange={(e) => setInputDesc(e.target.value)}
-                               placeholder="Descrição"/>
+                               placeholder="Descrição" />
                         <div className="modal-actions">
                             <button className="btn-cancelar" onClick={() => setModalProjeto(null)}>Cancelar</button>
-                            <button className="btn-confirmar"
-                                    onClick={confirmarProjeto}>{modalProjeto === "criar" ? "Criar" : "Guardar"}</button>
+                            <button className="btn-confirmar" onClick={confirmarProjeto}>
+                                {modalProjeto === "criar" ? "Criar" : "Guardar"}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -285,11 +293,13 @@ export default function Dashboard() {
                         <h2>{modalPasta.tipo === "criar" ? "Nova pasta" : "Editar pasta"}</h2>
                         <label>Nome</label>
                         <input autoFocus value={inputNome} onChange={(e) => setInputNome(e.target.value)}
-                               onKeyDown={(e) => e.key === "Enter" && confirmarPasta()} placeholder="Nome da pasta"/>
+                               onKeyDown={(e) => e.key === "Enter" && confirmarPasta()}
+                               placeholder="Nome da pasta" />
                         <div className="modal-actions">
                             <button className="btn-cancelar" onClick={() => setModalPasta(null)}>Cancelar</button>
-                            <button className="btn-confirmar"
-                                    onClick={confirmarPasta}>{modalPasta.tipo === "criar" ? "Criar" : "Guardar"}</button>
+                            <button className="btn-confirmar" onClick={confirmarPasta}>
+                                {modalPasta.tipo === "criar" ? "Criar" : "Guardar"}
+                            </button>
                         </div>
                     </div>
                 </div>

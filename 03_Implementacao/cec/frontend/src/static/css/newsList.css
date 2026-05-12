@@ -263,3 +263,198 @@
   color: #e2e4eb;
 }
 
+/* ── Hierarquia sidebar ─────────────────────────────────────── */
+
+.sidebar-header {
+  padding: 18px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar-titulo {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sidebar-hierarquia {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-2) transparent;
+}
+
+.sidebar-hierarquia::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar-hierarquia::-webkit-scrollbar-thumb {
+  background: var(--border-2);
+  border-radius: 2px;
+}
+
+/* Projeto */
+
+.sidebar-projeto {
+  margin-bottom: 2px;
+}
+
+.sidebar-projeto-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.sidebar-projeto-btn:hover {
+  background: var(--surface-2);
+}
+
+.sidebar-projeto-nome {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-projeto-conteudo {
+  padding-left: 10px;
+}
+
+/* Pasta */
+
+.sidebar-pasta {
+  margin-bottom: 1px;
+}
+
+.sidebar-pasta-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.sidebar-pasta-btn:hover {
+  background: var(--surface-2);
+}
+
+.sidebar-pasta-btn.pasta-atual {
+  background: var(--accent-glow);
+}
+
+.sidebar-pasta-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.sidebar-pasta-nome {
+  flex: 1;
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-pasta-count {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.sidebar-pasta-conteudo {
+  padding-left: 12px;
+}
+
+/* Notícia */
+
+.sidebar-noticia-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 1px;
+}
+
+.sidebar-noticia-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-noticia-btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.sidebar-noticia-btn.active {
+  background: var(--accent-glow);
+  border-color: rgba(79, 124, 255, 0.4);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.sidebar-noticia-acoes {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* Chevron */
+
+.sidebar-chevron {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  width: 10px;
+}
+
+/* Vazio */
+
+.sidebar-vazio {
+  display: block;
+  padding: 6px 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Upload dentro da pasta */
+
+.sidebar-pasta-conteudo .upload-btn {
+  margin: 4px 0;
+  padding: 5px 8px;
+  font-size: 10px;
+}

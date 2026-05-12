@@ -1,19 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-  --bg:          #0a0b0f;
-  --surface:     #111318;
-  --surface-2:   #181b22;
-  --border:      #1f2330;
-  --border-2:    #2a2f3d;
-  --text:        #e2e4eb;
-  --text-muted:  #5a6070;
-  --text-dim:    #8891a4;
-  --accent:      #4f7cff;
+  --radius: 8px;
+  --sidebar-w: 220px;
+  --panel-w: 280px;
+}
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #0a0b0f;
+  --surface: #111318;
+  --surface-2: #181b22;
+  --border: #1f2330;
+  --border-2: #2a2f3d;
+  --text: #e2e4eb;
+  --text-muted: #5a6070;
+  --text-dim: #8891a4;
+  --accent: #4f7cff;
   --accent-glow: rgba(79, 124, 255, 0.15);
-  --radius:      8px;
-  --sidebar-w:   220px;
-  --panel-w:     280px;
+  --score: #c39bd3;
+  --graph-text: #ffffff;
+  --graph-secondary-text: rgba(255, 255, 255, 0.35);
+  --graph-outline: rgba(255, 255, 255, 0.2);
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface-2: #eef1f6;
+  --border: #d8dde8;
+  --border-2: #c5ccda;
+  --text: #151922;
+  --text-muted: #687083;
+  --text-dim: #4d5668;
+  --accent: #315eea;
+  --accent-glow: rgba(49, 94, 234, 0.12);
+  --score: #7c3aed;
+  --graph-text: #151922;
+  --graph-secondary-text: rgba(21, 25, 34, 0.55);
+  --graph-outline: rgba(21, 25, 34, 0.18);
 }
 
 *, *::before, *::after {
@@ -54,6 +79,39 @@ body {
   flex-shrink: 0;
 }
 
+/* ── Topbar do editor ── */
+.editor-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px 0;
+  flex-shrink: 0;
+}
+
+.editor-topbar h1 {
+  padding: 0;
+}
+
+.btn-theme-toggle {
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text-dim);
+  border-radius: var(--radius);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--accent-glow);
+}
+
 /* ── Modal notícias semelhantes ── */
 .semelhantes-modal {
   width: 500px;
@@ -74,6 +132,7 @@ body {
   cursor: pointer;
   transition: all 0.15s;
 }
+
 .semelhante-item:hover {
   border-color: var(--accent);
   background: var(--accent-glow);
@@ -100,7 +159,7 @@ body {
 .semelhante-score {
   font-size: 13px;
   font-weight: 700;
-  color: #c39bd3;
+  color: var(--score);
   flex-shrink: 0;
 }
 

@@ -1,10 +1,48 @@
 import React from "react";
-import { getTodasAsPastas, moverNoticia } from "../api/client.jsx";
+import { getHierarquia, getTodasAsPastas, moverNoticia } from "../api/client.jsx";
 import "../../static/css/newsList.css";
+
+// ── Handler ────────────────────────────────────────────────────────────────
 
 class NewsListHandler {
   constructor(component) {
     this.component = component;
+  }
+
+  async carregarHierarquia() {
+    const hierarquia = await getHierarquia();
+    const { pastaId } = this.component.props;
+
+    // Expande automaticamente o projeto e pasta actuais
+    const projetosExpandidos = new Set();
+    const pastasExpandidas = new Set();
+
+    for (const proj of hierarquia) {
+      for (const pasta of proj.pastas) {
+        if (pasta.id === pastaId) {
+          projetosExpandidos.add(proj.id);
+          pastasExpandidas.add(pasta.id);
+        }
+      }
+    }
+
+    this.component.setState({ hierarquia, projetosExpandidos, pastasExpandidas });
+  }
+
+  toggleProjeto(projetoId) {
+    this.component.setState((prev) => {
+      const next = new Set(prev.projetosExpandidos);
+      next.has(projetoId) ? next.delete(projetoId) : next.add(projetoId);
+      return { projetosExpandidos: next };
+    });
+  }
+
+  togglePasta(pastaId) {
+    this.component.setState((prev) => {
+      const next = new Set(prev.pastasExpandidas);
+      next.has(pastaId) ? next.delete(pastaId) : next.add(pastaId);
+      return { pastasExpandidas: next };
+    });
   }
 
   async abrirModalMover() {
@@ -12,14 +50,14 @@ class NewsListHandler {
     this.component.setState({ todasPastas: pastas, modalMover: true });
   }
 
-  async confirmarMover(pastaId) {
+  async confirmarMover(pastaDestino) {
     const { noticiaAtiva, onMover } = this.component.props;
     if (!noticiaAtiva) return;
-
     this.component.setState({ isMovendo: true });
     try {
-      await moverNoticia(noticiaAtiva.id, pastaId);
+      await moverNoticia(noticiaAtiva.id, pastaDestino);
       this.component.setState({ modalMover: false });
+      await this.carregarHierarquia();
       if (onMover) onMover(noticiaAtiva.id);
     } catch {
       alert("Erro ao mover a notícia.");
@@ -31,115 +69,179 @@ class NewsListHandler {
   async processarFicheiros(fileList) {
     const files = Array.from(fileList || []);
     if (!files.length) return;
-
     for (const file of files) {
       const content = await this.lerFicheiro(file);
       await this.component.props.onAdicionar(content);
     }
+    // onAdicionar é assíncrono — aguarda antes de recarregar
+    await this.carregarHierarquia();
   }
 
   lerFicheiro(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (event) => resolve(event.target?.result || "");
+      reader.onload = (e) => resolve(e.target?.result || "");
       reader.onerror = () => reject(reader.error);
       reader.readAsText(file, "utf-8");
     });
   }
 
   agruparPastasPorProjeto(todasPastas) {
-    const groupedFolders = todasPastas.reduce((accumulator, pasta) => {
-      if (!accumulator[pasta.projeto_nome]) accumulator[pasta.projeto_nome] = [];
-      accumulator[pasta.projeto_nome].push(pasta);
-      return accumulator;
+    const grupos = todasPastas.reduce((acc, pasta) => {
+      if (!acc[pasta.projeto_nome]) acc[pasta.projeto_nome] = [];
+      acc[pasta.projeto_nome].push(pasta);
+      return acc;
     }, {});
-
-    return Object.entries(groupedFolders).map(([projectName, folders]) => ({
-      projectName,
-      folders,
-    }));
-  }
-
-  buildNewsItemViewModel(item) {
-    const { noticiaAtiva, onSelecionar, onApagar } = this.component.props;
-    const isActive = noticiaAtiva?.id === item.id;
-
-    return {
-      id: item.id,
-      title: item.titulo,
-      className: `news-item ${isActive ? "active" : ""}`,
-      isActive,
-      onSelect: () => onSelecionar(item.id),
-      onMove: () => this.abrirModalMover(),
-      onDelete: onApagar,
-    };
-  }
-
-  buildViewModel() {
-    const { lista, onVoltar, isLoading } = this.component.props;
-    const { modalMover, todasPastas, isMovendo } = this.component.state;
-
-    return {
-      uploadButtonClassName: `upload-btn ${isLoading ? "loading" : ""}`,
-      uploadButtonLabel: isLoading ? "A analisar..." : "+ Adicionar notícia",
-      isUploadDisabled: isLoading,
-      newsItems: lista.map((item) => this.buildNewsItemViewModel(item)),
-      isMoveModalVisible: modalMover,
-      moveGroups: this.agruparPastasPorProjeto(todasPastas),
-      isMovendo,
-      onVoltar,
-    };
+    return Object.entries(grupos).map(([projectName, folders]) => ({ projectName, folders }));
   }
 }
 
+// ── Renderer ───────────────────────────────────────────────────────────────
+
 class NewsListRenderer {
-  renderNewsItem(item) {
+  renderNoticia(noticia, pastaId, projetoId, component) {
+    const { noticiaAtiva, onSelecionar, onApagar, onMudarPasta } = component.props;
+    const isAtiva = noticiaAtiva?.id === noticia.id;
+
+    const handleSelect = () => {
+      if (pastaId !== component.props.pastaId && onMudarPasta) {
+        onMudarPasta(projetoId, pastaId);
+      }
+      onSelecionar(noticia.id);
+    };
+
     return (
-      <div key={item.id} className="news-item-row">
-        <button className={item.className} onClick={item.onSelect}>
-          {item.title}
+      <div key={noticia.id} className="sidebar-noticia-row">
+        <button
+          className={`sidebar-noticia-btn ${isAtiva ? "active" : ""}`}
+          onClick={handleSelect}
+          title={noticia.titulo}
+        >
+          {noticia.titulo}
         </button>
-        {item.isActive && (
-          <>
-            <button className="btn-mover-noticia" onClick={item.onMove} title="Mover notícia">
+        {isAtiva && (
+          <div className="sidebar-noticia-acoes">
+            <button
+              className="btn-mover-noticia"
+              onClick={() => component.handler.abrirModalMover()}
+              title="Mover notícia"
+            >
               ↗
             </button>
-            <button className="btn-apagar-noticia" onClick={item.onDelete} title="Apagar notícia">
+            <button
+              className="btn-apagar-noticia"
+              onClick={onApagar}
+              title="Apagar notícia"
+            >
               🗑
             </button>
-          </>
+          </div>
         )}
       </div>
     );
   }
 
-  renderMoveGroups(viewModel, component) {
-    return viewModel.moveGroups.map((group) => (
-      <div key={group.projectName} className="mover-grupo">
-        <span className="mover-projeto-nome">{group.projectName}</span>
-        {group.folders.map((folder) => (
-          <button
-            key={folder.id}
-            className="mover-pasta-btn"
-            onClick={() => component.handleConfirmarMover(folder.id)}
-            disabled={viewModel.isMovendo}
-          >
-            📁 {folder.nome}
-          </button>
-        ))}
+  renderPasta(pasta, projetoId, component) {
+    const { pastasExpandidas } = component.state;
+    const { pastaId, isLoading } = component.props;
+    const expandida = pastasExpandidas.has(pasta.id);
+    const eAtual = pasta.id === pastaId;
+
+    return (
+      <div key={pasta.id} className="sidebar-pasta">
+        <button
+          className={`sidebar-pasta-btn ${eAtual ? "pasta-atual" : ""}`}
+          onClick={() => component.handler.togglePasta(pasta.id)}
+        >
+          <span className="sidebar-chevron">{expandida ? "▾" : "▸"}</span>
+          <span className="sidebar-pasta-icon">📁</span>
+          <span className="sidebar-pasta-nome">{pasta.nome}</span>
+          <span className="sidebar-pasta-count">{pasta.noticias.length}</span>
+        </button>
+
+        {expandida && (
+          <div className="sidebar-pasta-conteudo">
+            {pasta.noticias.length === 0 ? (
+              <span className="sidebar-vazio">Sem notícias</span>
+            ) : (
+              pasta.noticias.map((n) => this.renderNoticia(n, pasta.id, projetoId, component))
+            )}
+
+            {eAtual && (
+              <label className={`upload-btn ${isLoading ? "loading" : ""}`}>
+                {isLoading ? "A analisar..." : "+ Adicionar"}
+                <input
+                  type="file"
+                  accept=".txt"
+                  multiple
+                  className="news-list-file-input"
+                  disabled={isLoading}
+                  onChange={component.handleFileSelectionChange}
+                />
+              </label>
+            )}
+          </div>
+        )}
       </div>
-    ));
+    );
   }
 
-  renderMoveModal(viewModel, component) {
-    if (!viewModel.isMoveModalVisible) return null;
+  renderProjeto(projeto, component) {
+    const { projetosExpandidos } = component.state;
+    const expandido = projetosExpandidos.has(projeto.id);
+
+    return (
+      <div key={projeto.id} className="sidebar-projeto">
+        <button
+          className="sidebar-projeto-btn"
+          onClick={() => component.handler.toggleProjeto(projeto.id)}
+        >
+          <span className="sidebar-chevron">{expandido ? "▾" : "▸"}</span>
+          <span className="sidebar-projeto-nome">{projeto.nome}</span>
+          <span className="sidebar-pasta-count">{projeto.pastas.length}</span>
+        </button>
+
+        {expandido && (
+          <div className="sidebar-projeto-conteudo">
+            {projeto.pastas.length === 0 ? (
+              <span className="sidebar-vazio">Sem pastas</span>
+            ) : (
+              projeto.pastas.map((p) => this.renderPasta(p, projeto.id, component))
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  renderMoveModal(component) {
+    const { modalMover, todasPastas, isMovendo } = component.state;
+    if (!modalMover) return null;
+
+    const grupos = component.handler.agruparPastasPorProjeto(todasPastas);
 
     return (
       <div className="news-list-modal-overlay" onClick={component.handleCloseMoveModal}>
-        <div className="news-list-modal" onClick={component.handleModalContentClick}>
+        <div className="news-list-modal" onClick={(e) => e.stopPropagation()}>
           <h2>Mover notícia</h2>
           <p className="news-list-helper-text">Seleciona a pasta de destino:</p>
-          <div className="mover-lista">{this.renderMoveGroups(viewModel, component)}</div>
+          <div className="mover-lista">
+            {grupos.map((grupo) => (
+              <div key={grupo.projectName} className="mover-grupo">
+                <span className="mover-projeto-nome">{grupo.projectName}</span>
+                {grupo.folders.map((folder) => (
+                  <button
+                    key={folder.id}
+                    className="mover-pasta-btn"
+                    onClick={() => component.handleConfirmarMover(folder.id)}
+                    disabled={isMovendo}
+                  >
+                    📁 {folder.nome}
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
           <div className="news-list-modal-actions">
             <button className="news-list-btn-cancelar" onClick={component.handleCloseMoveModal}>
               Cancelar
@@ -150,36 +252,41 @@ class NewsListRenderer {
     );
   }
 
-  render(viewModel, component) {
-    return (
-      <aside className="sidebar">
-        <button className="btn-voltar" onClick={viewModel.onVoltar}>← Projetos</button>
-        <h2>Notícias</h2>
+    render(component) {
+      const { hierarquia } = component.state;
 
-        <label className={viewModel.uploadButtonClassName}>
-          {viewModel.uploadButtonLabel}
-          <input
-            type="file"
-            accept=".txt"
-            multiple
-            className="news-list-file-input"
-            disabled={viewModel.isUploadDisabled}
-            onChange={component.handleFileSelectionChange}
-          />
-        </label>
+      return (
+        <aside className="sidebar">
+          <div className="sidebar-header">
+            <button className="btn-voltar" onClick={() => component.props.onVoltar?.()}>
+              ← Dashboard
+            </button>
+            <span className="sidebar-titulo">Projetos</span>
+          </div>
 
-        <div className="news-list">{viewModel.newsItems.map((item) => this.renderNewsItem(item))}</div>
+        <div className="sidebar-hierarquia">
+          {hierarquia.length === 0 ? (
+            <span className="sidebar-vazio">Sem projetos</span>
+          ) : (
+            hierarquia.map((proj) => this.renderProjeto(proj, component))
+          )}
+        </div>
 
-        {this.renderMoveModal(viewModel, component)}
+        {this.renderMoveModal(component)}
       </aside>
     );
   }
 }
 
+// ── Componente principal ───────────────────────────────────────────────────
+
 export default class NewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      hierarquia: [],
+      projetosExpandidos: new Set(),
+      pastasExpandidas: new Set(),
       modalMover: false,
       todasPastas: [],
       isMovendo: false,
@@ -188,13 +295,21 @@ export default class NewsList extends React.Component {
     this.renderer = new NewsListRenderer();
   }
 
-  handleCloseMoveModal = () => {
-    this.setState({ modalMover: false });
-  };
+  componentDidMount() {
+    this.handler.carregarHierarquia();
+  }
 
-  handleModalContentClick = (event) => {
-    event.stopPropagation();
-  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.pastaId !== this.props.pastaId && this.props.pastaId) {
+      this.handler.carregarHierarquia();
+      return;
+    }
+    if (prevProps.noticiaCount !== this.props.noticiaCount) {
+      this.handler.carregarHierarquia();
+    }
+  }
+
+  handleCloseMoveModal = () => this.setState({ modalMover: false });
 
   handleConfirmarMover = async (pastaId) => {
     await this.handler.confirmarMover(pastaId);
@@ -206,7 +321,6 @@ export default class NewsList extends React.Component {
   };
 
   render() {
-    const viewModel = this.handler.buildViewModel();
-    return this.renderer.render(viewModel, this);
+    return this.renderer.render(this);
   }
 }

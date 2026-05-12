@@ -42,9 +42,6 @@ const GRAPH_COLORS = Object.freeze({
     principalLink: "#444",
     totalLink: "#4f7cff",
     partialLink: "#f59e0b",
-    outline: "rgba(255,255,255,0.2)",
-    text: "#fff",
-    secondaryText: "rgba(255,255,255,0.35)",
 });
 
 class GraphPanelHandler {
@@ -117,9 +114,9 @@ class GraphPanelHandler {
         if (layout === "circular") {
             this._applyCircularLayout(nodes, 0, 0, 200);
         } else if (layout === "hierarquico") {
-            this._applyHierarchicalLayout(nodes, links, 0, 0);
+            this._applyHierarchicalLayout(nodes, links);
         } else if (layout === "radial") {
-            this._applyRadialLayout(nodes, links, 0, 0);
+            this._applyRadialLayout(nodes, links);
         }
 
         return {nodes, links};
@@ -134,7 +131,7 @@ class GraphPanelHandler {
         });
     }
 
-    _applyHierarchicalLayout(nodes, links, width, height) {
+    _applyHierarchicalLayout(nodes, links) {
         const degree = {};
         nodes.forEach((n) => {
             degree[n.id] = 0;
@@ -164,7 +161,7 @@ class GraphPanelHandler {
         });
     }
 
-    _applyRadialLayout(nodes, links, cx, cy) {
+    _applyRadialLayout(nodes, links) {
         if (nodes.length === 0) return;
 
         const degree = {};
@@ -321,18 +318,18 @@ class GraphPanelHandler {
         context.fill();
 
         if (!node.origem) {
-            context.strokeStyle = GRAPH_COLORS.outline;
+            context.strokeStyle = this.getCssVariable("--graph-outline", "rgba(255,255,255,0.2)");
             context.lineWidth = 0.8;
             context.stroke();
         }
 
-        context.fillStyle = GRAPH_COLORS.text;
+        context.fillStyle = this.getCssVariable("--graph-text", "#ffffff");
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.fillText(this.truncateLabel(node.name), node.x, node.y + radius + GRAPH_SIZES.labelOffset);
 
         if (!node.origem && node.noticia_ids?.length > 0) {
-            context.fillStyle = GRAPH_COLORS.secondaryText;
+            context.fillStyle = this.getCssVariable("--graph-secondary-text", "rgba(255,255,255,0.35)");
             context.font = `${fontSize * 0.75}px Sans-Serif`;
             const label = node.noticia_ids.length === 1
                 ? node.noticia_ids[0]
@@ -345,6 +342,14 @@ class GraphPanelHandler {
         if (name.length <= GRAPH_SIZES.maxLabelLength) return name;
         return `${name.slice(0, GRAPH_SIZES.maxLabelLength)}...`;
     }
+
+getCssVariable(name, fallback) {
+    if (typeof window === "undefined") return fallback;
+
+    return getComputedStyle(document.documentElement)
+        .getPropertyValue(name)
+        .trim() || fallback;
+}
 }
 
 class GraphPanelRenderer {

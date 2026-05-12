@@ -556,6 +556,57 @@ def get_grafo_frases_fundidas(frase_ids: list) -> Dict:
         }.values())
 
         return {"nos": list(nos_vistos.values()), "arestas": arestas_unicas}
+
+def get_hierarquia() -> List[Dict]:
+    """Devolve todos os projetos com pastas e notícias para a sidebar."""
+    with get_driver().session(database="cec") as session:
+        result = session.run("""
+            MATCH (proj:Projeto)
+            OPTIONAL MATCH (proj)-[:TEM_PASTA]->(p:Pasta)
+            OPTIONAL MATCH (p)-[:CONTEM_NOTICIA]->(n:Noticia)
+            RETURN proj.id AS projeto_id,
+                   proj.nome AS projeto_nome,
+                   p.id AS pasta_id,
+                   p.nome AS pasta_nome,
+                   n.id AS noticia_id,
+                   n.titulo AS noticia_titulo
+            ORDER BY proj.nome, p.nome, n.titulo
+        """)
+
+        projetos = {}
+        for row in result:
+            pid = row["projeto_id"]
+            if pid not in projetos:
+                projetos[pid] = {
+                    "id": pid,
+                    "nome": row["projeto_nome"],
+                    "pastas": {},
+                }
+
+            if row["pasta_id"] is None:
+                continue
+
+            pastas = projetos[pid]["pastas"]
+            fid = row["pasta_id"]
+            if fid not in pastas:
+                pastas[fid] = {
+                    "id": fid,
+                    "nome": row["pasta_nome"],
+                    "noticias": [],
+                }
+
+            if row["noticia_id"] is not None:
+                pastas[fid]["noticias"].append({
+                    "id": row["noticia_id"],
+                    "titulo": row["noticia_titulo"],
+                })
+
+        return [
+            {**proj, "pastas": list(proj["pastas"].values())}
+            for proj in projetos.values()
+        ]
+
+
 def exportar_dados_treino() -> list:
     """
     Exporta todas as notícias anotadas do Neo4j em formato de treino.
@@ -611,43 +662,28 @@ def exportar_dados_treino() -> list:
 
 def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
     """
-    Devolve as notícias mais semelhantes à notícia indicada,
-    com base em entidades partilhadas ponderadas por tipo.
+    Devolve as notícias mais semelhantes comparando frase a frase.
+    Para cada frase da notícia origem, procura frases de outras notícias
+    com entidades em comum e acumula o score ponderado por tipo.
     """
-    pesos = {
-        "PESSOA":      5,
-        "MATRICULA":   5,
-        "TELEMOVEL":   5,
-        "CRIME":       4,
-        "EMAIL":       4,
-        "CRIPTO":      4,
-        "LOCAL":       3,
-        "ORGANIZACAO": 3,
-        "VIATURA":     3,
-        "DATA":        2,
-        "MONTANTE":    2,
-    }
-
     with get_driver().session(database="cec") as session:
         result = session.run("""
+            // Frases e entidades da notícia origem
             MATCH (origem:Noticia {id: $noticia_id})-[:TEM_FRASE]->(f1:Frase)
             MATCH (e:Entidade)-[:MENCIONADA_EM]->(f1)
-            WITH origem, collect(DISTINCT {nome: e.nome, tipo: e.tipo}) AS entidades_origem
 
-            MATCH (outra:Noticia) WHERE outra.id <> $noticia_id
-            MATCH (outra)-[:TEM_FRASE]->(f2:Frase)
-            MATCH (e2:Entidade)-[:MENCIONADA_EM]->(f2)
-            WHERE e2.nome IN [x IN entidades_origem | x.nome]
+            // Frases de outras notícias que partilham essas entidades
+            MATCH (e)-[:MENCIONADA_EM]->(f2:Frase)<-[:TEM_FRASE]-(outra:Noticia)
+            WHERE outra.id <> $noticia_id
 
-            WITH outra, entidades_origem,
-                 collect(DISTINCT {nome: e2.nome, tipo: e2.tipo}) AS entidades_outra
+            // Agrupa por par de frases
+            WITH outra, f1, f2,
+                 collect(DISTINCT {nome: e.nome, tipo: e.tipo}) AS entidades_comuns
 
-            WITH outra,
-                 [x IN entidades_origem WHERE x.nome IN [y IN entidades_outra | y.nome]] AS comuns
-
-            WITH outra, comuns,
-                 reduce(score = 0, e IN comuns |
-                     score + CASE e.tipo
+            // Score ponderado para este par de frases
+            WITH outra, f1, f2, entidades_comuns,
+                 reduce(s = 0, e IN entidades_comuns |
+                     s + CASE e.tipo
                          WHEN 'PESSOA'      THEN 5
                          WHEN 'MATRICULA'   THEN 5
                          WHEN 'TELEMOVEL'   THEN 5
@@ -661,10 +697,22 @@ def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
                          WHEN 'MONTANTE'    THEN 2
                          ELSE 1
                      END
-                 ) AS score
+                 ) AS score_frase
 
-            WHERE score > 0
-            ORDER BY score DESC
+            // Agrega por notícia destino
+            WITH outra,
+                 sum(score_frase) AS score_total,
+                 count(DISTINCT f1) AS frases_origem_com_match,
+                 sum(size(entidades_comuns)) AS total_entidades_comuns
+
+            WHERE score_total > 0
+
+            // Conta total de frases da notícia origem para normalizar
+            MATCH (origem:Noticia {id: $noticia_id})-[:TEM_FRASE]->(f_todas:Frase)
+            WITH outra, score_total, frases_origem_com_match,
+                 total_entidades_comuns, count(f_todas) AS total_frases_origem
+
+            ORDER BY score_total DESC
             LIMIT $limite
 
             OPTIONAL MATCH (p:Pasta)-[:CONTEM_NOTICIA]->(outra)
@@ -672,17 +720,21 @@ def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
 
             RETURN outra.id AS id,
                    outra.titulo AS titulo,
-                   score,
+                   score_total AS score,
+                   frases_origem_com_match,
+                   total_frases_origem,
+                   total_entidades_comuns AS entidades_comuns,
                    p.nome AS pasta_nome,
-                   proj.nome AS projeto_nome,
-                   size(comuns) AS entidades_comuns
+                   proj.nome AS projeto_nome
         """, noticia_id=noticia_id, limite=limite)
 
-        # Calcula score máximo possível para normalizar
-        score_maximo = sum(pesos.values()) * 3  # estimativa razoável
         resultados = []
         for row in result:
-            percentagem = min(100, round((row["score"] / score_maximo) * 100))
+            # Percentagem = frases com match / total de frases da origem
+            frases_match = row["frases_origem_com_match"] or 0
+            total_frases = row["total_frases_origem"] or 1
+            percentagem = min(100, round((frases_match / total_frases) * 100))
+
             resultados.append({
                 "id": row["id"],
                 "titulo": row["titulo"],

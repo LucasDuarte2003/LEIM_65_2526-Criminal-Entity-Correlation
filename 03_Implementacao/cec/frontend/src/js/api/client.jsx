@@ -128,3 +128,6 @@ export const alterarTipoModelo = (tipo) =>
 
 export const getNoticias_semelhantes = (noticiaId) =>
   request(`/noticias/${noticiaId}/semelhantes`);
+
+export const getHierarquia = () =>
+  request("/projetos/hierarquia");
