@@ -7,6 +7,7 @@ from .routes.labels import LabelsRouter
 from .routes.modelo import ModeloRouter
 from .routes.noticias import NoticiasRouter
 from .routes.projetos import ProjetosRouter
+from .routes.investigar import InvestigarRouter
 
 
 class RouterFactory:
@@ -42,4 +43,5 @@ class RouterFactory:
             GrafoRouter(neo4j_service=self._neo4j_service).router,
             ProjetosRouter(neo4j_service=self._neo4j_service).router,
             ModeloRouter(ner_manager=self._ner_manager, trainer=self._trainer).router,
+            InvestigarRouter(neo4j_service=self._neo4j_service).router,
         ]

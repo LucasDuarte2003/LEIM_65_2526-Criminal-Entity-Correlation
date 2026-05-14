@@ -44,6 +44,8 @@ const GRAPH_COLORS = Object.freeze({
     partialLink: "#f59e0b",
 });
 
+const DOUBLE_CLICK_DELAY = 250;
+
 class GraphPanelHandler {
     constructor(component) {
         this.component = component;
@@ -102,9 +104,6 @@ class GraphPanelHandler {
         if (!graphData || layout === "forca") return graphData;
 
         const nodes = graphData.nodes.map((n) => ({...n}));
-
-        // Cria cópias frescas das arestas com ids como strings
-        // (o D3 muta source/target para object references após a simulação)
         const links = graphData.links.map((l) => ({
             ...l,
             source: typeof l.source === "object" ? l.source.id : l.source,
@@ -133,9 +132,7 @@ class GraphPanelHandler {
 
     _applyHierarchicalLayout(nodes, links) {
         const degree = {};
-        nodes.forEach((n) => {
-            degree[n.id] = 0;
-        });
+        nodes.forEach((n) => { degree[n.id] = 0; });
         links.forEach((l) => {
             const src = typeof l.source === "object" ? l.source.id : l.source;
             const tgt = typeof l.target === "object" ? l.target.id : l.target;
@@ -165,9 +162,7 @@ class GraphPanelHandler {
         if (nodes.length === 0) return;
 
         const degree = {};
-        nodes.forEach((n) => {
-            degree[n.id] = 0;
-        });
+        nodes.forEach((n) => { degree[n.id] = 0; });
         links.forEach((l) => {
             const src = typeof l.source === "object" ? l.source.id : l.source;
             const tgt = typeof l.target === "object" ? l.target.id : l.target;
@@ -244,7 +239,7 @@ class GraphPanelHandler {
             name: node.nome,
             tipo: node.tipo,
             color: labelMap[node.tipo] || GRAPH_COLORS.defaultNode,
-            origem: true
+            origem: true,
         };
     }
 
@@ -343,13 +338,10 @@ class GraphPanelHandler {
         return `${name.slice(0, GRAPH_SIZES.maxLabelLength)}...`;
     }
 
-getCssVariable(name, fallback) {
-    if (typeof window === "undefined") return fallback;
-
-    return getComputedStyle(document.documentElement)
-        .getPropertyValue(name)
-        .trim() || fallback;
-}
+    getCssVariable(name, fallback) {
+        if (typeof window === "undefined") return fallback;
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+    }
 }
 
 class GraphPanelRenderer {
@@ -394,9 +386,8 @@ class GraphPanelRenderer {
         return (
             <div className="panel-grafo-principal">
                 <div className="panel-hint panel-inline-header">
-                    <span>Clica num nó para o remover.</span>
-                    <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenPrincipal}>⛶
-                    </button>
+                    <span>Clica num nó para o remover. 2× para investigar.</span>
+                    <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenPrincipal}>⛶</button>
                 </div>
                 <ForceGraph2D
                     graphData={viewModel.graphData}
@@ -409,8 +400,11 @@ class GraphPanelRenderer {
                     onNodeClick={component.handleNodeClick}
                 />
                 <div className="ambito-selector">{this.renderAmbitoButtons(viewModel)}</div>
-                <button className="btn-pesquisar" onClick={viewModel.handlePesquisar}
-                        disabled={viewModel.isSearchDisabled}>
+                <button
+                    className="btn-pesquisar"
+                    onClick={viewModel.handlePesquisar}
+                    disabled={viewModel.isSearchDisabled}
+                >
                     {viewModel.isLoadingRelacionadas ? "A pesquisar..." : "Procurar relações"}
                 </button>
             </div>
@@ -423,8 +417,7 @@ class GraphPanelRenderer {
             <div className="panel-grafo-relacionadas">
                 <div className="relacionadas-header panel-inline-header">
                     <span>Relações — {viewModel.ambitoLabel}</span>
-                    <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenRelacionadas}>⛶
-                    </button>
+                    <button className="btn-expand" title="Expandir grafo" onClick={component.handleOpenRelacionadas}>⛶</button>
                 </div>
                 {!viewModel.shouldShowRelacionadasResults ? (
                     <p className="panel-msg">Não foram encontradas relações neste âmbito.</p>
@@ -443,6 +436,7 @@ class GraphPanelRenderer {
                             linkColor={viewModel.relatedLinkColor}
                             linkWidth={viewModel.relatedLinkWidth}
                             nodeCanvasObject={viewModel.renderRelatedNode}
+                            onNodeClick={component.handleNodeClick}
                         />
                     </>
                 )}
@@ -472,7 +466,7 @@ class GraphPanelRenderer {
                         linkColor={viewModel.expandedLinkColor}
                         linkWidth={viewModel.expandedLinkWidth}
                         nodeCanvasObject={viewModel.renderExpandedNode}
-                        onNodeClick={viewModel.expandedGraph === GRAPH_VARIANTS.principal ? component.handleNodeClick : undefined}
+                        onNodeClick={component.handleNodeClick}
                         cooldownTicks={viewModel.useFixedLayout ? 0 : undefined}
                         dagMode={null}
                     />
@@ -513,15 +507,32 @@ export default class GraphPanel extends React.Component {
             expandedLayout: "forca",
             ambito: "global",
         };
+        this._clickTimer = null;
         this.handler = new GraphPanelHandler(this);
         this.renderer = new GraphPanelRenderer();
     }
 
+    componentWillUnmount() {
+        if (this._clickTimer) clearTimeout(this._clickTimer);
+    }
+
     handleNodeClick = (node) => {
-        this.setState((previousState) => {
-            if (previousState.nosRemovidosIds.includes(node.id)) return null;
-            return {nosRemovidosIds: [...previousState.nosRemovidosIds, node.id]};
-        });
+        if (this._clickTimer) {
+            // Segundo clique dentro do delay — é double-click
+            clearTimeout(this._clickTimer);
+            this._clickTimer = null;
+            window.location.href = `/investigar?nome=${encodeURIComponent(node.name)}`;
+            return;
+        }
+        // Primeiro clique — aguarda para ver se vem segundo
+        this._clickTimer = setTimeout(() => {
+            this._clickTimer = null;
+            // Foi single-click — remove o nó
+            this.setState((prev) => {
+                if (prev.nosRemovidosIds.includes(node.id)) return null;
+                return {nosRemovidosIds: [...prev.nosRemovidosIds, node.id]};
+            });
+        }, DOUBLE_CLICK_DELAY);
     };
 
     handleReset = () => {

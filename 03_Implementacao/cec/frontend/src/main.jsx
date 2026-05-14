@@ -4,6 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import "./static/css/index.css";
 import App from "./app.jsx";
 
+// Aplica o tema antes do render para evitar flash
+const savedTheme = localStorage.getItem("cec-theme") || "dark";
+document.documentElement.dataset.theme = savedTheme;
+
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {

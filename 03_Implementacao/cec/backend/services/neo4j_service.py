@@ -746,3 +746,97 @@ def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
             })
 
         return resultados
+
+def get_investigar(nome: str, tipo: str = None, ambito: str = "global") -> dict:
+    """
+    Pesquisa uma entidade pelo nome e devolve notícias onde aparece,
+    grafo de co-ocorrências e entidades relacionadas para cruzamento.
+    """
+    with get_driver().session(database="cec") as session:
+
+        # ── 1. Encontra a entidade ──────────────────────────────────
+        query_entidade = "MATCH (e:Entidade {nome: $nome}) RETURN e.nome AS nome, e.tipo AS tipo LIMIT 1"
+        row = session.run(query_entidade, nome=nome).single()
+        if not row:
+            return {"entidade": None, "noticias": [], "grafo": {"nos": [], "arestas": []}, "relacionadas": []}
+
+        entidade = {"nome": row["nome"], "tipo": row["tipo"]}
+
+        # ── 2. Notícias onde aparece ────────────────────────────────
+        if ambito == "global":
+            filtro_noticias = ""
+        else:
+            filtro_noticias = ""  # pode ser expandido futuramente por pasta/projeto
+
+        noticias_result = session.run("""
+            MATCH (e:Entidade {nome: $nome})-[:MENCIONADA_EM]->(f:Frase)<-[:TEM_FRASE]-(n:Noticia)
+            OPTIONAL MATCH (p:Pasta)-[:CONTEM_NOTICIA]->(n)
+            OPTIONAL MATCH (proj:Projeto)-[:TEM_PASTA]->(p)
+            RETURN DISTINCT n.id AS id, n.titulo AS titulo,
+                   p.nome AS pasta_nome, proj.nome AS projeto_nome,
+                   proj.id AS projeto_id, p.id AS pasta_id
+            ORDER BY n.titulo
+        """, nome=nome)
+
+        noticias = [
+            {
+                "id": r["id"],
+                "titulo": r["titulo"],
+                "pasta_nome": r["pasta_nome"],
+                "projeto_nome": r["projeto_nome"],
+                "projeto_id": r["projeto_id"],
+                "pasta_id": r["pasta_id"],
+            }
+            for r in noticias_result
+        ]
+
+        # ── 3. Grafo de co-ocorrências ──────────────────────────────
+        grafo_result = session.run("""
+            MATCH (e:Entidade {nome: $nome})-[r:CO_OCORRE_COM]-(outra:Entidade)
+            RETURN DISTINCT outra.nome AS nome, outra.tipo AS tipo,
+                   count(r) AS peso
+            ORDER BY peso DESC
+            LIMIT 30
+        """, nome=nome)
+
+        nos = [{"id": nome, "nome": nome, "tipo": entidade["tipo"], "origem": True}]
+        arestas = []
+        for r in grafo_result:
+            nos.append({
+                "id": r["nome"],
+                "nome": r["nome"],
+                "tipo": r["tipo"],
+                "origem": False,
+                "peso": r["peso"],
+            })
+            arestas.append({
+                "origem": nome,
+                "destino": r["nome"],
+                "relacao": "CO_OCORRE_COM",
+                "peso": r["peso"],
+            })
+
+        # ── 4. Entidades relacionadas para cruzamento ───────────────
+        relacionadas_result = session.run("""
+            MATCH (e:Entidade {nome: $nome})-[r:CO_OCORRE_COM]-(outra:Entidade)
+            RETURN outra.nome AS nome, outra.tipo AS tipo,
+                   count(r) AS co_ocorrencias
+            ORDER BY co_ocorrencias DESC
+            LIMIT 20
+        """, nome=nome)
+
+        relacionadas = [
+            {
+                "nome": r["nome"],
+                "tipo": r["tipo"],
+                "co_ocorrencias": r["co_ocorrencias"],
+            }
+            for r in relacionadas_result
+        ]
+
+        return {
+            "entidade": entidade,
+            "noticias": noticias,
+            "grafo": {"nos": nos, "arestas": arestas},
+            "relacionadas": relacionadas,
+        }

@@ -199,6 +199,9 @@ export default function Editor() {
             <main className="main-content">
                 <div className="editor-topbar">
                     <h1>Criminal Entity Correlation</h1>
+                    <button className="btn-investigar" onClick={() => navigate("/investigar")}>
+                        🔍 Investigar
+                    </button>
                     <button className="btn-theme-toggle" onClick={toggleTheme}>
                         {theme === "dark" ? "Modo claro" : "Modo escuro"}
                     </button>
