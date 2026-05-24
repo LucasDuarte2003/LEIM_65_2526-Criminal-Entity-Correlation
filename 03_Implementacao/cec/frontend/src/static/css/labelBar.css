@@ -1,84 +1,115 @@
+/* ── Barra de labels ── */
 .labels-bar {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 5px;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
+  background: var(--surface);
 }
 
+/* ── Chips de entidades ── */
 .label-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 3px 9px 3px 3px;
+  gap: 5px;
+  padding: 3px 9px 3px 4px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   cursor: pointer;
   color: #fff;
   transition: all 0.15s;
-  opacity: 0.55;
+  opacity: 0.6;
+  user-select: none;
 }
 
 .label-chip:hover {
-  opacity: 0.75;
+  opacity: 0.8;
   transform: translateY(-1px);
 }
 
 .label-chip.active-chip {
   opacity: 1;
-  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0,0,0,0.25);
   transform: translateY(-1px);
 }
 
+/* Atalho — subtil para o nome ser o elemento principal */
 .label-shortcut {
-  background-color: rgba(0, 0, 0, 0.25);
-  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.28);
+  padding: 1px 5px;
   border-radius: 2px;
+  font-size: 8.5px;
+  opacity: 0.75;
 }
-/* ── Toggle de vista (ambos modelos) ── */
+
+.label-name {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ── Separador entre chips e selector de modelo ── */
 .vista-toggle {
   display: flex;
-  gap: 3px;
+  align-items: center;
+  gap: 6px;
   margin-left: auto;
   flex-shrink: 0;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-2);
 }
 
-.vista-btn {
-  padding: 3px 10px;
-  background: transparent;
-  border: 1px solid var(--border-2);
-  border-radius: 4px;
-  color: var(--text-muted);
-  font-size: 9px;
-  font-weight: 700;
+.vista-toggle-label {
+  font-size: 10px;
   font-family: 'Syne', sans-serif;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Dropdown selector de modelo ── */
+.select-modelo {
+  padding: 4px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 5px;
+  color: var(--text-dim);
+  font-size: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s;
-}
-.vista-btn:hover { border-color: var(--accent); color: var(--text); }
-.vista-btn.active {
-  background: var(--accent-glow);
-  border-color: rgba(79,124,255,0.4);
-  color: #7da4ff;
+  transition: border-color 0.15s;
+  outline: none;
 }
 
-.label-chip--default { background-color: #6b7280; }
-.label-chip--pessoa { background-color: #4A90D9; }
-.label-chip--local { background-color: #27AE60; }
-.label-chip--organizacao { background-color: #E67E22; }
-.label-chip--crime { background-color: #E74C3C; }
-.label-chip--data { background-color: #9B59B6; }
-.label-chip--viatura { background-color: #1ABC9C; }
-.label-chip--matricula { background-color: #F39C12; }
-.label-chip--telemovel { background-color: #2ECC71; }
-.label-chip--email { background-color: #3498DB; }
-.label-chip--cripto { background-color: #E91E63; }
-.label-chip--montante { background-color: #FF9800; }
+.select-modelo:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
 
+.select-modelo:focus {
+  border-color: var(--accent);
+}
+
+/* ── Cores das entidades — 11 cores distintas ── */
+.label-chip--default      { background-color: var(--label-default); }
+.label-chip--pessoa       { background-color: var(--label-pessoa); }
+.label-chip--local        { background-color: var(--label-local); }
+.label-chip--organizacao  { background-color: var(--label-organizacao); }
+.label-chip--crime        { background-color: var(--label-crime); }
+.label-chip--data         { background-color: var(--label-data); }
+.label-chip--viatura      { background-color: var(--label-viatura); }
+.label-chip--matricula    { background-color: var(--label-matricula); }
+.label-chip--telemovel    { background-color: var(--label-telemovel); }
+.label-chip--email        { background-color: var(--label-email); }
+.label-chip--cripto       { background-color: var(--label-cripto); }
+.label-chip--montante     { background-color: var(--label-montante); }

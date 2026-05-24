@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useNoticias } from "../js/hooks/useNoticias.jsx";
 import { useLabels } from "../js/hooks/useLabels.jsx";
 import { useGrafo } from "../js/hooks/useGrafo.jsx";
@@ -15,10 +15,11 @@ import "../static/css/app.css";
 export default function Editor() {
     const { pastaId } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { theme, toggleTheme } = useTheme();
     const [vistaAtiva, setVistaAtiva] = useState(
-    () => localStorage.getItem("modoExtracao") || "ambos"
-);
+        () => localStorage.getItem("modoExtracao") || "ambos"
+    );
 
     const {
         lista, noticia, frasesGliner, isLoading,
@@ -57,6 +58,7 @@ export default function Editor() {
         shortcut: LABEL_SHORTCUTS[index] || null,
     }));
 
+    // Atalhos de teclado para labels
     useEffect(() => {
         const handleKeyDown = (event) => {
             const tag = document.activeElement?.tagName;
@@ -68,6 +70,15 @@ export default function Editor() {
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [labelsComAtalho]);
+
+    // Selecciona noticia passada via query param ?noticia=id
+    // Aguarda que a lista esteja carregada antes de seleccionar
+    useEffect(() => {
+        const noticiaId = searchParams.get("noticia");
+        if (!noticiaId || lista.length === 0) return;
+        const existe = lista.some((n) => n.id === noticiaId);
+        if (existe) selecionar(noticiaId);
+    }, [lista, searchParams]);
 
     const handleTextSelect = (e, frase) => {
         const selection = window.getSelection();
@@ -86,7 +97,7 @@ export default function Editor() {
 
     const handleUpdate = () => {
         if (!labelSelecionada) return alert("Seleciona um tipo de entidade.");
-        if (!pendingSelection) return alert("Seleciona texto na notícia.");
+        if (!pendingSelection) return alert("Seleciona texto na noticia.");
         if (!noticia) return;
 
         const frase = noticia.frases.find((f) => f.id === pendingSelection.fraseId);
@@ -94,7 +105,7 @@ export default function Editor() {
 
         const { inicio, fim, texto, fraseId } = pendingSelection;
         const overlap = frase.entidades.some((e) => inicio < e.fim && fim > e.inicio);
-        if (overlap) return alert("A seleção sobrepõe-se a uma entidade existente.");
+        if (overlap) return alert("A selecao sobrepoem-se a uma entidade existente.");
 
         const novasEntidades = [
             ...frase.entidades,
@@ -159,7 +170,7 @@ export default function Editor() {
 
     const handleApagarNoticia = async () => {
         if (!noticia) return;
-        if (!confirm(`Apagar a notícia "${noticia.titulo}"? Esta ação não pode ser revertida.`)) return;
+        if (!confirm(`Apagar a noticia "${noticia.titulo}"? Esta acao nao pode ser revertida.`)) return;
         await apagarNoticia(noticia.id);
         limparGrafo();
     };
@@ -171,14 +182,14 @@ export default function Editor() {
             const resultado = await getNoticias_semelhantes(noticia.id);
             setSemelhantes(resultado);
         } catch {
-            alert("Erro ao procurar notícias semelhantes.");
+            alert("Erro ao procurar noticias semelhantes.");
         } finally {
             setIsLoadingSemelhantes(false);
         }
     };
 
     const handleMudarPasta = (novoProjetoId, novaPastaId) => {
-      navigate(`/projeto/${novoProjetoId}/pasta/${novaPastaId}`);
+        navigate(`/projeto/${novoProjetoId}/pasta/${novaPastaId}`);
     };
 
     return (
@@ -199,12 +210,14 @@ export default function Editor() {
             <main className="main-content">
                 <div className="editor-topbar">
                     <h1>Criminal Entity Correlation</h1>
-                    <button className="btn-investigar" onClick={() => navigate("/investigar")}>
-                        🔍 Investigar
-                    </button>
-                    <button className="btn-theme-toggle" onClick={toggleTheme}>
-                        {theme === "dark" ? "Modo claro" : "Modo escuro"}
-                    </button>
+                    <div className="editor-topbar-actions">
+                        <button className="btn-investigar" onClick={() => navigate("/investigar")}>
+                            Investigar entidades
+                        </button>
+                        <button className="btn-theme-toggle" onClick={toggleTheme}>
+                            {theme === "dark" ? "Modo claro" : "Modo escuro"}
+                        </button>
+                    </div>
                 </div>
 
                 <LabelBar
@@ -255,10 +268,10 @@ export default function Editor() {
             {semelhantes && (
                 <div className="modal-overlay" onClick={() => setSemelhantes(null)}>
                     <div className="modal semelhantes-modal" onClick={(e) => e.stopPropagation()}>
-                        <h2>Notícias Semelhantes</h2>
+                        <h2>Noticias Semelhantes</h2>
                         {semelhantes.length === 0 ? (
                             <p style={{ color: "var(--text-muted)", fontStyle: "italic", fontSize: "13px" }}>
-                                Não foram encontradas notícias semelhantes.
+                                Nao foram encontradas noticias semelhantes.
                             </p>
                         ) : (
                             <div className="semelhantes-lista">
@@ -272,8 +285,8 @@ export default function Editor() {
                                             <span className="semelhante-score">{n.percentagem}%</span>
                                         </div>
                                         <div className="semelhante-meta">
-                                            <span>📁 {n.pasta_nome || "—"}</span>
-                                            <span>📂 {n.projeto_nome || "—"}</span>
+                                            <span>pasta: {n.pasta_nome || "—"}</span>
+                                            <span>projeto: {n.projeto_nome || "—"}</span>
                                             <span>
                                                 {n.entidades_comuns} entidade{n.entidades_comuns !== 1 ? "s" : ""} em comum
                                             </span>

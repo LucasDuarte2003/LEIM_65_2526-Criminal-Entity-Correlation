@@ -241,16 +241,13 @@ export default function Dashboard() {
                                 </strong>
                             </div>
                             <div className="modelo-botoes">
-                                <select
-                                    className="select-modelo"
-                                    value={modoExtracao}
-                                    onChange={(e) => handleAlterarModo(e.target.value)}
-                                    disabled={modeloStatus?.a_treinar}
-                                >
-                                    <option value="ambos">Ambos</option>
-                                    <option value="xlm-roberta">XLM-RoBERTa</option>
-                                    <option value="gliner">GLiNER</option>
-                                </select>
+                            <select className="select-modelo" value={modoExtracao}
+                                onChange={(e) => handleAlterarModo(e.target.value)}
+                                disabled={modeloStatus?.a_treinar}>
+                              <option value="ambos">Ambos os modelos</option>
+                              <option value="xlm-roberta">Só XLM-RoBERTa</option>
+                              <option value="gliner">Só GLiNER</option>
+                            </select>
                                 <button
                                     className="btn-retreinar"
                                     onClick={handleRetreinar}

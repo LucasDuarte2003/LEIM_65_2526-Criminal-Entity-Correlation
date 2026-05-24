@@ -1,14 +1,16 @@
+/* ── Action Bar ── */
 .action-bar {
   display: flex;
   align-items: center;
-  height: 44px;
+  height: 46px;
   padding: 0 20px;
   gap: 16px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  overflow: hidden;
+  background: var(--surface);
 }
 
+/* ── Info de estado — estilo simples e limpo ── */
 .action-info {
   display: flex;
   align-items: center;
@@ -24,30 +26,36 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 200px;
 }
 
 .action-info strong {
   color: var(--text-dim);
-  font-weight: 500;
+  font-weight: 600;
 }
 
+/* ── Grupo de botões ── */
 .action-buttons {
   display: flex;
+  align-items: center;
   gap: 5px;
   flex-shrink: 0;
 }
 
+/* ── Base dos botões ── */
 .btn {
-  padding: 5px 12px;
-  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 13px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
+  border: 1px solid transparent;
 }
 
 .btn:disabled {
@@ -55,41 +63,58 @@
   cursor: not-allowed;
 }
 
+/* ── Adicionar entidade — verde ── */
 .btn-update {
-  background: rgba(39, 174, 96, 0.12);
-  border: 1px solid rgba(39, 174, 96, 0.35);
+  background: rgba(39, 174, 96, 0.1);
+  border-color: rgba(39, 174, 96, 0.3);
   color: #4ade80;
 }
+.btn-update:hover:not(:disabled) {
+  background: rgba(39, 174, 96, 0.2);
+  border-color: rgba(39, 174, 96, 0.5);
+}
 
+/* ── Remover entidade — vermelho ── */
 .btn-remove {
   background: rgba(231, 76, 60, 0.1);
-  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-color: rgba(231, 76, 60, 0.3);
   color: #f87171;
 }
-
-.btn-save {
-  background: rgba(79, 124, 255, 0.12);
-  border: 1px solid rgba(79, 124, 255, 0.35);
-  color: #7da4ff;
-}
-
-.btn-update:hover:not(:disabled) {
-  background: rgba(39, 174, 96, 0.22);
-}
-
 .btn-remove:hover:not(:disabled) {
   background: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.5);
 }
 
-.btn-save:hover:not(:disabled) {
-  background: rgba(79, 124, 255, 0.22);
-}
-
+/* ── Notícias Semelhantes — roxo ── */
 .btn-semelhantes {
-  background: rgba(155, 89, 182, 0.12);
-  border: 1px solid rgba(155, 89, 182, 0.35);
+  background: rgba(155, 89, 182, 0.1);
+  border-color: rgba(155, 89, 182, 0.3);
   color: #c39bd3;
 }
 .btn-semelhantes:hover:not(:disabled) {
-  background: rgba(155, 89, 182, 0.22);
+  background: rgba(155, 89, 182, 0.2);
+  border-color: rgba(155, 89, 182, 0.5);
+}
+.btn-semelhantes:disabled {
+  opacity: 0.35;
+}
+
+/* ── Guardar — primário azul ── */
+.btn-save {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  padding: 6px 18px;
+  box-shadow: 0 2px 8px rgba(79, 124, 255, 0.3);
+}
+.btn-save:hover:not(:disabled) {
+  opacity: 0.88;
+  box-shadow: 0 4px 12px rgba(79, 124, 255, 0.4);
+}
+.btn-save:disabled {
+  background: var(--surface-2);
+  border-color: var(--border-2);
+  color: var(--text-muted);
+  box-shadow: none;
+  opacity: 0.6;
 }

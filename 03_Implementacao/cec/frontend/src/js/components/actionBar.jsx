@@ -54,13 +54,8 @@ export default class ActionBar extends React.Component {
         <button className="btn btn-remove" onClick={viewModel.onRemover}>
           Remover entidade
         </button>
-        <button
-          className="btn btn-semelhantes"
-          onClick={viewModel.onSemelhantes}
-          disabled={viewModel.isSemelhantesDisabled}
-          title="Procurar notícias semelhantes"
-        >
-          Semelhantes
+        <button className="btn btn-semelhantes" onClick={viewModel.onSemelhantes} disabled={viewModel.isSemelhantesDisabled}>
+          Notícias Semelhantes
         </button>
         <button className="btn btn-save" onClick={viewModel.onGuardar} disabled={viewModel.isSaveDisabled}>
           {viewModel.saveButtonLabel}

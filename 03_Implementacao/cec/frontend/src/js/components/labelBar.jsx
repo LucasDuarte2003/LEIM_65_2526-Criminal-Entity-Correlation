@@ -66,14 +66,15 @@ export default class LabelBar extends React.Component {
   renderToggle(vistaAtiva) {
     return (
       <div className="vista-toggle">
+        <span className="vista-toggle-label">Modelo NER:</span>
         <select
           className="select-modelo"
           value={vistaAtiva}
           onChange={(e) => this.props.onVistaChange?.(e.target.value)}
         >
-          {["xlm-roberta", "ambos", "gliner"].map((modo) => (
-            <option key={modo} value={modo}>{MODO_LABELS[modo]}</option>
-          ))}
+          <option value="ambos">Ambos os modelos</option>
+          <option value="xlm-roberta">Só XLM-RoBERTa</option>
+          <option value="gliner">Só GLiNER</option>
         </select>
       </div>
     );

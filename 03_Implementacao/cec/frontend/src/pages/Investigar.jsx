@@ -58,7 +58,7 @@ export default function Investigar() {
 
     const handleNoticiaClick = (noticia) => {
         if (noticia.projeto_id && noticia.pasta_id) {
-            navigate(`/projeto/${noticia.projeto_id}/pasta/${noticia.pasta_id}`);
+            navigate(`/projeto/${noticia.projeto_id}/pasta/${noticia.pasta_id}?noticia=${noticia.id}`);
         }
     };
 
