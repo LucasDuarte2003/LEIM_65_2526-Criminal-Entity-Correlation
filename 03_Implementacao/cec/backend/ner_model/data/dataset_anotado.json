@@ -9202,5 +9202,1613 @@
         "label": "CRIME"
       }
     ]
+  },
+  {
+    "id": "SIN-021",
+    "text": "Lisboa, 14 de março de 2024 — A Polícia Judiciária deteve esta manhã Miguel Ferreira, de 38 anos, suspeito de tráfico de estupefacientes e branqueamento de capitais na área metropolitana de Lisboa. O arguido, residente em Setúbal, terá movimentado cerca de 47 000 euros através de várias transferências em Bitcoin para carteiras associadas a redes criminosas sediadas no Porto. As autoridades apreenderam ainda um Toyota Corolla com a matrícula AA-23-BC, utilizado no transporte de droga entre Almada e Cascais. O telemóvel 912 345 678 e o endereço de email mferreira92@protonmail.com foram igualmente apreendidos como prova. A detenção ocorreu em coordenação com o Departamento Central de Investigação e Ação Penal (DCIAP).",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Lisboa",
+        "label": "LOCAL"
+      },
+      {
+        "start": 8,
+        "end": 27,
+        "text": "14 de março de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 32,
+        "end": 50,
+        "text": "Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 69,
+        "end": 84,
+        "text": "Miguel Ferreira",
+        "label": "PESSOA"
+      },
+      {
+        "start": 110,
+        "end": 136,
+        "text": "tráfico de estupefacientes",
+        "label": "CRIME"
+      },
+      {
+        "start": 139,
+        "end": 164,
+        "text": "branqueamento de capitais",
+        "label": "CRIME"
+      },
+      {
+        "start": 168,
+        "end": 196,
+        "text": "área metropolitana de Lisboa",
+        "label": "LOCAL"
+      },
+      {
+        "start": 222,
+        "end": 229,
+        "text": "Setúbal",
+        "label": "LOCAL"
+      },
+      {
+        "start": 257,
+        "end": 269,
+        "text": "47 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 306,
+        "end": 313,
+        "text": "Bitcoin",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 371,
+        "end": 376,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 414,
+        "end": 428,
+        "text": "Toyota Corolla",
+        "label": "VIATURA"
+      },
+      {
+        "start": 445,
+        "end": 453,
+        "text": "AA-23-BC",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 468,
+        "end": 487,
+        "text": "transporte de droga",
+        "label": "CRIME"
+      },
+      {
+        "start": 494,
+        "end": 500,
+        "text": "Almada",
+        "label": "LOCAL"
+      },
+      {
+        "start": 503,
+        "end": 510,
+        "text": "Cascais",
+        "label": "LOCAL"
+      },
+      {
+        "start": 524,
+        "end": 535,
+        "text": "912 345 678",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 558,
+        "end": 584,
+        "text": "mferreira92@protonmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 666,
+        "end": 715,
+        "text": "Departamento Central de Investigação e Ação Penal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 717,
+        "end": 722,
+        "text": "DCIAP",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-022",
+    "text": "Porto, 8 de janeiro de 2024 — O Tribunal de Instrução Criminal do Porto decretou esta semana a prisão preventiva de Ana Sousa, de 45 anos, e do seu cúmplice Rui Magalhães, de 51 anos, ambos residentes em Vila Nova de Gaia. Os arguidos são suspeitos de burla informática e falsificação de documentos, tendo lesado mais de 30 vítimas num esquema de phishing que operavam desde junho de 2023. Segundo o Ministério Público, os suspeitos contactavam as vítimas através do endereço de email servicos.bancarios24@gmail.com e do número 934 567 890, fazendo-se passar por funcionários do Banco de Portugal. Os montantes transferidos de forma ilícita ascendem a 128 500 euros, parte dos quais foram convertidos em Ethereum para dificultar o rastreio. As investigações estão a cargo da Unidade Nacional de Combate ao Cibercrime e à Criminalidade Tecnológica (UNC3T).",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 7,
+        "end": 27,
+        "text": "8 de janeiro de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 32,
+        "end": 62,
+        "text": "Tribunal de Instrução Criminal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 66,
+        "end": 71,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 116,
+        "end": 125,
+        "text": "Ana Sousa",
+        "label": "PESSOA"
+      },
+      {
+        "start": 157,
+        "end": 170,
+        "text": "Rui Magalhães",
+        "label": "PESSOA"
+      },
+      {
+        "start": 204,
+        "end": 221,
+        "text": "Vila Nova de Gaia",
+        "label": "LOCAL"
+      },
+      {
+        "start": 252,
+        "end": 269,
+        "text": "burla informática",
+        "label": "CRIME"
+      },
+      {
+        "start": 272,
+        "end": 298,
+        "text": "falsificação de documentos",
+        "label": "CRIME"
+      },
+      {
+        "start": 347,
+        "end": 355,
+        "text": "phishing",
+        "label": "CRIME"
+      },
+      {
+        "start": 375,
+        "end": 388,
+        "text": "junho de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 400,
+        "end": 418,
+        "text": "Ministério Público",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 485,
+        "end": 515,
+        "text": "servicos.bancarios24@gmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 528,
+        "end": 539,
+        "text": "934 567 890",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 579,
+        "end": 596,
+        "text": "Banco de Portugal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 652,
+        "end": 665,
+        "text": "128 500 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 704,
+        "end": 712,
+        "text": "Ethereum",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 775,
+        "end": 846,
+        "text": "Unidade Nacional de Combate ao Cibercrime e à Criminalidade Tecnológica",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 848,
+        "end": 853,
+        "text": "UNC3T",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-023",
+    "text": "Braga, 6 de abril de 2024 — A Guarda Nacional Republicana (GNR) desmantelou esta quinta-feira uma rede de tráfico de veículos furtados que operava entre Braga e Viana do Castelo. O líder da organização, Carlos Mendonça, de 42 anos, natural de Guimarães, coordenava a venda de automóveis com a identificação adulterada a compradores em vários pontos do país. Entre os veículos apreendidos encontravam-se um BMW Série 3 com matrícula XY-45-QR e um Mercedes Classe C com matrícula LM-78-ST, ambos com os números de chassis falsificados. As comunicações entre os membros da rede eram feitas através dos telemóveis 926 111 222 e 963 444 555. A operação, denominada Operação Ferro, decorreu entre janeiro e abril de 2024 e contou com a colaboração do Departamento de Investigação Criminal de Braga. Os prejuízos causados às vítimas estimam-se em cerca de 85 000 euros.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Braga",
+        "label": "LOCAL"
+      },
+      {
+        "start": 7,
+        "end": 25,
+        "text": "6 de abril de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 30,
+        "end": 57,
+        "text": "Guarda Nacional Republicana",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 59,
+        "end": 62,
+        "text": "GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 106,
+        "end": 134,
+        "text": "tráfico de veículos furtados",
+        "label": "CRIME"
+      },
+      {
+        "start": 153,
+        "end": 158,
+        "text": "Braga",
+        "label": "LOCAL"
+      },
+      {
+        "start": 161,
+        "end": 177,
+        "text": "Viana do Castelo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 203,
+        "end": 218,
+        "text": "Carlos Mendonça",
+        "label": "PESSOA"
+      },
+      {
+        "start": 243,
+        "end": 252,
+        "text": "Guimarães",
+        "label": "LOCAL"
+      },
+      {
+        "start": 267,
+        "end": 317,
+        "text": "venda de automóveis com a identificação adulterada",
+        "label": "CRIME"
+      },
+      {
+        "start": 406,
+        "end": 417,
+        "text": "BMW Série 3",
+        "label": "VIATURA"
+      },
+      {
+        "start": 432,
+        "end": 440,
+        "text": "XY-45-QR",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 446,
+        "end": 463,
+        "text": "Mercedes Classe C",
+        "label": "VIATURA"
+      },
+      {
+        "start": 478,
+        "end": 486,
+        "text": "LM-78-ST",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 610,
+        "end": 621,
+        "text": "926 111 222",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 624,
+        "end": 635,
+        "text": "963 444 555",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 691,
+        "end": 714,
+        "text": "janeiro e abril de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 745,
+        "end": 782,
+        "text": "Departamento de Investigação Criminal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 786,
+        "end": 791,
+        "text": "Braga",
+        "label": "LOCAL"
+      },
+      {
+        "start": 849,
+        "end": 861,
+        "text": "85 000 euros",
+        "label": "MONTANTE"
+      }
+    ]
+  },
+  {
+    "id": "SIN-024",
+    "text": "Faro, 20 de maio de 2024 — A Polícia Judiciária da Direção Regional do Algarve deteve três indivíduos suspeitos de tráfico de seres humanos e exploração laboral em Albufeira. Os detidos, Piotr Nowak, de 36 anos, Dmitri Volkov, de 44 anos, e Sérgio Lopes, de 39 anos, recrutavam trabalhadores estrangeiros em situação irregular, alojando-os em condições desumanas em armazéns na zona industrial de Loulé. As vítimas, maioritariamente oriundas da Roménia e da Moldávia, eram obrigadas a trabalhar sem remuneração adequada, tendo os arguidos retido um total de 213 000 euros em salários não pagos. As ordens eram transmitidas através do número de telemóvel 961 234 567 e do endereço exploracaolaboral.algarve@outlook.com. Um Volkswagen Transporter com a matrícula MN-56-OP era utilizado para o transporte das vítimas entre localidades. O caso está a ser instruído pelo DCIAP em colaboração com o Serviço de Estrangeiros e Fronteiras (SEF), tendo as investigações decorrido entre setembro de 2023 e maio de 2024.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "text": "Faro",
+        "label": "LOCAL"
+      },
+      {
+        "start": 6,
+        "end": 24,
+        "text": "20 de maio de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 29,
+        "end": 67,
+        "text": "Polícia Judiciária da Direção Regional",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 71,
+        "end": 78,
+        "text": "Algarve",
+        "label": "LOCAL"
+      },
+      {
+        "start": 115,
+        "end": 139,
+        "text": "tráfico de seres humanos",
+        "label": "CRIME"
+      },
+      {
+        "start": 142,
+        "end": 160,
+        "text": "exploração laboral",
+        "label": "CRIME"
+      },
+      {
+        "start": 164,
+        "end": 173,
+        "text": "Albufeira",
+        "label": "LOCAL"
+      },
+      {
+        "start": 187,
+        "end": 198,
+        "text": "Piotr Nowak",
+        "label": "PESSOA"
+      },
+      {
+        "start": 212,
+        "end": 225,
+        "text": "Dmitri Volkov",
+        "label": "PESSOA"
+      },
+      {
+        "start": 241,
+        "end": 253,
+        "text": "Sérgio Lopes",
+        "label": "PESSOA"
+      },
+      {
+        "start": 267,
+        "end": 326,
+        "text": "recrutavam trabalhadores estrangeiros em situação irregular",
+        "label": "CRIME"
+      },
+      {
+        "start": 328,
+        "end": 362,
+        "text": "alojando-os em condições desumanas",
+        "label": "CRIME"
+      },
+      {
+        "start": 397,
+        "end": 402,
+        "text": "Loulé",
+        "label": "LOCAL"
+      },
+      {
+        "start": 445,
+        "end": 452,
+        "text": "Roménia",
+        "label": "LOCAL"
+      },
+      {
+        "start": 458,
+        "end": 466,
+        "text": "Moldávia",
+        "label": "LOCAL"
+      },
+      {
+        "start": 485,
+        "end": 519,
+        "text": "trabalhar sem remuneração adequada",
+        "label": "CRIME"
+      },
+      {
+        "start": 558,
+        "end": 571,
+        "text": "213 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 654,
+        "end": 665,
+        "text": "961 234 567",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 680,
+        "end": 717,
+        "text": "exploracaolaboral.algarve@outlook.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 722,
+        "end": 744,
+        "text": "Volkswagen Transporter",
+        "label": "VIATURA"
+      },
+      {
+        "start": 761,
+        "end": 769,
+        "text": "MN-56-OP",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 866,
+        "end": 871,
+        "text": "DCIAP",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 893,
+        "end": 929,
+        "text": "Serviço de Estrangeiros e Fronteiras",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 931,
+        "end": 934,
+        "text": "SEF",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 976,
+        "end": 992,
+        "text": "setembro de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 995,
+        "end": 1007,
+        "text": "maio de 2024",
+        "label": "DATA"
+      }
+    ]
+  },
+  {
+    "id": "SIN-025",
+    "text": "Coimbra, 25 de fevereiro de 2024 — O Tribunal Judicial da Comarca de Coimbra condenou hoje Francisco Tavares, de 57 anos, empresário residente em Coimbra, a oito anos de prisão efetiva por corrupção ativa, fraude fiscal e branqueamento de capitais. Segundo a acusação do Ministério Público, o arguido terá subornado funcionários da Câmara Municipal de Coimbra entre março de 2019 e novembro de 2023, obtendo ilegalmente contratos de obras públicas no valor de 1 450 000 euros. Os pagamentos ilícitos eram coordenados através do telemóvel 917 888 999 e do endereço de email ftavares.construcoes@sapo.pt. Parte dos lucros obtidos de forma ilegal foi convertida em Bitcoin e Monero, transferidos para carteiras digitais registadas em nome de terceiros. A viatura utilizada pelo arguido para os encontros com os funcionários corruptos, um Audi A6 com matrícula CO-12-AB, foi igualmente apreendida. A investigação foi conduzida pela Unidade de Ação Fiscal (UAF) da GNR em conjunto com a Autoridade Tributária e Aduaneira.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "text": "Coimbra",
+        "label": "LOCAL"
+      },
+      {
+        "start": 9,
+        "end": 32,
+        "text": "25 de fevereiro de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 37,
+        "end": 65,
+        "text": "Tribunal Judicial da Comarca",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 69,
+        "end": 76,
+        "text": "Coimbra",
+        "label": "LOCAL"
+      },
+      {
+        "start": 91,
+        "end": 108,
+        "text": "Francisco Tavares",
+        "label": "PESSOA"
+      },
+      {
+        "start": 146,
+        "end": 153,
+        "text": "Coimbra",
+        "label": "LOCAL"
+      },
+      {
+        "start": 189,
+        "end": 204,
+        "text": "corrupção ativa",
+        "label": "CRIME"
+      },
+      {
+        "start": 206,
+        "end": 219,
+        "text": "fraude fiscal",
+        "label": "CRIME"
+      },
+      {
+        "start": 222,
+        "end": 247,
+        "text": "branqueamento de capitais",
+        "label": "CRIME"
+      },
+      {
+        "start": 271,
+        "end": 289,
+        "text": "Ministério Público",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 306,
+        "end": 328,
+        "text": "subornado funcionários",
+        "label": "CRIME"
+      },
+      {
+        "start": 332,
+        "end": 359,
+        "text": "Câmara Municipal de Coimbra",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 366,
+        "end": 379,
+        "text": "março de 2019",
+        "label": "DATA"
+      },
+      {
+        "start": 382,
+        "end": 398,
+        "text": "novembro de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 400,
+        "end": 447,
+        "text": "obtendo ilegalmente contratos de obras públicas",
+        "label": "CRIME"
+      },
+      {
+        "start": 460,
+        "end": 475,
+        "text": "1 450 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 538,
+        "end": 549,
+        "text": "917 888 999",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 573,
+        "end": 601,
+        "text": "ftavares.construcoes@sapo.pt",
+        "label": "EMAIL"
+      },
+      {
+        "start": 662,
+        "end": 669,
+        "text": "Bitcoin",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 672,
+        "end": 678,
+        "text": "Monero",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 835,
+        "end": 842,
+        "text": "Audi A6",
+        "label": "VIATURA"
+      },
+      {
+        "start": 857,
+        "end": 865,
+        "text": "CO-12-AB",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 928,
+        "end": 950,
+        "text": "Unidade de Ação Fiscal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 952,
+        "end": 955,
+        "text": "UAF",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 960,
+        "end": 963,
+        "text": "GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 982,
+        "end": 1015,
+        "text": "Autoridade Tributária e Aduaneira",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-026",
+    "text": "Sintra, 15 de junho de 2022 — A Polícia Judiciária anunciou hoje a detenção de Mariana Costa, de 33 anos, e Bruno Andrade, de 41 anos, ambos residentes em Sintra, suspeitos de extorsão e ameaça agravada a empresários da região de Lisboa. Os arguidos exigiam o pagamento de quantias entre 5 000 e 20 000 euros a proprietários de restaurantes e pequenos negócios, sob ameaça de destruição dos estabelecimentos. Os contactos com as vítimas eram realizados através dos números de telemóvel 965 321 654 e 912 876 543, bem como através do endereço de email cobrancas.sintra22@gmail.com. Para os encontros com as vítimas, os suspeitos utilizavam um Renault Megane com a matrícula SN-34-XZ. O esquema terá estado ativo entre outubro de 2021 e maio de 2022, período durante o qual os arguidos terão extorquido um total de 178 000 euros. A investigação foi conduzida pela Diretoria de Lisboa e Vale do Tejo da Polícia Judiciária, com apoio do Núcleo de Investigação Criminal da GNR de Sintra.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Sintra",
+        "label": "LOCAL"
+      },
+      {
+        "start": 8,
+        "end": 27,
+        "text": "15 de junho de 2022",
+        "label": "DATA"
+      },
+      {
+        "start": 32,
+        "end": 50,
+        "text": "Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 79,
+        "end": 92,
+        "text": "Mariana Costa",
+        "label": "PESSOA"
+      },
+      {
+        "start": 108,
+        "end": 121,
+        "text": "Bruno Andrade",
+        "label": "PESSOA"
+      },
+      {
+        "start": 155,
+        "end": 161,
+        "text": "Sintra",
+        "label": "LOCAL"
+      },
+      {
+        "start": 176,
+        "end": 184,
+        "text": "extorsão",
+        "label": "CRIME"
+      },
+      {
+        "start": 187,
+        "end": 202,
+        "text": "ameaça agravada",
+        "label": "CRIME"
+      },
+      {
+        "start": 230,
+        "end": 236,
+        "text": "Lisboa",
+        "label": "LOCAL"
+      },
+      {
+        "start": 288,
+        "end": 294,
+        "text": "5 000 ",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 296,
+        "end": 308,
+        "text": "20 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 486,
+        "end": 497,
+        "text": "965 321 654",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 500,
+        "end": 511,
+        "text": "912 876 543",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 551,
+        "end": 579,
+        "text": "cobrancas.sintra22@gmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 642,
+        "end": 656,
+        "text": "Renault Megane",
+        "label": "VIATURA"
+      },
+      {
+        "start": 673,
+        "end": 681,
+        "text": "SN-34-XZ",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 717,
+        "end": 732,
+        "text": "outubro de 2021",
+        "label": "DATA"
+      },
+      {
+        "start": 735,
+        "end": 747,
+        "text": "maio de 2022",
+        "label": "DATA"
+      },
+      {
+        "start": 813,
+        "end": 826,
+        "text": "178 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 875,
+        "end": 881,
+        "text": "Lisboa",
+        "label": "LOCAL"
+      },
+      {
+        "start": 884,
+        "end": 896,
+        "text": "Vale do Tejo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 900,
+        "end": 918,
+        "text": "Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 933,
+        "end": 971,
+        "text": "Núcleo de Investigação Criminal da GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 975,
+        "end": 981,
+        "text": "Sintra",
+        "label": "LOCAL"
+      }
+    ]
+  },
+  {
+    "id": "SIN-027",
+    "text": "Évora, 28 de março de 2021 — A Polícia Judiciária da Diretoria do Sul desmantelou uma rede de tráfico de droga que operava entre Évora e Beja, detendo quatro indivíduos, entre os quais o alegado líder da organização, Tomás Guerreiro, de 49 anos, natural de Montemor-o-Novo. Os restantes detidos, Filipe Rosado, de 28 anos, Gonçalo Pires, de 31 anos, e Nuno Esteves, de 35 anos, eram responsáveis pela distribuição de cocaína e heroína em várias localidades do Alentejo. As comunicações internas da rede eram feitas através dos telemóveis 934 789 012 e 961 654 321, sendo os pagamentos parcialmente realizados em Litecoin para dificultar o rastreio pelas autoridades. Os suspeitos utilizavam um Ford Transit com a matrícula EV-89-KL para o transporte das substâncias ilícitas. A droga apreendida tinha um valor estimado no mercado de 320 000 euros. A operação, denominada Operação Planície, teve início em julho de 2020 e contou com a colaboração da Unidade de Controlo Costeiro da GNR e do Serviço de Estrangeiros e Fronteiras (SEF).",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Évora",
+        "label": "LOCAL"
+      },
+      {
+        "start": 7,
+        "end": 26,
+        "text": "28 de março de 2021",
+        "label": "DATA"
+      },
+      {
+        "start": 31,
+        "end": 49,
+        "text": "Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 94,
+        "end": 110,
+        "text": "tráfico de droga",
+        "label": "CRIME"
+      },
+      {
+        "start": 129,
+        "end": 134,
+        "text": "Évora",
+        "label": "LOCAL"
+      },
+      {
+        "start": 137,
+        "end": 141,
+        "text": "Beja",
+        "label": "LOCAL"
+      },
+      {
+        "start": 217,
+        "end": 232,
+        "text": "Tomás Guerreiro",
+        "label": "PESSOA"
+      },
+      {
+        "start": 257,
+        "end": 272,
+        "text": "Montemor-o-Novo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 296,
+        "end": 309,
+        "text": "Filipe Rosado",
+        "label": "PESSOA"
+      },
+      {
+        "start": 323,
+        "end": 336,
+        "text": "Gonçalo Pires",
+        "label": "PESSOA"
+      },
+      {
+        "start": 352,
+        "end": 364,
+        "text": "Nuno Esteves",
+        "label": "PESSOA"
+      },
+      {
+        "start": 401,
+        "end": 434,
+        "text": "distribuição de cocaína e heroína",
+        "label": "CRIME"
+      },
+      {
+        "start": 460,
+        "end": 468,
+        "text": "Alentejo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 538,
+        "end": 549,
+        "text": "934 789 012",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 552,
+        "end": 563,
+        "text": "961 654 321",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 612,
+        "end": 620,
+        "text": "Litecoin",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 694,
+        "end": 706,
+        "text": "Ford Transit",
+        "label": "VIATURA"
+      },
+      {
+        "start": 723,
+        "end": 731,
+        "text": "EV-89-KL",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 739,
+        "end": 774,
+        "text": "transporte das substâncias ilícitas",
+        "label": "CRIME"
+      },
+      {
+        "start": 833,
+        "end": 846,
+        "text": "320 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 904,
+        "end": 918,
+        "text": " julho de 2020",
+        "label": "DATA"
+      },
+      {
+        "start": 949,
+        "end": 977,
+        "text": "Unidade de Controlo Costeiro",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 981,
+        "end": 984,
+        "text": "GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 990,
+        "end": 1026,
+        "text": "Serviço de Estrangeiros e Fronteiras",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1028,
+        "end": 1031,
+        "text": "SEF",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-028",
+    "text": "Viana do Castelo, 12 de maio de 2023 — O Departamento Central de Investigação e Ação Penal (DCIAP) anunciou hoje a acusação formal de Ricardo Almendra, de 52 anos, empresário residente em Viana do Castelo, e da sua sócia Inês Figueiredo, de 46 anos, natural de Barcelos, pelos crimes de associação criminosa, fraude fiscal qualificada e branqueamento de capitais. Segundo a acusação, os arguidos terão constituído uma rede de empresas fictícias sediadas em Viana do Castelo, Braga e Vila Verde entre fevereiro de 2018 e outubro de 2022, através das quais desviaram 2 890 000 euros dos cofres do Estado em sede de IVA. Os valores desviados eram transferidos para contas em nome de terceiros e posteriormente convertidos em Bitcoin e depositados em carteiras digitais não rastreáveis. As ordens eram transmitidas através do endereço de email rfigueiredo.gestao@hotmail.com e do telemóvel 919 753 864. Um Mercedes Classe E com matrícula VC-67-PQ e um Audi Q7 com matrícula BG-22-RT foram apreendidos no âmbito da investigação. O caso foi instruído pela Unidade de Ação Fiscal (UAF) da GNR em articulação com a Autoridade Tributária e Aduaneira e o Banco de Portugal.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 16,
+        "text": "Viana do Castelo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 18,
+        "end": 36,
+        "text": "12 de maio de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 41,
+        "end": 90,
+        "text": "Departamento Central de Investigação e Ação Penal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 92,
+        "end": 97,
+        "text": "DCIAP",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 134,
+        "end": 150,
+        "text": "Ricardo Almendra",
+        "label": "PESSOA"
+      },
+      {
+        "start": 188,
+        "end": 204,
+        "text": "Viana do Castelo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 221,
+        "end": 236,
+        "text": "Inês Figueiredo",
+        "label": "PESSOA"
+      },
+      {
+        "start": 261,
+        "end": 269,
+        "text": "Barcelos",
+        "label": "LOCAL"
+      },
+      {
+        "start": 287,
+        "end": 307,
+        "text": "associação criminosa",
+        "label": "CRIME"
+      },
+      {
+        "start": 309,
+        "end": 334,
+        "text": "fraude fiscal qualificada",
+        "label": "CRIME"
+      },
+      {
+        "start": 337,
+        "end": 362,
+        "text": "branqueamento de capitais",
+        "label": "CRIME"
+      },
+      {
+        "start": 457,
+        "end": 473,
+        "text": "Viana do Castelo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 475,
+        "end": 480,
+        "text": "Braga",
+        "label": "LOCAL"
+      },
+      {
+        "start": 483,
+        "end": 493,
+        "text": "Vila Verde",
+        "label": "LOCAL"
+      },
+      {
+        "start": 500,
+        "end": 517,
+        "text": "fevereiro de 2018",
+        "label": "DATA"
+      },
+      {
+        "start": 520,
+        "end": 535,
+        "text": "outubro de 2022",
+        "label": "DATA"
+      },
+      {
+        "start": 565,
+        "end": 580,
+        "text": "2 890 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 595,
+        "end": 601,
+        "text": "Estado",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 722,
+        "end": 729,
+        "text": "Bitcoin",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 840,
+        "end": 870,
+        "text": "rfigueiredo.gestao@hotmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 886,
+        "end": 897,
+        "text": "919 753 864",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 902,
+        "end": 919,
+        "text": "Mercedes Classe E",
+        "label": "VIATURA"
+      },
+      {
+        "start": 934,
+        "end": 942,
+        "text": "VC-67-PQ",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 948,
+        "end": 955,
+        "text": "Audi Q7",
+        "label": "VIATURA"
+      },
+      {
+        "start": 970,
+        "end": 978,
+        "text": "BG-22-RT",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 1050,
+        "end": 1072,
+        "text": "Unidade de Ação Fiscal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1074,
+        "end": 1077,
+        "text": "UAF",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1082,
+        "end": 1085,
+        "text": "GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1107,
+        "end": 1140,
+        "text": "Autoridade Tributária e Aduaneira",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1145,
+        "end": 1162,
+        "text": "Banco de Portugal",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-029",
+    "text": "Setúbal, 19 de março de 2022 — A Polícia Judiciária da Diretoria de Lisboa e Vale do Tejo deteve esta manhã Armindo Carvalho, de 44 anos, residente em Palmela, suspeito de burla qualificada e falsificação de documentos dirigida a idosos na região de Setúbal. O arguido fazia-se passar por técnico da EDP — Energias de Portugal, contactando as vítimas através do telemóvel 926 482 731 e marcando visitas domiciliárias sob pretexto de inspeções técnicas obrigatórias. Durante as visitas, o suspeito furtava joias, dinheiro e documentos de identificação das vítimas, tendo lesado um total de 23 idosos num valor estimado de 94 500 euros. As comunicações com eventuais cúmplices eram feitas através do endereço de email tecnico.edp.visitas@gmail.com. O veículo utilizado pelo arguido para se deslocar às residências das vítimas era um Peugeot Partner com a matrícula ST-44-MW, com logótipos falsos da empresa aposta na carroçaria. A investigação, que decorreu entre agosto de 2021 e fevereiro de 2022, foi conduzida pelo Núcleo de Investigação Criminal da GNR de Setúbal em colaboração com a Direção-Geral do Consumidor.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 7,
+        "text": "Setúbal",
+        "label": "LOCAL"
+      },
+      {
+        "start": 9,
+        "end": 28,
+        "text": "19 de março de 2022",
+        "label": "DATA"
+      },
+      {
+        "start": 33,
+        "end": 64,
+        "text": "Polícia Judiciária da Diretoria",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 68,
+        "end": 74,
+        "text": "Lisboa",
+        "label": "LOCAL"
+      },
+      {
+        "start": 77,
+        "end": 89,
+        "text": "Vale do Tejo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 108,
+        "end": 124,
+        "text": "Armindo Carvalho",
+        "label": "PESSOA"
+      },
+      {
+        "start": 151,
+        "end": 158,
+        "text": "Palmela",
+        "label": "LOCAL"
+      },
+      {
+        "start": 172,
+        "end": 189,
+        "text": "burla qualificada",
+        "label": "CRIME"
+      },
+      {
+        "start": 192,
+        "end": 218,
+        "text": "falsificação de documentos",
+        "label": "CRIME"
+      },
+      {
+        "start": 250,
+        "end": 257,
+        "text": "Setúbal",
+        "label": "LOCAL"
+      },
+      {
+        "start": 300,
+        "end": 303,
+        "text": "EDP",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 306,
+        "end": 326,
+        "text": "Energias de Portugal",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 372,
+        "end": 383,
+        "text": "926 482 731",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 497,
+        "end": 550,
+        "text": "furtava joias, dinheiro e documentos de identificação",
+        "label": "CRIME"
+      },
+      {
+        "start": 621,
+        "end": 633,
+        "text": "94 500 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 716,
+        "end": 745,
+        "text": "tecnico.edp.visitas@gmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 831,
+        "end": 846,
+        "text": "Peugeot Partner",
+        "label": "VIATURA"
+      },
+      {
+        "start": 863,
+        "end": 871,
+        "text": "ST-44-MW",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 962,
+        "end": 976,
+        "text": "agosto de 2021",
+        "label": "DATA"
+      },
+      {
+        "start": 979,
+        "end": 996,
+        "text": "fevereiro de 2022",
+        "label": "DATA"
+      },
+      {
+        "start": 1017,
+        "end": 1055,
+        "text": "Núcleo de Investigação Criminal da GNR",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1059,
+        "end": 1066,
+        "text": "Setúbal",
+        "label": "LOCAL"
+      },
+      {
+        "start": 1088,
+        "end": 1115,
+        "text": "Direção-Geral do Consumidor",
+        "label": "ORGANIZACAO"
+      }
+    ]
+  },
+  {
+    "id": "SIN-030",
+    "text": "Porto, 14 de março de 2024 — A Polícia Judiciária do Porto deteve Rui Manuel Ferreira Cardoso, de 41 anos, residente em Vila Nova de Gaia, suspeito de ter burlado dezenas de vítimas através de um esquema de investimento fraudulento em criptomoedas. O arguido criou uma plataforma online denominada CryptoLucro PT, através da qual prometia rendimentos mensais de 20% sobre o capital investido. As vítimas foram angariadas maioritariamente através das redes sociais, onde o arguido publicitava o esquema utilizando o endereço de email rui.cardoso.invest@gmail.com e o número de telemóvel 913 456 789. Os montantes investidos por cada vítima variavam entre 500 e 15 000 euros, tendo o prejuízo total estimado ultrapassado os 280 000 euros. As transferências recebidas eram imediatamente convertidas em Bitcoin, sendo os fundos enviados para a carteira bc1qm7r9jqzxkh8wvt5n3p4yc6ls2f0e1d8guvwk9 e posteriormente dispersos por múltiplas contas. O arguido foi presente a primeiro interrogatório judicial, tendo ficado sujeito a apresentações periódicas e proibição de se ausentar do país. Responde pelo crime de burla informática agravada e branqueamento de capitais.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 7,
+        "end": 26,
+        "text": "14 de março de 2024",
+        "label": "DATA"
+      },
+      {
+        "start": 31,
+        "end": 49,
+        "text": "Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 53,
+        "end": 58,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 66,
+        "end": 93,
+        "text": "Rui Manuel Ferreira Cardoso",
+        "label": "PESSOA"
+      },
+      {
+        "start": 120,
+        "end": 137,
+        "text": "Vila Nova de Gaia",
+        "label": "LOCAL"
+      },
+      {
+        "start": 155,
+        "end": 162,
+        "text": "burlado",
+        "label": "CRIME"
+      },
+      {
+        "start": 196,
+        "end": 247,
+        "text": "esquema de investimento fraudulento em criptomoedas",
+        "label": "CRIME"
+      },
+      {
+        "start": 533,
+        "end": 561,
+        "text": "rui.cardoso.invest@gmail.com",
+        "label": "EMAIL"
+      },
+      {
+        "start": 586,
+        "end": 597,
+        "text": "913 456 789",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 654,
+        "end": 657,
+        "text": "500",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 660,
+        "end": 672,
+        "text": "15 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 722,
+        "end": 735,
+        "text": "280 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 799,
+        "end": 806,
+        "text": "Bitcoin",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 849,
+        "end": 890,
+        "text": "bc1qm7r9jqzxkh8wvt5n3p4yc6ls2f0e1d8guvwk9",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 1097,
+        "end": 1132,
+        "text": "crime de burla informática agravada",
+        "label": "CRIME"
+      },
+      {
+        "start": 1135,
+        "end": 1160,
+        "text": "branqueamento de capitais",
+        "label": "CRIME"
+      }
+    ]
+  },
+  {
+    "id": "SIN-031",
+    "text": "Aveiro, 10 de julho de 2023 — O Tribunal Judicial de Aveiro condenou esta terça-feira Michael Morgan, de 47 anos, cidadão britânico residente em Ílhavo, a seis anos de prisão efetiva pelo crime de tráfico de armas e associação criminosa. Segundo a acusação do Ministério Público, o arguido liderava uma rede que introduzia ilegalmente armas de fogo no território nacional, provenientes da Sérvia e da Bulgária, vendendo-as a grupos criminosos na região Centro e Norte do país. As encomendas eram negociadas através do endereço de email m.morgan.arms@protonmail.com e do telemóvel 937 621 485. Os pagamentos eram efetuados exclusivamente em Monero para garantir o anonimato das transações. O arguido utilizava um Land Rover Defender com a matrícula IL-33-AV para o transporte das armas entre Aveiro e Porto. O prejuízo estimado para o Estado em termos de armamento ilegal em circulação ascende a 560 000 euros. A investigação, que decorreu entre janeiro de 2021 e junho de 2023, foi conduzida pela Unidade de Informação de Armas e Explosivos da Polícia Judiciária em colaboração com a Interpol.",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Aveiro",
+        "label": "LOCAL"
+      },
+      {
+        "start": 8,
+        "end": 27,
+        "text": "10 de julho de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 32,
+        "end": 49,
+        "text": "Tribunal Judicial",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 53,
+        "end": 59,
+        "text": "Aveiro",
+        "label": "LOCAL"
+      },
+      {
+        "start": 86,
+        "end": 100,
+        "text": "Michael Morgan",
+        "label": "PESSOA"
+      },
+      {
+        "start": 145,
+        "end": 151,
+        "text": "Ílhavo",
+        "label": "LOCAL"
+      },
+      {
+        "start": 197,
+        "end": 213,
+        "text": "tráfico de armas",
+        "label": "CRIME"
+      },
+      {
+        "start": 216,
+        "end": 236,
+        "text": "associação criminosa",
+        "label": "CRIME"
+      },
+      {
+        "start": 260,
+        "end": 278,
+        "text": "Ministério Público",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 312,
+        "end": 371,
+        "text": "introduzia ilegalmente armas de fogo no território nacional",
+        "label": "CRIME"
+      },
+      {
+        "start": 389,
+        "end": 395,
+        "text": "Sérvia",
+        "label": "LOCAL"
+      },
+      {
+        "start": 401,
+        "end": 409,
+        "text": "Bulgária",
+        "label": "LOCAL"
+      },
+      {
+        "start": 453,
+        "end": 467,
+        "text": "Centro e Norte",
+        "label": "LOCAL"
+      },
+      {
+        "start": 536,
+        "end": 564,
+        "text": "m.morgan.arms@protonmail.com",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 580,
+        "end": 591,
+        "text": "937 621 485",
+        "label": "TELEMOVEL"
+      },
+      {
+        "start": 640,
+        "end": 646,
+        "text": "Monero",
+        "label": "CRIPTO"
+      },
+      {
+        "start": 712,
+        "end": 731,
+        "text": "Land Rover Defender",
+        "label": "VIATURA"
+      },
+      {
+        "start": 748,
+        "end": 756,
+        "text": "IL-33-AV",
+        "label": "MATRICULA"
+      },
+      {
+        "start": 791,
+        "end": 797,
+        "text": "Aveiro",
+        "label": "LOCAL"
+      },
+      {
+        "start": 800,
+        "end": 805,
+        "text": "Porto",
+        "label": "LOCAL"
+      },
+      {
+        "start": 834,
+        "end": 840,
+        "text": "Estado",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 854,
+        "end": 884,
+        "text": "armamento ilegal em circulação",
+        "label": "CRIME"
+      },
+      {
+        "start": 895,
+        "end": 908,
+        "text": "560 000 euros",
+        "label": "MONTANTE"
+      },
+      {
+        "start": 945,
+        "end": 960,
+        "text": "janeiro de 2021",
+        "label": "DATA"
+      },
+      {
+        "start": 963,
+        "end": 976,
+        "text": "junho de 2023",
+        "label": "DATA"
+      },
+      {
+        "start": 997,
+        "end": 1062,
+        "text": "Unidade de Informação de Armas e Explosivos da Polícia Judiciária",
+        "label": "ORGANIZACAO"
+      },
+      {
+        "start": 1084,
+        "end": 1092,
+        "text": "Interpol",
+        "label": "ORGANIZACAO"
+      }
+    ]
   }
 ]
