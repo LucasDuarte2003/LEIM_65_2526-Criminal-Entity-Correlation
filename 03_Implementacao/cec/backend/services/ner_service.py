@@ -79,6 +79,48 @@ def _merge_entities(entidades_modelo: List[Dict], entidades_regex: List[Dict]) -
 
     resultado.sort(key=lambda e: (e["inicio"], e["fim"]))
     return resultado
+def _reagregar(entidades: List[Dict], desloc: int) -> List[Dict]:
+    """Passa offsets locais da frase para offsets do texto completo."""
+    for e in entidades:
+        e["inicio"] += desloc
+        e["fim"] += desloc
+    return entidades
+
+
+def run_ner_ambos_por_frases(frases: List[Dict]) -> dict:
+    """
+    Corre os dois modelos frase a frase e reagrega os offsets ao texto completo.
+    Resolve a truncagem (B3): cada frase cabe folgadamente nos limites dos modelos.
+    Nota: os modelos são carregados uma vez por pedido. Reutilizá-los entre
+    pedidos (B1) fica para a consolidação do NERManager.
+    """
+    modelo_xlm = ner_manager.get_xlm()
+    modelo_gliner = ner_manager.get_gliner()
+
+    ents_xlm, ents_gliner, ents_regex = [], [], []
+    for frase in frases:
+        texto = frase["texto"]
+        desloc = frase["inicio"]
+
+        raw_xlm = modelo_xlm.predict_entities(texto)
+        f_xlm = _convert_offsets_words(texto, raw_xlm) if (raw_xlm and "start_word" in raw_xlm[0]) else raw_xlm
+        ents_xlm.extend(_reagregar(f_xlm, desloc))
+        ents_gliner.extend(_reagregar(modelo_gliner.predict_entities(texto), desloc))
+        ents_regex.extend(_reagregar(extract_regex_entities(texto), desloc))
+
+    return {
+        "xlm": _merge_entities(ents_xlm, ents_regex),
+        "gliner": _merge_entities(ents_gliner, ents_regex),
+    }
+
+def run_ner_por_frases(frases: List[Dict]) -> List[Dict]:
+    """Corre o modelo ativo frase a frase e reagrega offsets ao texto completo."""
+    entidades = []
+    for frase in frases:
+        ents = run_ner(frase["texto"])
+        entidades.extend(_reagregar(ents, frase["inicio"]))
+    return entidades
+
 def run_ner_ambos(texto: str) -> dict:
     """
     Corre os dois modelos em paralelo e devolve entidades de cada um.

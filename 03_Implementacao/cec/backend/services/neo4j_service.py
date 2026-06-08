@@ -643,17 +643,30 @@ def exportar_dados_treino() -> list:
                 word_starts.append(pos)
                 pos += len(palavra)
 
-            labels = ["O"] * len(tokens)
-            for ent in entidades:
-                tipo = ent["tipo"]
-                inicio = ent["inicio"]
-                fim = ent["fim"]
-                primeiro = True
-                for i, (word, start) in enumerate(zip(tokens, word_starts)):
-                    end = start + len(word)
-                    if start >= inicio and end <= fim:
-                        labels[i] = f"{'B' if primeiro else 'I'}-{tipo}"
-                        primeiro = False
+            # Rótulo por caractere: que entidade é dona de cada char da frase.
+            # Tolerante a pontuação colada e a edições manuais que não casem
+            # exatamente com as fronteiras dos tokens (resolve o T1).
+            char_ent = [-1] * len(texto)
+            for idx, ent in enumerate(entidades):
+                if ent["inicio"] is None or ent["fim"] is None:
+                    continue
+                for c in range(max(0, ent["inicio"]), min(len(texto), ent["fim"])):
+                    char_ent[c] = idx
+
+            labels = []
+            ent_anterior = -1
+            for word, start in zip(tokens, word_starts):
+                end = start + len(word)
+                ents_no_token = [char_ent[c] for c in range(start, end) if char_ent[c] != -1]
+                if not ents_no_token:
+                    labels.append("O")
+                    ent_anterior = -1
+                    continue
+                # entidade dominante = a que cobre mais caracteres do token
+                idx = max(set(ents_no_token), key=ents_no_token.count)
+                prefixo = "B" if idx != ent_anterior else "I"
+                labels.append(f"{prefixo}-{entidades[idx]['tipo']}")
+                ent_anterior = idx
 
             if any(l != "O" for l in labels):
                 dados.append({"tokens": tokens, "labels": labels})

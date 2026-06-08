@@ -56,9 +56,8 @@ class NoticiasRouter(BaseApiRouter):
 
         if body.modo == "ambos":
             import copy
-            resultado = self._ner_service.run_ner_ambos(texto)
-            # Gera as frases UMA vez — ambos os modelos partilham os mesmos IDs
             frases_base = self._sentence_splitter.split_sentences(texto, noticia_id)
+            resultado = self._ner_service.run_ner_ambos_por_frases(frases_base)
             frases_xlm = self._graph_builder.assign_entities_to_sentences(
                 copy.deepcopy(frases_base), resultado["xlm"]
             )
@@ -73,8 +72,8 @@ class NoticiasRouter(BaseApiRouter):
                 modo="ambos",
             )
         else:
-            entidades = self._ner_service.run_ner(texto)
             frases = self._sentence_splitter.split_sentences(texto, noticia_id)
+            entidades = self._ner_service.run_ner_por_frases(frases)
             frases = self._graph_builder.assign_entities_to_sentences(frases, entidades)
             return {"id": noticia_id, "titulo": titulo, "frases": frases}
 
