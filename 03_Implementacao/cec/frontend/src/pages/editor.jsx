@@ -23,7 +23,7 @@ export default function Editor() {
 
     const {
         lista, noticia, frasesGliner, isLoading,
-        selecionar, adicionarNoticia, guardar,
+        selecionar, adicionarNoticia, adicionarFicheiro, guardar,
         atualizarFrase, atualizarFraseGliner, apagarNoticia, removerDaLista,
     } = useNoticias(pastaId);
 
@@ -58,7 +58,6 @@ export default function Editor() {
         shortcut: LABEL_SHORTCUTS[index] || null,
     }));
 
-    // Atalhos de teclado para labels
     useEffect(() => {
         const handleKeyDown = (event) => {
             const tag = document.activeElement?.tagName;
@@ -71,8 +70,6 @@ export default function Editor() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [labelsComAtalho]);
 
-    // Selecciona noticia passada via query param ?noticia=id
-    // Aguarda que a lista esteja carregada antes de seleccionar
     useEffect(() => {
         const noticiaId = searchParams.get("noticia");
         if (!noticiaId || lista.length === 0) return;
@@ -200,6 +197,7 @@ export default function Editor() {
                 pastaId={pastaId}
                 onSelecionar={selecionar}
                 onAdicionar={(texto) => adicionarNoticia(texto, pastaId)}
+                onAdicionarFicheiro={(ficheiro) => adicionarFicheiro(ficheiro, pastaId)}
                 onApagar={handleApagarNoticia}
                 onMover={removerDaLista}
                 onMudarPasta={handleMudarPasta}

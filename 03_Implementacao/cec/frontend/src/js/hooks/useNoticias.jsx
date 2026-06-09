@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  getPasta, getNoticia, predictNoticia,
+  getPasta, getNoticia, predictNoticia, predictFicheiro,
   guardarNoticia, apagarNoticia as apagarNoticiaApi,
 } from "../api/client.jsx";
 
@@ -53,6 +53,28 @@ export function useNoticias(pastaId) {
       setIsLoading(false);
     }
   };
+
+  const adicionarFicheiro = async (ficheiro, pastaIdDestino) => {
+  setIsLoading(true);
+  setFrasesGliner(null);
+  const modo = localStorage.getItem("modoExtracao") || "xlm-roberta";
+  try {
+    const nova = await predictFicheiro(ficheiro, pastaIdDestino, modo);
+    if (nova.modo === "ambos") {
+      const noticiaBase = { id: nova.id, titulo: nova.titulo, frases: nova.frases };
+      setFrasesGliner(nova.frases_gliner);
+      setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
+      setNoticia(noticiaBase);
+    } else {
+      setLista((prev) => [...prev, { id: nova.id, titulo: nova.titulo }]);
+      setNoticia(nova);
+    }
+  } catch (e) {
+    setErro(e.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const guardar = async (onSucesso) => {
     if (!noticia) return;
@@ -114,7 +136,7 @@ export function useNoticias(pastaId) {
 
   return {
     lista, noticia, frasesGliner, isLoading, erro,
-    selecionar, adicionarNoticia, guardar,
+    selecionar, adicionarNoticia, adicionarFicheiro ,guardar,
     apagarNoticia, atualizarFrase, atualizarFraseGliner,
     removerDaLista, mudarParaModelo,
   };

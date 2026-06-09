@@ -137,3 +137,22 @@ export const getInvestigar = (nome, tipo, ambito) => {
   if (tipo) params.append("tipo", tipo);
   return request(`/investigar/?${params}`);
 };
+
+export const predictFicheiro = (ficheiro, pastaId, modo = "xlm-roberta") => {
+  const formData = new FormData();
+  formData.append("ficheiro", ficheiro);
+  formData.append("pasta_id", pastaId);
+  formData.append("modo", modo);
+
+  return fetch(`${BASE}/noticias/predict-ficheiro`, {
+    method: "POST",
+    body: formData,
+    // sem Content-Type — o browser define automaticamente o boundary do multipart
+  }).then(async (res) => {
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `Erro ${res.status}`);
+    }
+    return res.json();
+  });
+};

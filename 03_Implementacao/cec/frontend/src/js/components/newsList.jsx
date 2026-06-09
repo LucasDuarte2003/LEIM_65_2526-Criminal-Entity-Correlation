@@ -70,10 +70,13 @@ class NewsListHandler {
     const files = Array.from(fileList || []);
     if (!files.length) return;
     for (const file of files) {
-      const content = await this.lerFicheiro(file);
-      await this.component.props.onAdicionar(content);
+      if (file.name.toLowerCase().endsWith(".pdf")) {
+        await this.component.props.onAdicionarFicheiro(file);
+      } else {
+        const content = await this.lerFicheiro(file);
+        await this.component.props.onAdicionar(content);
+      }
     }
-    // onAdicionar é assíncrono — aguarda antes de recarregar
     await this.carregarHierarquia();
   }
 
@@ -172,7 +175,7 @@ class NewsListRenderer {
                 {isLoading ? "A analisar..." : "+ Adicionar"}
                 <input
                   type="file"
-                  accept=".txt"
+                  accept=".txt, .pdf"
                   multiple
                   className="news-list-file-input"
                   disabled={isLoading}
