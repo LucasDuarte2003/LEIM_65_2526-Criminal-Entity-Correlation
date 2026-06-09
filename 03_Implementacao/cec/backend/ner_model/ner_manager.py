@@ -23,6 +23,25 @@ class NERManager:
         self._ultimo_treino = None
         self._a_treinar = False
 
+    def iniciar_treino(self) -> bool:
+        """Marca o início de um treino de forma atómica.
+        Devolve False se já houver um treino a decorrer (resolve a race condition)."""
+        with self._lock:
+            if self._a_treinar:
+                return False
+            self._a_treinar = True
+            return True
+
+    def terminar_treino(self) -> None:
+        """Marca o fim de um treino."""
+        with self._lock:
+            self._a_treinar = False
+
+    def esta_a_treinar(self) -> bool:
+        """Indica se há um treino a decorrer."""
+        with self._lock:
+            return self._a_treinar
+
     def get_xlm(self):
         """Devolve a instância xlm-roberta, carregando-a uma única vez."""
         with self._lock:
