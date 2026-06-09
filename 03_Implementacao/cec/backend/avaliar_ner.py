@@ -1,9 +1,6 @@
 """
 avaliar_ner.py — treino e avaliação do modelo NER (XLM-RoBERTa) com métricas por tipo.
 
-Onde colocar: na pasta `backend/` (mesmo nível de `services/` e `ner_model/`).
-Como correr (a partir de backend/):
-
     # 1) Avaliar o modelo que já tens em ner_model/saved_model
     python avaliar_ner.py --modo avaliar-atual
 
