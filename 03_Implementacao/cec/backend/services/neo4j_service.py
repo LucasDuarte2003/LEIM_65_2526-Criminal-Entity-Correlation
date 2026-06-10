@@ -6,8 +6,8 @@ from ner_model.data.labels import LABEL2ID
 
 # --- Ligação ---
 
-URI      = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-USER     = os.getenv("NEO4J_USER", "neo4j")
+URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+USER = os.getenv("NEO4J_USER", "neo4j")
 PASSWORD = os.getenv("NEO4J_PASSWORD", "")
 
 _driver = None
@@ -120,7 +120,7 @@ def _write_noticia(tx, noticia: Dict) -> None:
             MATCH (n:Noticia {id: $noticia_id})
             CREATE (n)-[:TEM_FRASE]->(f)
         """, id=frase["id"], texto=frase["texto"],
-             ordem=frase["ordem"], noticia_id=noticia["id"])
+               ordem=frase["ordem"], noticia_id=noticia["id"])
 
         for ent in frase["entidades"]:
             tx.run("""
@@ -129,7 +129,7 @@ def _write_noticia(tx, noticia: Dict) -> None:
                 MATCH (f:Frase {id: $frase_id})
                 CREATE (e)-[:MENCIONADA_EM {inicio: $inicio, fim: $fim}]->(f)
             """, nome=ent["nome"], tipo=ent["tipo"],
-                 frase_id=frase["id"], inicio=ent["inicio"], fim=ent["fim"])
+                   frase_id=frase["id"], inicio=ent["inicio"], fim=ent["fim"])
 
         pares = build_cooccurrences(frase["entidades"])
         for e1, e2 in pares:
@@ -138,8 +138,8 @@ def _write_noticia(tx, noticia: Dict) -> None:
                 MATCH (b:Entidade {nome: $nome2, tipo: $tipo2})
                 MERGE (a)-[:CO_OCORRE_COM {frase_id: $frase_id}]->(b)
             """, nome1=e1["nome"], tipo1=e1["tipo"],
-                 nome2=e2["nome"], tipo2=e2["tipo"],
-                 frase_id=frase["id"])
+                   nome2=e2["nome"], tipo2=e2["tipo"],
+                   frase_id=frase["id"])
 
 
 def delete_noticia(noticia_id: str) -> bool:
@@ -347,17 +347,17 @@ def get_all_labels() -> List[Dict]:
 
 def init_labels() -> None:
     defaults = [
-        ("PESSOA",      "#4A90D9"),
-        ("LOCAL",       "#27AE60"),
+        ("PESSOA", "#4A90D9"),
+        ("LOCAL", "#27AE60"),
         ("ORGANIZACAO", "#E67E22"),
-        ("CRIME",       "#E74C3C"),
-        ("DATA",        "#9B59B6"),
-        ("VIATURA",     "#1ABC9C"),
-        ("MATRICULA",   "#F39C12"),
-        ("TELEMOVEL",   "#2ECC71"),
-        ("EMAIL",       "#3498DB"),
-        ("CRIPTO",      "#E91E63"),
-        ("MONTANTE",    "#FF9800"),
+        ("CRIME", "#E74C3C"),
+        ("DATA", "#9B59B6"),
+        ("VIATURA", "#1ABC9C"),
+        ("MATRICULA", "#F39C12"),
+        ("TELEMOVEL", "#2ECC71"),
+        ("EMAIL", "#3498DB"),
+        ("CRIPTO", "#E91E63"),
+        ("MONTANTE", "#FF9800"),
     ]
     with get_driver().session(database="cec") as session:
         for nome, cor in defaults:
@@ -499,14 +499,15 @@ def get_grafo_relacionadas(frase_id: str, nomes_visiveis: list, ambito: str = "g
                     })
 
         arestas_unicas = list({
-            f"{a['origem']}_{a['destino']}": a for a in arestas
-        }.values())
+                                  f"{a['origem']}_{a['destino']}": a for a in arestas
+                              }.values())
         todos_nos = list(nos_origem.values()) + list(nos_novos.values())
         return {
             "nos": todos_nos,
             "arestas": arestas_unicas,
             "tem_resultados": len(nos_novos) > 0,
         }
+
 
 def get_all_pastas() -> List[Dict]:
     """Devolve todas as pastas de todos os projetos."""
@@ -526,6 +527,7 @@ def get_all_pastas() -> List[Dict]:
             }
             for r in result
         ]
+
 
 def get_grafo_frases_fundidas(frase_ids: list) -> Dict:
     """Devolve o grafo combinado de duas frases."""
@@ -552,10 +554,11 @@ def get_grafo_frases_fundidas(frase_ids: list) -> Dict:
             })
 
         arestas_unicas = list({
-            f"{a['origem']}_{a['destino']}": a for a in arestas
-        }.values())
+                                  f"{a['origem']}_{a['destino']}": a for a in arestas
+                              }.values())
 
         return {"nos": list(nos_vistos.values()), "arestas": arestas_unicas}
+
 
 def get_hierarquia() -> List[Dict]:
     """Devolve todos os projetos com pastas e notícias para a sidebar."""
@@ -673,6 +676,7 @@ def exportar_dados_treino() -> list:
 
         return dados
 
+
 def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
     """
     Devolve as notícias mais semelhantes comparando frase a frase.
@@ -759,6 +763,7 @@ def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
             })
 
         return resultados
+
 
 def get_investigar(nome: str, tipo: str = None, ambito: str = "global") -> dict:
     """
@@ -853,3 +858,54 @@ def get_investigar(nome: str, tipo: str = None, ambito: str = "global") -> dict:
             "grafo": {"nos": nos, "arestas": arestas},
             "relacionadas": relacionadas,
         }
+
+
+# --- Histórico de retreinos ---
+
+def registar_retreino(f1: float, n_frases: int, epocas: int, promovido: bool) -> None:
+    """Guarda o resultado de um retreino no histórico (nó :Retreino)."""
+    import datetime
+    with get_driver().session(database="cec") as session:
+        session.run("""
+            CREATE (r:Retreino {
+                timestamp: $timestamp,
+                f1: $f1,
+                n_frases: $n_frases,
+                epocas: $epocas,
+                promovido: $promovido
+            })
+        """, timestamp=datetime.datetime.now().isoformat(),
+                    f1=f1, n_frases=n_frases, epocas=epocas, promovido=promovido)
+
+
+def melhor_f1_promovido():
+    """Maior F1 entre os retreinos promovidos, ou None se ainda não houver."""
+    with get_driver().session(database="cec") as session:
+        result = session.run("""
+            MATCH (r:Retreino {promovido: true})
+            RETURN max(r.f1) AS melhor
+        """)
+        registo = result.single()
+        return registo["melhor"] if registo else None
+
+
+def historico_retreinos() -> List[Dict]:
+    """Histórico de retreinos por ordem cronológica (para gráficos/relatório)."""
+    with get_driver().session(database="cec") as session:
+        result = session.run("""
+            MATCH (r:Retreino)
+            RETURN r.timestamp AS timestamp, r.f1 AS f1,
+                   r.n_frases AS n_frases, r.epocas AS epocas,
+                   r.promovido AS promovido
+            ORDER BY r.timestamp
+        """)
+        return [
+            {
+                "timestamp": r["timestamp"],
+                "f1": r["f1"],
+                "n_frases": r["n_frases"],
+                "epocas": r["epocas"],
+                "promovido": r["promovido"],
+            }
+            for r in result
+        ]

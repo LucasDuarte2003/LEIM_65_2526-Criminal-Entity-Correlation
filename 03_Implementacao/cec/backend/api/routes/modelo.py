@@ -31,7 +31,7 @@ class ModeloRouter(BaseApiRouter):
 
     def retreinar(self, background_tasks: BackgroundTasks):
         """Lança um retreino manual em background."""
-        if self._ner_manager._a_treinar:
+        if self._ner_manager.esta_a_treinar():
             raise HTTPException(status_code=409, detail="Retreino já em curso.")
         if self._trainer is None:
             raise HTTPException(status_code=503, detail="Trainer não configurado.")

@@ -88,19 +88,23 @@ def treinar_de_raiz(dados_treino: list, epocas: int = 12, lr: float = 3e-5, batc
     total = len(loader) * epocas
     scheduler = get_linear_schedule_with_warmup(optimizer, max(1, total // 10), total)
 
+    print(f"[retreino] device: {device} | {len(dados_treino)} frases | {epocas} épocas", flush=True)
     modelo.train()
-    for _ in range(epocas):
+    for epoca in range(epocas):
+        perda_total = 0.0
         for b in loader:
             saidas = modelo(
                 input_ids=b["input_ids"].to(device),
                 attention_mask=b["attention_mask"].to(device),
                 labels=b["labels"].to(device),
             )
+            perda_total += saidas.loss.item()
             saidas.loss.backward()
             torch.nn.utils.clip_grad_norm_(modelo.parameters(), 1.0)
             optimizer.step()
             scheduler.step()
             optimizer.zero_grad()
+        print(f"  época {epoca + 1}/{epocas} | loss {perda_total / len(loader):.4f}", flush=True)
     modelo.eval()
     return modelo, tokenizer
 
