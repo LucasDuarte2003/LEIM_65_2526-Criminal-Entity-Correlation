@@ -1,9 +1,9 @@
 """
-Treino de raiz e avaliação partilhados do subsistema NER.
+Motor partilhado de treino e avaliação do subsistema NER.
 
 Fonte única de "como treinamos (desde xlm-roberta-base) e como medimos (seqeval)".
-Usado pelo Trainer para o retreino seguro. O avaliar_ner.py pode passar a importar
-daqui mais tarde, para não haver duas formas de medir.
+É um módulo de lógica, sem interface de consola — importado tanto pelo Trainer
+(retreino em background na app) como pelo script avaliar_ner.py (uso manual).
 """
 
 import random

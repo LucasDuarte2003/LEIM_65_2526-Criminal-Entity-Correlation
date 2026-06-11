@@ -4,12 +4,12 @@ import time
 
 logger = logging.getLogger(__name__)
 
-INTERVALO_VERIFICACAO = 300       # 5 minutos entre verificações
-MIN_NOTICIAS_PARA_TREINO = 5      # nº de notícias novas que dispara um retreino
-MIN_FRASES_PARA_TREINO = 20       # mínimo de frases anotadas para valer a pena treinar
-FRAC_VALIDACAO = 0.2              # fração reservada para medir o candidato
-EPOCAS_RETREINO = 8               # menos épocas: a placa é fraca e 12 fazia overfit
-MAX_SHARD = "200MB"               # shards pequenos ao gravar (evita pico de RAM)
+INTERVALO_VERIFICACAO = 300
+MIN_NOTICIAS_PARA_TREINO = 5
+MIN_FRASES_PARA_TREINO = 20
+FRAC_VALIDACAO = 0.2
+EPOCAS_RETREINO = 8
+MAX_SHARD = "200MB"
 
 
 class Trainer:
@@ -71,7 +71,7 @@ class Trainer:
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-        # 1) Grava para uma pasta temporária. Se falhar aqui, produção fica intacta.
+        # Grava para uma pasta temporária. Se falhar aqui, produção fica intacta.
         temp_dir = MODEL_PATH + "__novo"
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
@@ -82,7 +82,7 @@ class Trainer:
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-        # 2) Troca a pasta de produção pela nova, com backup para poder reverter.
+        # Troca a pasta de produção pela nova, com backup para poder reverter.
         backup_dir = MODEL_PATH + "__old"
         if os.path.exists(backup_dir):
             shutil.rmtree(backup_dir)
@@ -93,14 +93,14 @@ class Trainer:
             os.rename(backup_dir, MODEL_PATH)  # reverte e propaga
             raise
 
-        # 3) Carrega o novo modelo (liberta o antigo) antes de limpar o backup.
+        # Carrega o novo modelo (liberta o antigo) antes de limpar o backup.
         from ner_model.xlm_roberta_model import NERModel
         self._ner_manager.trocar_modelo(NERModel(), "xlm-roberta")
         gc.collect()
         try:
             shutil.rmtree(backup_dir)
         except Exception:
-            pass  # se ficar preso por handles, não é crítico — limpa-se depois
+            pass
 
     def _executar_treino(self):
         """Retreino seguro: treina candidato, avalia, e promove só se melhorar."""

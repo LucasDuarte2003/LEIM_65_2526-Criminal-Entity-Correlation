@@ -75,15 +75,19 @@ class NERManager:
         return self._modelo_ativo().predict_entities(texto)
 
     def trocar_modelo(self, novo_modelo, tipo: str):
-        """Substitui a instância em cache após um retreino (hot-swap)."""
+        """Substitui a instância em cache após um retreino (hot-swap).
+
+        Atualiza só os pesos em cache do tipo indicado; não mexe no modelo
+        atualmente selecionado (_tipo), para um retreino em background não
+        roubar a escolha do utilizador.
+        """
         with self._lock:
             if tipo == "gliner":
                 self._gliner = novo_modelo
             else:
                 self._xlm = novo_modelo
-            self._tipo = tipo
             self._ultimo_treino = datetime.datetime.now().isoformat()
-        logger.info(f"Modelo trocado para: {tipo}")
+        logger.info(f"Instância '{tipo}' atualizada (hot-swap).")
 
     def set_tipo(self, tipo: str):
         """Altera o tipo de modelo a usar nas próximas predições."""
