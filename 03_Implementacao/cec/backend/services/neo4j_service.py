@@ -764,6 +764,7 @@ def get_noticias_semelhantes(noticia_id: str, limite: int = 3) -> List[Dict]:
 
         return resultados
 
+
 def _frases_no_ambito(session, ambito: str, ambito_id):
     """Ids das frases dentro do âmbito escolhido.
     None = global (sem filtro); lista (mesmo vazia) = âmbito específico."""
@@ -789,7 +790,6 @@ def _frases_no_ambito(session, ambito: str, ambito_id):
     return session.run(q, aid=ambito_id).single()["frases"]
 
 def get_investigar(nome: str, tipo: str = None, ambito: str = "global", ambito_id: str = None) -> dict:
-
     """
     Pesquisa uma entidade pelo nome e devolve notícias onde aparece,
     grafo de co-ocorrências e entidades relacionadas. Pode limitar o
