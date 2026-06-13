@@ -29,17 +29,25 @@
 }
 
 .frase {
-  display: inline;
+  display: block;
+  padding: 5px 12px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  transition: background 0.12s;
 }
 
-.frase-ativa {
-  background: rgba(255, 255, 255, 0.025);
-  border-radius: 2px;
+.frase:hover {
+  background: rgba(127, 127, 127, 0.08);
 }
 
-.frase-fundida {
-  background: rgba(79, 124, 255, 0.06);
-  border-radius: 2px;
+.frase.frase-ativa {
+  background: rgba(127, 127, 127, 0.14);
+  border-radius: 6px;
+}
+
+.frase.frase-fundida {
+  background: rgba(79, 124, 255, 0.12);
+  border-radius: 6px;
 }
 
 /* ── Entidade em conflito entre modelos ── */

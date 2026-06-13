@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ForceGraph2D from "react-force-graph-2d";
-import { getInvestigar } from "../js/api/client.jsx";
+import { getInvestigar, getHierarquia } from "../js/api/client.jsx";
 import { useLabels } from "../js/hooks/useLabels.jsx";
 import "../static/css/investigar.css";
 
@@ -18,29 +18,36 @@ export default function Investigar() {
     const [query, setQuery] = useState(searchParams.get("nome") || "");
     const [tipoFiltro, setTipoFiltro] = useState("");
     const [ambito, setAmbito] = useState("global");
+    const [ambitoId, setAmbitoId] = useState("");
+    const [hierarquia, setHierarquia] = useState(null);
     const [resultado, setResultado] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [erro, setErro] = useState(null);
 
     const inputRef = useRef(null);
 
+    // Carrega a hierarquia (projetos → pastas → notícias) para o seletor de âmbito
+    useEffect(() => {
+        getHierarquia().then(setHierarquia).catch(() => setHierarquia([]));
+    }, []);
+
     // Se veio com ?nome= na URL, pesquisa automaticamente
     useEffect(() => {
         const nomeParam = searchParams.get("nome");
         if (nomeParam) {
             setQuery(nomeParam);
-            executarPesquisa(nomeParam, "", "global");
+            executarPesquisa(nomeParam, "", "global", "");
         } else {
             inputRef.current?.focus();
         }
     }, []);
 
-    const executarPesquisa = async (nome, tipo, amb) => {
+    const executarPesquisa = async (nome, tipo, amb, ambId) => {
         if (!nome?.trim()) return;
         setIsLoading(true);
         setErro(null);
         try {
-            const data = await getInvestigar(nome.trim(), tipo || null, amb);
+            const data = await getInvestigar(nome.trim(), tipo || null, amb, ambId || null);
             setResultado(data);
         } catch {
             setErro("Erro ao pesquisar. Tenta novamente.");
@@ -50,7 +57,7 @@ export default function Investigar() {
         }
     };
 
-    const handlePesquisar = () => executarPesquisa(query, tipoFiltro, ambito);
+    const handlePesquisar = () => executarPesquisa(query, tipoFiltro, ambito, ambitoId);
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") handlePesquisar();
@@ -64,25 +71,52 @@ export default function Investigar() {
 
     const handleEntidadeRelacionadaClick = (nome) => {
         setQuery(nome);
-        executarPesquisa(nome, tipoFiltro, ambito);
+        executarPesquisa(nome, tipoFiltro, ambito, ambitoId);
     };
 
-    const buildGrafoData = () => {
-        if (!resultado?.grafo) return { nodes: [], links: [] };
-        return {
-            nodes: resultado.grafo.nos.map((n) => ({
-                id: n.id,
-                name: n.nome,
-                tipo: n.tipo,
-                origem: n.origem,
-                color: labelMap[n.tipo] || "#aaa",
-            })),
-            links: resultado.grafo.arestas.map((a) => ({
-                source: a.origem,
-                target: a.destino,
-            })),
-        };
+    // Opções do segundo seletor consoante o âmbito escolhido
+    const opcoesAmbito = () => {
+        if (!hierarquia) return [];
+        if (ambito === "projeto") {
+            return hierarquia.map((proj) => ({ value: proj.id, label: proj.nome }));
+        }
+        if (ambito === "pasta") {
+            return hierarquia.flatMap((proj) =>
+                proj.pastas.map((pasta) => ({ value: pasta.id, label: `${proj.nome} / ${pasta.nome}` }))
+            );
+        }
+        if (ambito === "documento") {
+            return hierarquia.flatMap((proj) =>
+                proj.pastas.flatMap((pasta) =>
+                    pasta.noticias.map((n) => ({ value: n.id, label: n.titulo }))
+                )
+            );
+        }
+        return [];
     };
+
+    const placeholderAmbito = {
+        projeto: "Escolher projeto...",
+        pasta: "Escolher pasta...",
+        documento: "Escolher documento...",
+    };
+
+    const grafoData = useMemo(() => {
+            if (!resultado?.grafo) return { nodes: [], links: [] };
+            return {
+                nodes: resultado.grafo.nos.map((n) => ({
+                    id: n.id,
+                    name: n.nome,
+                    tipo: n.tipo,
+                    origem: n.origem,
+                    color: labelMap[n.tipo] || "#aaa",
+                })),
+                links: resultado.grafo.arestas.map((a) => ({
+                    source: a.origem,
+                    target: a.destino,
+                })),
+            };
+        }, [resultado, labelMap]);
 
     const renderNode = (node, ctx, globalScale) => {
         const radius = node.origem ? 8 : 5;
@@ -101,7 +135,7 @@ export default function Investigar() {
 
         ctx.font = `${fontSize}px Sans-Serif`;
         ctx.fillStyle = getComputedStyle(document.documentElement)
-    .getPropertyValue("--graph-text").trim() || "#ffffff";
+            .getPropertyValue("--graph-text").trim() || "#ffffff";
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
         ctx.fillText(
@@ -133,7 +167,13 @@ export default function Investigar() {
                 <select
                     className="investigar-select"
                     value={tipoFiltro}
-                    onChange={(e) => setTipoFiltro(e.target.value)}
+                    onChange={(e) => {
+                        const novoTipo = e.target.value;
+                        setTipoFiltro(novoTipo);
+                        if (resultado?.entidade) {
+                            executarPesquisa(resultado.entidade.nome, novoTipo, ambito, ambitoId);
+                        }
+                    }}
                 >
                     <option value="">Todos os tipos</option>
                     {TIPOS_ENTIDADE.map((t) => (
@@ -143,17 +183,42 @@ export default function Investigar() {
                 <select
                     className="investigar-select"
                     value={ambito}
-                    onChange={(e) => setAmbito(e.target.value)}
+                    onChange={(e) => {
+                        const novoAmbito = e.target.value;
+                        setAmbito(novoAmbito);
+                        setAmbitoId("");
+                        if (resultado?.entidade && novoAmbito === "global") {
+                            executarPesquisa(resultado.entidade.nome, tipoFiltro, "global", "");
+                        }
+                    }}
                 >
                     <option value="global">Global</option>
                     <option value="projeto">Projeto</option>
                     <option value="pasta">Pasta</option>
                     <option value="documento">Documento</option>
                 </select>
+                {ambito !== "global" && (
+                    <select
+                        className="investigar-select"
+                        value={ambitoId}
+                        onChange={(e) => {
+                            const novoId = e.target.value;
+                            setAmbitoId(novoId);
+                            if (resultado?.entidade && novoId) {
+                                executarPesquisa(resultado.entidade.nome, tipoFiltro, ambito, novoId);
+                            }
+                        }}
+                    >
+                        <option value="">{placeholderAmbito[ambito]}</option>
+                        {opcoesAmbito().map((o) => (
+                            <option key={o.value} value={o.value}>{o.label}</option>
+                        ))}
+                    </select>
+                )}
                 <button
                     className="investigar-btn-pesquisar"
                     onClick={handlePesquisar}
-                    disabled={isLoading || !query.trim()}
+                    disabled={isLoading || !query.trim() || (ambito !== "global" && !ambitoId)}
                 >
                     {isLoading ? "A pesquisar..." : "Pesquisar"}
                 </button>
@@ -223,12 +288,12 @@ export default function Investigar() {
                                 <p className="investigar-vazio">Sem co-ocorrências encontradas.</p>
                             ) : (
                                 <ForceGraph2D
-                                    graphData={buildGrafoData()}
+                                    graphData={grafoData}
                                     width={380}
                                     height={380}
                                     nodeLabel={(n) => `${n.name} (${n.tipo})`}
                                     nodeRelSize={6}
-                                    linkColor={() => "rgba(255,255,255,0.15)"}
+                                    linkColor={() => "rgba(120, 120, 120, 0.4)"}
                                     nodeCanvasObject={renderNode}
                                     onNodeDoubleClick={(node) => handleEntidadeRelacionadaClick(node.name)}
                                 />

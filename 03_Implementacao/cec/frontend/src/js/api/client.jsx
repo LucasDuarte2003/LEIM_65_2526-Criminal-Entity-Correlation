@@ -132,9 +132,10 @@ export const getNoticias_semelhantes = (noticiaId) =>
 export const getHierarquia = () =>
   request("/projetos/hierarquia");
 
-export const getInvestigar = (nome, tipo, ambito) => {
+export const getInvestigar = (nome, tipo, ambito, ambitoId) => {
   const params = new URLSearchParams({ nome, ambito });
   if (tipo) params.append("tipo", tipo);
+  if (ambitoId) params.append("ambito_id", ambitoId);
   return request(`/investigar/?${params}`);
 };
 

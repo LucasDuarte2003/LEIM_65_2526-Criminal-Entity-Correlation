@@ -23,6 +23,25 @@ class NERManager:
         self._ultimo_treino = None
         self._a_treinar = False
 
+    def iniciar_treino(self) -> bool:
+        """Marca o início de um treino de forma atómica.
+        Devolve False se já houver um treino a decorrer (resolve a race condition)."""
+        with self._lock:
+            if self._a_treinar:
+                return False
+            self._a_treinar = True
+            return True
+
+    def terminar_treino(self) -> None:
+        """Marca o fim de um treino."""
+        with self._lock:
+            self._a_treinar = False
+
+    def esta_a_treinar(self) -> bool:
+        """Indica se há um treino a decorrer."""
+        with self._lock:
+            return self._a_treinar
+
     def get_xlm(self):
         """Devolve a instância xlm-roberta, carregando-a uma única vez."""
         with self._lock:
@@ -56,15 +75,19 @@ class NERManager:
         return self._modelo_ativo().predict_entities(texto)
 
     def trocar_modelo(self, novo_modelo, tipo: str):
-        """Substitui a instância em cache após um retreino (hot-swap)."""
+        """Substitui a instância em cache após um retreino (hot-swap).
+
+        Atualiza só os pesos em cache do tipo indicado; não mexe no modelo
+        atualmente selecionado (_tipo), para um retreino em background não
+        roubar a escolha do utilizador.
+        """
         with self._lock:
             if tipo == "gliner":
                 self._gliner = novo_modelo
             else:
                 self._xlm = novo_modelo
-            self._tipo = tipo
             self._ultimo_treino = datetime.datetime.now().isoformat()
-        logger.info(f"Modelo trocado para: {tipo}")
+        logger.info(f"Instância '{tipo}' atualizada (hot-swap).")
 
     def set_tipo(self, tipo: str):
         """Altera o tipo de modelo a usar nas próximas predições."""

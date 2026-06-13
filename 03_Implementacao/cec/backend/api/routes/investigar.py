@@ -18,13 +18,15 @@ class InvestigarRouter(BaseApiRouter):
     def _register_routes(self) -> None:
         self.router.add_api_route("/", self.investigar, methods=["GET"])
 
-    def investigar(self, nome: str, tipo: Optional[str] = None, ambito: str = "global"):
+    def investigar(self, nome: str, tipo: Optional[str] = None,
+                   ambito: str = "global", ambito_id: Optional[str] = None):
         """
         Pesquisa uma entidade pelo nome e devolve:
         - as notícias onde aparece
         - o grafo de co-ocorrências
         - entidades que co-ocorrem com ela (para cruzamento)
         """
+
         if not nome or not nome.strip():
             raise HTTPException(status_code=400, detail="Nome da entidade obrigatório")
-        return self._neo4j_service.get_investigar(nome.strip(), tipo, ambito)
+        return self._neo4j_service.get_investigar(nome.strip(), tipo, ambito, ambito_id)

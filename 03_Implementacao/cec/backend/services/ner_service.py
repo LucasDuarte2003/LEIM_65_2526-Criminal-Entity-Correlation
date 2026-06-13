@@ -27,7 +27,6 @@ def run_ner(texto: str) -> List[Dict]:
 def _convert_offsets_words(texto: str, entidades_raw: List[Dict]) -> List[Dict]:
     """Converte offsets de palavras para offsets de caracteres (xlm-roberta)."""
     palavras = texto.split()
-
     word_starts = []
     pos = 0
     for palavra in palavras:
@@ -35,19 +34,28 @@ def _convert_offsets_words(texto: str, entidades_raw: List[Dict]) -> List[Dict]:
         word_starts.append(pos)
         pos += len(palavra)
 
+    PONT_DIR = ".,;:!?»)]\"'"
+    PONT_ESQ = "«([\"'"
+
     resultado = []
     for ent in entidades_raw:
         sw = ent["start_word"]
         ew = ent["end_word"]
         inicio = word_starts[sw]
         fim = word_starts[ew] + len(palavras[ew])
+        # Apara pontuação colada às pontas (o split() mantém "Bloods," como um token).
+        while fim > inicio and texto[fim - 1] in PONT_DIR:
+            fim -= 1
+        while inicio < fim and texto[inicio] in PONT_ESQ:
+            inicio += 1
+        if inicio >= fim:
+            continue
         resultado.append({
-            "nome": ent["text"],
+            "nome": texto[inicio:fim],
             "tipo": ent["label"],
             "inicio": inicio,
             "fim": fim,
         })
-
     return resultado
 
 
